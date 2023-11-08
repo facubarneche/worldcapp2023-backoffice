@@ -1,3 +1,5 @@
+![coverage](./badges/coverage/coverage.svg)
+
 # TP-WorldCapp React
 
 desarrolladores:
