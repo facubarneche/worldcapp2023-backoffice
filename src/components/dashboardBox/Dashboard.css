@@ -1,0 +1,28 @@
+.dashboard-box{
+    display: flex;
+    border: 1px solid black;
+    border-radius: 2em;
+    box-shadow: 2px 2px 6px black;
+    padding: 1.2em 1em;
+    font-size: 1.4em;
+}
+
+.dashboard-box__section{
+    margin: auto;
+}
+
+.dashboard-box__quantity{
+    font-size: 5em;
+}
+
+.dashboard-box .dashboard-box__icon{
+    font-size: 6em;
+}
+
+/* TODO: AGREGAR COLORES DEL ROOT */
+.dashboard-box__icon--primary{
+    color: lightblue;
+}
+.dashboard-box__icon--secondary{
+    color: red;
+}

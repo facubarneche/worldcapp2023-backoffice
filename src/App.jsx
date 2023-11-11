@@ -1,8 +1,12 @@
+import DashboardBox from './components/dashboardBox/DashboardBox'
 import './App.css'
+
 
 function App() {
   return (    
-    <>Vacio</>
+    <>
+      <DashboardBox />
+    </>
   )
 }
 
