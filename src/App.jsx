@@ -4,7 +4,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Cards from './pages/Cards'
 import Players from './pages/Players'
-import Sales_Point from './pages/Sales_Point'
+import SalesPoint from 'pages/SalesPoint'
 import Teams from './pages/Teams'
 
 // Import Styles
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
       <Route path='/home' element={<Home/>}></Route>
       <Route path='/figuritas' element={<Cards/>}></Route>
       <Route path='/jugadores' element={<Players/>}></Route>
-      <Route path='/puntos-de-venta' element={<Sales_Point/>}></Route>
+      <Route path='/puntos-de-venta' element={<SalesPoint/>}></Route>
       <Route path='/selecciones' element={<Teams/>}></Route>
     </Route>
   )
