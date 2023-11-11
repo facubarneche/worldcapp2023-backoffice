@@ -1,11 +1,11 @@
-import DashboardBox from './components/dashboardBox/DashboardBox'
 import './App.css'
+import Dashboard from './pages/dashboard/Dashboard'
 
 
 function App() {
   return (    
     <>
-      <DashboardBox />
+      <Dashboard />
     </>
   )
 }

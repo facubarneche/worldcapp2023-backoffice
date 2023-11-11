@@ -1,12 +1,12 @@
 import { Box } from "@mui/material"
 import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded'
-import StorefrontIcon from '@mui/icons-material/Storefront'
-import StoreIcon from '@mui/icons-material/Store'
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+// import StorefrontIcon from '@mui/icons-material/Storefront'
+// import StoreIcon from '@mui/icons-material/Store'
+// import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 
 import "./Dashboard.css"
 
-function DashboardBox() {
+function DashboardBox( ) {
   return (
     <Box className='dashboard-box'>
       <section className="dashboard-box__section">
