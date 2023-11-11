@@ -1,10 +1,12 @@
 import DashboardBox from "../../components/dashboardBox/DashboardBox"
+import { itemsDashboardBox } from "../../domain/mocks/ItemsDashboardBox.mock"
 
 function Dashboard() {
-  const itemsBox = {}
   return (
     <>
-      <DashboardBox itemsBox={itemsBox}/>
+      {
+        itemsDashboardBox.map( (itemBox, index) => <DashboardBox key={index} itemsBox={itemBox} />)
+      }
     </>
   )
 }
