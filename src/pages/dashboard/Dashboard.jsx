@@ -1,9 +1,10 @@
 import DashboardBox from "../../components/dashboardBox/DashboardBox"
 
 function Dashboard() {
+  const itemsBox = {}
   return (
     <>
-        <DashboardBox />
+      <DashboardBox itemsBox={itemsBox}/>
     </>
   )
 }

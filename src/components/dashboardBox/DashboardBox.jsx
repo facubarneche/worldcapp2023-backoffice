@@ -6,7 +6,7 @@ import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded'
 
 import "./Dashboard.css"
 
-function DashboardBox( ) {
+function DashboardBox({ itemsBox }) {
   return (
     <Box className='dashboard-box'>
       <section className="dashboard-box__section">
