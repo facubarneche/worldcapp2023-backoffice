@@ -12,8 +12,8 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./setupTests.js"], // es importante definirlo en un archivo aparte para que se ejecute en otro contexto
     environment: 'jsdom',
-    coverage: {
-      reporter: ['text', 'json', 'html', 'json-summary'],
-    },
+    // coverage: {
+    //   reporter: ['text', 'json', 'html', 'json-summary'],
+    // },
   }
 })
