@@ -1,4 +1,4 @@
-import { Container, Box, TextField, Button } from "@mui/material"
+import { Container, Box, TextField, Button, InputLabel } from "@mui/material"
 import { LogoComponent } from '../../components/LogoComponent/LogoComponent'
 
 export const LoginPage = () => {
@@ -7,43 +7,40 @@ export const LoginPage = () => {
 
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <LogoComponent />
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            name="email"            
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"            
-            type="password"
-            id="password"            
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Ingresar
-          </Button>
-        </Box>
+    <Container component="main" className="login-form">
+      <LogoComponent />
+      <Box component="form" onSubmit={handleSubmit} noValidate className="login-form__actions">
+        <InputLabel className="input__label" htmlFor="user">
+          Usuario
+        </InputLabel>
+        <TextField
+          className="input"
+          margin="normal"
+          fullWidth
+          id="user"
+          name="user"
+          autoFocus
+        />
+        <InputLabel className="input__label" htmlFor="password">
+          Contraseña
+        </InputLabel>
+        <TextField
+          className="input"
+          margin="normal"
+          fullWidth
+          id="password"
+          name="password"
+          type="password"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className="login__button"
+        >
+          Ingresar
+        </Button>
       </Box>
-    </Container>
+    </Container >
   )
 }

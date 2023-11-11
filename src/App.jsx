@@ -2,7 +2,7 @@ import { LoginPage } from './pages/LoginComponent/LoginPage'
 import './App.css'
 
 function App() {
-  return (    
+  return (
     <LoginPage />
   )
 }
