@@ -1,3 +1,4 @@
+import { Logo } from 'components/logo/logo'
 import './App.css'
 
 function App() {

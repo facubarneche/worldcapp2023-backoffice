@@ -1,0 +1,29 @@
+.logo {
+  display: flex;
+  color: var(--typeface-color);
+  text-shadow: var(--box-shadow-md);
+}
+
+.logo__img {
+  width: 1.4em;
+  margin-right: 0.4em;
+}
+
+.logo__text {
+  cursor: default;
+}
+
+.logo__first-part {
+  font-weight: 800;
+}
+
+.logo__center-dot {
+  margin: 0 0.05em;
+  font-family: var(--secondary-font);
+  font-weight: 800;
+  color: var(--color-focus);
+}
+
+.logo__last-part {
+  font-weight: 400;
+}
