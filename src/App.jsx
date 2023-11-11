@@ -1,9 +1,9 @@
-import Logo from './components/logo/logo'
+import { LoginPage } from './pages/LoginComponent/LoginPage'
 import './App.css'
 
 function App() {
   return (    
-    <Logo />
+    <LoginPage />
   )
 }
 
