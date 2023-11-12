@@ -2,7 +2,7 @@ import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded'
 import StoreIcon from '@mui/icons-material/Store'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 
-export const itemsDashboardBox = [
+export const itemsDashboardBoxMock = [
   {
     name: 'Figuritas ofrecidas',
     quantity: 13,
