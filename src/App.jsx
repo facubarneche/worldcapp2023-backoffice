@@ -4,7 +4,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Cards from './pages/Cards'
 import Players from './pages/Players'
-import SalesPoint from 'pages/SalesPoint'
+import SalesPoint from './pages/SalesPoint'
 import Teams from './pages/Teams'
 
 // Import Styles
@@ -25,9 +25,8 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return (    
-    //<>Vacio</>
-    <RouterProvider router={router} />
+  return (
+    <RouterProvider router={router} />   
   )
 }
 
