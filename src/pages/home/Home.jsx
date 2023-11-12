@@ -1,8 +1,8 @@
 import DashboardBox from "components/dashboardBox/DashboardBox"
 import { itemsDashboardBoxMock } from "src/domain/mocks/ItemsDashboardBox.mock"
 
-function Dashboard() {
-  
+function Home() {
+
   return (
     <>
       {
@@ -12,4 +12,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Home
