@@ -24,7 +24,7 @@ function Home() {
   return (
     <>
       {
-        itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemsBox={itemBox} />)
+        itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
       }
     </>
   )

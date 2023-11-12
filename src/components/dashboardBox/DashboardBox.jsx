@@ -1,15 +1,15 @@
 import { Box } from "@mui/material"
 import "./Dashboard.css"
 
-function DashboardBox({ itemsBox }) {
+function DashboardBox({ itemBox }) {
   return (
     <Box className='dashboard-box'>
-      <section className="dashboard-box__section">
-        {itemsBox.icon}
+      <section data-testid='itembox-icon' className="dashboard-box__section">
+        {itemBox.icon}
       </section>
       <section className="dashboard-box__section">
-        <strong className="dashboard-box__quantity">{itemsBox.quantity}</strong>
-        <h2>{itemsBox.name}</h2>
+        <strong data-testid='itembox-quantity' className="dashboard-box__quantity">{itemBox.quantity}</strong>
+        <h2 data-testid='itembox-name'>{itemBox.name}</h2>
       </section>
     </Box>
   )
