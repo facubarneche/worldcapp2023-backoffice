@@ -34,7 +34,7 @@ module.exports = {
     ],
     'no-extra-parens': ['warn', 'all'],
     'no-func-assign': ['error'],
-    'no-import-assign': ['warn'],
+    'no-import-assign': ['error'],
     'no-inner-declarations': ['error', 'both'],
     'no-obj-calls': ['error'],
     'no-promise-executor-return': ['error'],

@@ -1,14 +1,12 @@
 import { Container, Box, TextField, Button, InputLabel } from "@mui/material"
-import { LogoComponent } from '../../components/LogoComponent/LogoComponent'
+import { LogoComponent } from "components/LogoComponent/LogoComponent"
 
 export const LoginPage = () => {
 
   const handleSubmit = () => { }
-
-
   return (
     <Container component="main" className="login-form">
-      <LogoComponent />
+      <LogoComponent />      
       <Box component="form" onSubmit={handleSubmit} noValidate className="login-form__actions">
         <InputLabel className="input__label" htmlFor="user">
           Usuario
