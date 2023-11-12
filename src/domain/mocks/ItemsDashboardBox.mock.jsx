@@ -1,6 +1,8 @@
 import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded'
 import StoreIcon from '@mui/icons-material/Store'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import ShieldIcon from '@mui/icons-material/Shield'
+
 
 export const itemsDashboardBoxMock = [
   {
@@ -19,8 +21,13 @@ export const itemsDashboardBoxMock = [
     icon: <StoreIcon className="dashboard-box__icon" />
   },
   {
-    name: 'usuarios activos',
+    name: 'Usuarios activos',
     quantity: 10,
     icon: <PeopleAltIcon className="dashboard-box__icon" />
+  },
+  {
+    name: 'Selecciones activas',
+    quantity: 32,
+    icon: <ShieldIcon className="dashboard-box__icon" />
   }
 ]
