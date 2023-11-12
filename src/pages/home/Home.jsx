@@ -8,13 +8,12 @@ import { iconsDashboardBox } from "src/domain/services/Home.service"
 function Home() {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
 
-
   useOnInit(async ()=> {
     try {
       const {data} = await axios.get(`${API_URL}/dashboard`)
-      const transformedData = data.map((itemBox, index) => ({
+      const transformedData = data.map((itemBox) => ({
         ...itemBox,
-        icon: iconsDashboardBox[index],
+        icon: iconsDashboardBox[itemBox.name],
       }))
       setItemsDashboardBox(transformedData)
     } catch (error) {

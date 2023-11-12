@@ -3,28 +3,28 @@ import { iconsDashboardBox } from '../services/Home.service'
 
 export const itemsDashboardBoxMock = [
   {
-    name: 'Figuritas ofrecidas',
+    name: 'Figuritas Ofrecidas',
     quantity: 13,
-    icon: iconsDashboardBox[0]
+    icon: iconsDashboardBox['Figuritas Ofrecidas']
   },
   {
-    name: 'Figuritas faltantes',
+    name: 'Figuritas Faltantes',
     quantity: 9,
-    icon: iconsDashboardBox[1]
+    icon: iconsDashboardBox['Figuritas Faltantes']
   },
   {
-    name: 'Puntos de ventas',
+    name: 'Puntos de Ventas',
     quantity: 20,
-    icon: iconsDashboardBox[2]
+    icon: iconsDashboardBox['Puntos de Ventas']
   },
   {
-    name: 'Usuarios activos',
+    name: 'Usuarios Activos',
     quantity: 10,
-    icon: iconsDashboardBox[3]
+    icon: iconsDashboardBox['Usuarios Activos']
   },
   {
-    name: 'Selecciones activas',
+    name: 'Selecciones Activas',
     quantity: 32,
-    icon: iconsDashboardBox[4]
+    icon: iconsDashboardBox['Selecciones Activas']
   }
 ]
