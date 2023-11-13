@@ -1,11 +1,11 @@
 import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 // Import Pages
-import Login from './pages/Login'
-import Home from './pages/Home'
-import Cards from './pages/Cards'
-import Players from './pages/Players'
+import Login from 'pages/Login'
+import Home from 'pages/Home'
+import Cards from 'pages/Cards'
+import Players from 'pages/Players'
 import SalesPoint from 'pages/SalesPoint'
-import Teams from './pages/Teams'
+import Teams from 'pages/Teams'
 
 // Import Styles
 import './App.css'
@@ -26,7 +26,6 @@ const router = createBrowserRouter(
 
 function App() {
   return (    
-    //<>Vacio</>
     <RouterProvider router={router} />
   )
 }

@@ -1,0 +1,28 @@
+.login-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 60vh
+}
+
+.login-form__actions{
+  font-size: 1.3em;
+  width: 100%;
+}
+
+.input{
+  font-size: inherit;
+  margin-top: 0px;
+}
+
+.input__label {
+  font-size: inherit;
+  margin-bottom: 0;
+}
+
+.login__button{
+  font-size: inherit;
+  height: 4em;
+  margin-top: 2em;
+}

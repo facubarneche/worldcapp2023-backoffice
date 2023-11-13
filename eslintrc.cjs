@@ -13,7 +13,6 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'semi': ['error', 'never'],
-    "indent": ["warn", 2],
     'prefer-const': [
       'warn',
       {
@@ -35,7 +34,7 @@ module.exports = {
     ],
     'no-extra-parens': ['warn', 'all'],
     'no-func-assign': ['error'],
-    'no-import-assign': ['warn'],
+    'no-import-assign': ['error'],
     'no-inner-declarations': ['error', 'both'],
     'no-obj-calls': ['error'],
     'no-promise-executor-return': ['error'],
@@ -71,7 +70,6 @@ module.exports = {
     'react/display-name': ['off'],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': [0],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
