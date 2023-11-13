@@ -6,5 +6,6 @@ describe('Tests Home', () => {
   it('El componente renderiza correctamente', () => {
     //Arrange
     render(<Home />)
+    
   })
 })

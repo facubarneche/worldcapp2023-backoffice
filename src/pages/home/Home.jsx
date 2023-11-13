@@ -4,9 +4,12 @@ import axios from "axios"
 import { API_URL } from "src/domain/services/config"
 import { useState } from "react"
 import { iconsDashboardBox } from "src/domain/services/Home.service"
+import { Alert, Snackbar } from "@mui/material"
+import "./Home.css"
 
 function Home() {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
+  const [snackbarOpen, setSnackbarOpen] = useState(null)
 
   useOnInit(async ()=> {
     try {
@@ -17,15 +20,23 @@ function Home() {
       }))
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      console.error(error)
+      setSnackbarOpen(error.message)
     }
   })
-
+  const handleClose = () => {
+    setSnackbarOpen(null)
+  }
+  
   return (
     <>
       {
         itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
       }
+      <Snackbar className="snackbar" open={snackbarOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {snackbarOpen}
+        </Alert>
+      </Snackbar>
     </>
   )
 }
