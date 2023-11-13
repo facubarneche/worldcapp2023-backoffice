@@ -6,6 +6,8 @@
     padding: 1em 1em;
     font-size: 1.4em;
     margin: 1.5em 0;
+    color: var(--text-color);
+    background-color: var(--color-focus-lighter);
 }
 
 .dashboard-box__section{
