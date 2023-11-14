@@ -35,7 +35,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
-    "prettier": "^3.0.3",
+    "prettier": "^2.8.8",
+    "prettier-eslint": "^15.0.1",
     "vite": "^4.4.5",
     "vitest": "^0.34.6"
   }
