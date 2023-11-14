@@ -14,7 +14,7 @@ const HandleError = ({errorCode}) => {
   return (
     <div className='display-error'>
       <h1>Oops... ha ocurrido un error</h1>
-      <img className="display-error__image" src="public/images/error-404.png" alt={`Error ${errorCode}`} />
+      <img className="display-error__image" src={`public/images/${errorCode}-error.png`} alt={`Error ${errorCode}`} />
       <h2>{errorMessage}</h2>
     </div>
   )
