@@ -1,12 +1,22 @@
 import { Container, Box, TextField, Button, InputLabel } from "@mui/material"
 import { LogoComponent } from "components/LogoComponent/LogoComponent"
+import { userService } from "src/domain/services/UserService/UserService"
 
 export const LoginPage = () => {
 
-  const handleSubmit = () => { }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    userService.login(data)
+    console.log({
+      email: data.get('user'),
+      password: data.get('password'),
+    })
+  }
+
   return (
     <Container component="main" className="login-form">
-      <LogoComponent />      
+      <LogoComponent />
       <Box component="form" onSubmit={handleSubmit} noValidate className="login-form__actions">
         <InputLabel className="input__label" htmlFor="user">
           Usuario
@@ -18,6 +28,7 @@ export const LoginPage = () => {
           id="user"
           name="user"
           autoFocus
+          required
         />
         <InputLabel className="input__label" htmlFor="password">
           Contraseña
