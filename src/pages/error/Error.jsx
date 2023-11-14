@@ -1,9 +1,11 @@
+import { useLocation } from "react-router-dom"
 import HandleError from "src/components/handleError/HandleError"
 
-const Error = ({error}) => {
+const Error = () => {
+  const { state } = useLocation()
   return (
     <>
-      <HandleError errorCode={error} />
+      <HandleError errorData={state?.errorData ?? { status: 404 }} />
     </>
   )
 }

@@ -6,10 +6,12 @@ import { useState } from "react"
 import { iconsDashboardBox } from "src/domain/services/Home.service"
 import { Alert, Snackbar } from "@mui/material"
 import "./Home.css"
+import { useNavigate } from "react-router-dom"
 
 function Home() {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
   const [snackbarOpen, setSnackbarOpen] = useState(null)
+  const navigate = useNavigate()
 
   useOnInit(async ()=> {
     try {
@@ -20,7 +22,8 @@ function Home() {
       }))
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      setSnackbarOpen(error.message)
+      //TODO: Hacer un helper global
+      navigate('/error', {state: {errorData: error.response.data}} )
     }
   })
   const handleClose = () => {
