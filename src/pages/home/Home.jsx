@@ -12,7 +12,7 @@ function Home() {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
   const [snackbarOpen, setSnackbarOpen] = useState(null)
   const navigate = useNavigate()
-
+  
   useOnInit(async ()=> {
     try {
       const {data} = await axios.get(`${API_URL}/dashboard`)
@@ -23,7 +23,7 @@ function Home() {
       setItemsDashboardBox(transformedData)
     } catch (error) {
       //TODO: Hacer un helper global
-      navigate('/error', {state: {errorData: error.response.data}} )
+      navigate('/error', {state: {errorData: error.response?.data ?? {status: 500}}} )
     }
   })
   const handleClose = () => {
