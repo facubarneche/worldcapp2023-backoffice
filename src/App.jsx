@@ -32,7 +32,10 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return <RouterProvider router={router} />
+  return (    
+    //<>Vacio</>
+    <RouterProvider router={router} />
+  )
 }
 
 export default App
