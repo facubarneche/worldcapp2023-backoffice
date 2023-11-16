@@ -1,5 +1,4 @@
-import { iconsDashboardBox } from '../services/Home.service'
-
+import { iconsDashboardBox } from "src/utils/IconsDashboardBox"
 
 export const itemsDashboardBoxMock = [
   {
