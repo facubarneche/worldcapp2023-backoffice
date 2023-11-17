@@ -1,19 +1,19 @@
 import { useState } from "react"
 
 import DashboardBox from "components/dashboardBox/DashboardBox"
-import { getStaticsDashboard } from "src/domain/services/Home.service"
 import { useOnInit } from "src/customHooks/hooks"
 
 import { SnackbarProvider, enqueueSnackbar } from "notistack"
 
 import "./Home.css"
+import { dashboardService } from "src/domain/services/Home.service"
 
-function Home() {
+const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
 
   useOnInit(async ()=> {
     try {
-      const dataDashboard = await getStaticsDashboard()
+      const dataDashboard = await dashboardService.getStaticsDashboard()
       const transformedData = dataDashboard.addIconsDashboardBox()
       
       setItemsDashboardBox(transformedData)
