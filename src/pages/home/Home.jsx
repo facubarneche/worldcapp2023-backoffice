@@ -9,10 +9,12 @@ import { API_URL } from "src/domain/services/config"
 import { SnackbarProvider, enqueueSnackbar } from "notistack"
 
 import "./Home.css"
+import { useNavigate } from "react-router-dom"
 
 function Home() {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
-
+  const navigate = useNavigate()
+  
   useOnInit(async ()=> {
     try {
       const {data} = await axios.get(`${API_URL}/dashboard`)
@@ -22,7 +24,8 @@ function Home() {
       }))
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      enqueueSnackbar(error.message)
+      //TODO: Hacer un helper global
+      navigate('/error', {state: {errorData: error.response?.data ?? {status: 500}}} )
     }
   })
 

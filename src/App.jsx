@@ -16,6 +16,7 @@ import SalesPoint from 'pages/salesPoint/SalesPoint'
 
 // Import Styles
 import './App.css'
+import Error from './pages/error/Error'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,8 @@ const router = createBrowserRouter(
       <Route path="/jugadores" element={<Players />}></Route>
       <Route path="/puntos-de-venta" element={<SalesPoint />}></Route>
       <Route path="/selecciones" element={<Teams />}></Route>
+      <Route path='/error' element={<Error />}></Route>
+      <Route path='*' element={<Error />}></Route>
     </Route>,
   ),
 )
