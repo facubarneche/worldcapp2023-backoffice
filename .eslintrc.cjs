@@ -12,14 +12,15 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
-    'semi': ['error', 'never'],
-    "indent": ["warn", 2],
+    'no-explicit-any': 'off',
+    semi: ['error', 'never'],
+    indent: ['warn', 2],
     'prefer-const': [
       'warn',
       {
-        'destructuring': 'any',
-        'ignoreReadBeforeAssign': false
-      }
+        destructuring: 'any',
+        ignoreReadBeforeAssign: false,
+      },
     ],
     'getter-return': ['error'],
     'no-async-promise-executor': ['warn'],
@@ -30,8 +31,8 @@ module.exports = {
     'no-extra-boolean-cast': [
       'error',
       {
-        'enforceForLogicalOperands': true
-      }
+        enforceForLogicalOperands: true,
+      },
     ],
     'no-extra-parens': ['warn', 'all'],
     'no-func-assign': ['error'],
