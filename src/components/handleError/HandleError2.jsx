@@ -7,18 +7,18 @@ const HandleError2 = ( error, navigate ) => {
   let navegar = false
 
   if (errorData.status >= 500) {
-    errorMessage = 'Error interno del servidor.'
+    errorMessage = 'Hubo un error al realizar la operación. Consulte al administrador del sistema.'
     navegar = true
   } else if (errorData.status === 404) {
-    errorMessage = 'Solicitud incorrecta del cliente.'
+    errorMessage = 'No se ha encontrado el recurso solicitado.'
     navegar = true
   } else if (errorData.status >= 400) {
-    errorMessage = 'Mensaje tomado desde el back'
+    errorMessage = 'Se ha producido un error en la solicitud. \n Por favor, verifique los datos y vuelva a intentarlo.'
   } else {
     errorMessage = 'Error desconocido.'
   }
 
-  if (navegar){
+  if (navegar && navigate){
     navigate('/error', {state: {...errorData, errorMessage}} )
   }else{
     enqueueSnackbar(errorData.message ?? errorMessage)
