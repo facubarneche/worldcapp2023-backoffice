@@ -3,11 +3,11 @@ import { useState } from "react"
 import DashboardBox from "components/dashboardBox/DashboardBox"
 import { useOnInit } from "src/customHooks/hooks"
 
-import { SnackbarProvider, enqueueSnackbar } from "notistack"
 
 import "./Home.css"
 import { useNavigate } from "react-router-dom"
-import { dashboardService } from "src/domain/services/Home.service"
+import { dashboardService } from "src/domain/services/homeService/Home.service"
+import HandleError2 from "src/components/handleError/HandleError2"
 
 const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
@@ -20,9 +20,7 @@ const Home = () => {
       
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      //TODO: Hacer un helper global
-      enqueueSnackbar('lala')
-      navigate('/error', {state: {errorData: error.response?.data ?? {status: 500}}} )
+      HandleError2(error, navigate)
     }
   })
   
@@ -31,7 +29,6 @@ const Home = () => {
       {
         itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
       }
-      <SnackbarProvider />
     </>
   )
 }

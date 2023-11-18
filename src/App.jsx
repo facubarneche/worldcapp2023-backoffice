@@ -17,6 +17,8 @@ import SalesPoint from 'pages/salesPoint/SalesPoint'
 // Import Styles
 import './App.css'
 import Error from './pages/error/Error'
+import { SnackbarProvider } from "notistack"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,8 +38,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (    
-    //<>Vacio</>
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <SnackbarProvider />
+    </>
+
   )
 }
 
