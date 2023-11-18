@@ -1,34 +1,30 @@
 import { useState } from "react"
-import axios from "axios"
 
 import DashboardBox from "components/dashboardBox/DashboardBox"
 import { useOnInit } from "src/customHooks/hooks"
-import { iconsDashboardBox } from "src/domain/services/Home.service"
-import { API_URL } from "src/domain/services/config"
 
 import { SnackbarProvider, enqueueSnackbar } from "notistack"
 
 import "./Home.css"
 import { useNavigate } from "react-router-dom"
+import { dashboardService } from "src/domain/services/Home.service"
 
-function Home() {
+const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
   const navigate = useNavigate()
   
   useOnInit(async ()=> {
     try {
-      const {data} = await axios.get(`${API_URL}/dashboard`)
-      const transformedData = data.map((itemBox) => ({
-        ...itemBox,
-        icon: iconsDashboardBox[itemBox.name],
-      }))
+      const dataDashboard = await dashboardService.getStaticsDashboard()
+      const transformedData = dataDashboard.addIconsDashboardBox()
+      
       setItemsDashboardBox(transformedData)
     } catch (error) {
       //TODO: Hacer un helper global
+      enqueueSnackbar('lala')
       navigate('/error', {state: {errorData: error.response?.data ?? {status: 500}}} )
     }
   })
-
   
   return (
     <>
