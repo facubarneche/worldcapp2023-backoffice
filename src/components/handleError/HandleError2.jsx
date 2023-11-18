@@ -2,7 +2,7 @@ import './HandleError.css'
 import { enqueueSnackbar } from "notistack"
 
 const HandleError2 = ( error, navigate ) => {
-  const errorData = error.response?.data ?? { status: 500 }
+  const errorData = error.response?.data ?? { status: 500, message: "El servidor se encuentra sin conexión" }
   let errorMessage = ''
   let navegar = false
 
@@ -19,6 +19,7 @@ const HandleError2 = ( error, navigate ) => {
   }
 
   if (navegar && navigate){
+    console.log(errorData.message)
     navigate('/error', {state: {...errorData, errorMessage}} )
   }else{
     enqueueSnackbar(errorData.message ?? errorMessage)
