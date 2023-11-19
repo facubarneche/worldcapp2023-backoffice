@@ -19,3 +19,13 @@ const Home = () => {
     }
   })
   
+  # Opcional
+
+  No se recomienda por discrepancia entre las otras paginas pero en el caso de querer posicionar el notistack se puede pasar un parametro opcional
+
+  HandleError(error, navigate, {vertical: 'top', horizontal: 'right'})
+
+  Vertical      Horizontal
+  top           left
+  bottom        center
+                right

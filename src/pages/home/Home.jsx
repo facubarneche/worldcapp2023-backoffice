@@ -19,7 +19,7 @@ const Home = () => {
       
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      HandleError(error, navigate)
+      HandleError(error, navigate, {vertical: 'top', horizontal: 'right'})
     }
   })
   

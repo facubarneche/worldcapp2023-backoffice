@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from "notistack"
 
-const HandleError = ( error, navigate ) => {
+const HandleError = ( error, navigate, notistack ) => {
   const errorData = error.response?.data ?? { status: 0 }
   let errorMessage = ''
   let navegar = false
@@ -23,7 +23,12 @@ const HandleError = ( error, navigate ) => {
   if (navegar && navigate){
     navigate('/error', {state: {...errorData, errorMessage}} )
   }else{
-    enqueueSnackbar(errorData.message ?? errorMessage)
+    enqueueSnackbar(errorData.message ?? errorMessage, {
+      anchorOrigin: {
+        vertical: notistack?.vertical ?? 'bottom',
+        horizontal: notistack?.horizontal ?? 'left'
+      }
+    })
   }
 }
 
