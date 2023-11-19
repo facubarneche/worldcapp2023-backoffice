@@ -19,7 +19,7 @@ const Error = () => {
   const printMessage = () => showMessage() ? data.message : data.errorMessage
 
   const printText = () => isNetworkError() ? 'Actualizar' : 'Volver'
-  console.log(data.status)
+  
   const pickImage = () => is500Error() || is404Error() ? data.status : 'unexpected'
 
   const returnPage = () => {

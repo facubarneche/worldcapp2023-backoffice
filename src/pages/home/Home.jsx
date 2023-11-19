@@ -1,13 +1,12 @@
 import { useState } from "react"
-
-import DashboardBox from "components/dashboardBox/DashboardBox"
+import { useNavigate } from "react-router-dom"
 import { useOnInit } from "src/customHooks/hooks"
 
-
-import "./Home.css"
-import { useNavigate } from "react-router-dom"
+import DashboardBox from "components/dashboardBox/DashboardBox"
 import { dashboardService } from "src/domain/services/homeService/Home.service"
 import HandleError from "src/components/handleError/HandleError"
+
+import "./Home.css"
 
 const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
