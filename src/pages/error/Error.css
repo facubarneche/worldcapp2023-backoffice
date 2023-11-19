@@ -20,4 +20,8 @@
     margin: 0 auto;
     width: 60%;
   }
+
+  .display-error__button:hover{
+    background-color: var(--color-secondary);
+  }
   
