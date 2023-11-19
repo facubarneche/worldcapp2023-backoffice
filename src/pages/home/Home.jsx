@@ -7,7 +7,7 @@ import { useOnInit } from "src/customHooks/hooks"
 import "./Home.css"
 import { useNavigate } from "react-router-dom"
 import { dashboardService } from "src/domain/services/homeService/Home.service"
-import HandleError2 from "src/components/handleError/HandleError2"
+import HandleError from "src/components/handleError/HandleError"
 
 const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
@@ -20,7 +20,7 @@ const Home = () => {
       
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      HandleError2(error, navigate)
+      HandleError(error, navigate)
     }
   })
   

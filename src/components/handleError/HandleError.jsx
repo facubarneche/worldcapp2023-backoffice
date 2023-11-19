@@ -1,28 +1,30 @@
-import './HandleError.css'
+import { enqueueSnackbar } from "notistack"
 
-const AXIOSNOTERROR = 'No message available'
-  
-const HandleError = ({errorData}) => {
+const HandleError = ( error, navigate ) => {
+  const errorData = error.response?.data ?? { status: 0 }
   let errorMessage = ''
+  let navegar = false
 
   if (errorData.status >= 500) {
-    errorMessage = 'Error interno del servidor.'
+    errorMessage = 'Hubo un error al realizar la operación. Consulte al administrador del sistema.'
+    navegar = true
+  } else if (errorData.status === 404) {
+    errorMessage = 'No se ha encontrado el recurso solicitado.'
+    navegar = true
   } else if (errorData.status >= 400) {
-    errorMessage = 'Solicitud incorrecta del cliente.'
+    errorMessage = 'Se ha producido un error en la solicitud. Por favor, verifique los datos y vuelva a intentarlo.'
+  } else if (errorData.status === 0) {
+    errorMessage = 'El servidor se encuentra sin conexión.'
+    navegar = true
   } else {
     errorMessage = 'Error desconocido.'
   }
 
-  const showmessage = () => errorData.message && errorData?.message !== AXIOSNOTERROR
-  const statusImage = (status) => status === 500 || status === 404 ? status : 'unexpected'
-
-  return (
-    <div className='display-error'>
-      <h1>Oops... ha ocurrido un error</h1>
-      <img className="display-error__image" src={`public/images/${statusImage(errorData.status)}-error.png`} alt={`Error ${errorData}`} />
-      <h2>{showmessage() ? errorData.message : errorMessage}</h2>
-    </div>
-  )
+  if (navegar && navigate){
+    navigate('/error', {state: {...errorData, errorMessage}} )
+  }else{
+    enqueueSnackbar(errorData.message ?? errorMessage)
+  }
 }
 
 export default HandleError
