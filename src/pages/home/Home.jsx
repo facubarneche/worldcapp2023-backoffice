@@ -9,7 +9,7 @@ import HandleError from "src/components/handleError/HandleError"
 import "./Home.css"
 
 const Home = () => {
-  const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
+  const [itemsDashboardBox, setItemsDashboardBox] = useState([])
   const navigate = useNavigate()
   
   useOnInit(async ()=> {
@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       {
-        itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
+        itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
       }
     </>
   )
