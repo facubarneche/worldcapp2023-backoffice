@@ -1,0 +1,36 @@
+.salespoint-box{
+    display: flex;
+    border: 1px solid black;
+    border-radius: 2em;
+    box-shadow: 2px 2px 6px black;
+    padding: 1em 1em;
+    font-size: 1.4em;
+    margin: 1.5em 1em;
+    color: var(--text-color);
+    background-color: var(--color-focus-lighter);
+}
+
+.salespoint-box:hover{
+    transition: all 0.4s;
+    translate: 0.1em -0.1em;
+    box-shadow: 4px 4px 6px black;
+}
+
+.salespoint-box__section{
+    margin: auto;
+}
+
+.salespoint-box__quantity{
+    font-size: 5em;
+}
+
+.salespoint-box .salespoint-box__icon{
+    font-size: 6em;
+}
+
+.salespoint-box__icon--primary{
+    color: lightblue;
+}
+.salespoint-box__icon--secondary{
+    color: palevioletred;
+}
