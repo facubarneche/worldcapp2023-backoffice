@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
-import HandleError from 'src/components/handleError/HandleError'
+import HandleError from 'src/utils/handleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()

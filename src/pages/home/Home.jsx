@@ -4,7 +4,7 @@ import { useOnInit } from "src/customHooks/hooks"
 
 import DashboardBox from "components/dashboardBox/DashboardBox"
 import { dashboardService } from "src/domain/services/homeService/Home.service"
-import HandleError from "src/components/handleError/HandleError"
+import HandleError from "src/utils/handleError/HandleError"
 
 import "./Home.css"
 
