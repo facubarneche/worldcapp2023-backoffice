@@ -1,14 +1,14 @@
-.sales-point-form{
+.item-form-builder{
     margin: 1em;
 }
 
-.sales-point-form__input{
+.item-form-builder__input{
     width: 100%;
     margin: 1em 0;
     
 }
 
-.sales-point-form__button{
+.item-form-builder__button{
     display: flex;
     justify-content: center;
     gap: 2em;

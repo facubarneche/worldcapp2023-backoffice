@@ -1,6 +1,6 @@
 import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
 import { formToJSON } from 'axios'
-import { LogoComponent } from 'components/LogoComponent/LogoComponent'
+import { LogoComponent } from 'src/components/logoComponent/LogoComponent'
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
