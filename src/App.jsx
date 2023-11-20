@@ -18,6 +18,7 @@ import SalesPoint from 'pages/salesPoint/SalesPoint'
 import './App.css'
 import Error from './pages/error/Error'
 import { SnackbarProvider } from "notistack"
+import SalesPointForm from './pages/salesPointForm/SalesPointForm'
 
 
 const router = createBrowserRouter(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="/figuritas" element={<Cards />}></Route>
       <Route path="/jugadores" element={<Players />}></Route>
       <Route path="/puntos-de-venta" element={<SalesPoint />}></Route>
+      <Route path="/puntos-de-venta/new" element={<SalesPointForm />}></Route>
       <Route path="/selecciones" element={<Teams />}></Route>
       <Route path='/error' element={<Error />}></Route>
       <Route path='*' element={<Error />}></Route>
@@ -37,7 +39,7 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return (    
+  return (
     <div className='app'>
       <RouterProvider router={router} />
       <SnackbarProvider className='snackbar' />

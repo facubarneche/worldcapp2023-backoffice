@@ -1,0 +1,16 @@
+.sales-point-form{
+    margin: 1em;
+}
+
+.sales-point-form__input{
+    width: 100%;
+    margin: 1em 0;
+    
+}
+
+.sales-point-form__button{
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    width: 100%;
+}
