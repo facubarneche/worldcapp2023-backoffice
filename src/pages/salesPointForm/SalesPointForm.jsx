@@ -15,6 +15,10 @@ const SalesPointForm = () => {
       label: 'Punto de venta',
       options: ['Kiosko', 'Librería', 'Supermercado'],
       defaultValue: "Kiosko"
+    },
+    {
+      type: 'checkbox',
+      label: 'Onfire', 
     }
   ]
 
