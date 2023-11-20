@@ -2,11 +2,13 @@ import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
 import { formToJSON } from 'axios'
 import { LogoComponent } from 'components/LogoComponent/LogoComponent'
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
+import HandleError from 'src/utils/handleError/HandleError'
 
 export const Login = () => {
+  const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false)
 
   const handleSubmit = async (event) => {
@@ -19,8 +21,8 @@ export const Login = () => {
         console.log('entro')
         setRedirect(true)
       })
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      HandleError(error, navigate)
     }
     // Reporte de valores que vienen el el formulario
     DEBUG_MODE && report(data)

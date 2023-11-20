@@ -1,16 +1,17 @@
 import { useState } from "react"
-
-import DashboardBox from "components/dashboardBox/DashboardBox"
+import { useNavigate } from "react-router-dom"
 import { useOnInit } from "src/customHooks/hooks"
 
-import { SnackbarProvider, enqueueSnackbar } from "notistack"
+import DashboardBox from "components/dashboardBox/DashboardBox"
+import { dashboardService } from "src/domain/services/homeService/Home.service"
+import HandleError from "src/utils/handleError/HandleError"
 
 import "./Home.css"
-import { dashboardService } from "src/domain/services/Home.service"
 
 const Home = () => {
-  const [itemsDashboardBox, setItemsDashboardBox] = useState(null)
-
+  const [itemsDashboardBox, setItemsDashboardBox] = useState([])
+  const navigate = useNavigate()
+  
   useOnInit(async ()=> {
     try {
       const dataDashboard = await dashboardService.getStaticsDashboard()
@@ -18,16 +19,15 @@ const Home = () => {
       
       setItemsDashboardBox(transformedData)
     } catch (error) {
-      enqueueSnackbar(error.message)
+      HandleError(error, navigate)
     }
   })
   
   return (
     <>
       {
-        itemsDashboardBox && itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
+        itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
       }
-      <SnackbarProvider />
     </>
   )
 }
