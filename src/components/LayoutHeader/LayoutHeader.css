@@ -1,0 +1,14 @@
+.layoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  width: 100vw;
+  height: 6rem;
+  box-shadow: var(--box-shadow);
+  background-image: var(--gradient-primary);
+}
+.layoutHeader_title {
+  font-weight: 900;
+  color: var(--typeface-color);
+}
