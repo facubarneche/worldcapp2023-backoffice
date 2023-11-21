@@ -50,7 +50,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (    
-    <div className='app'>
+    <div className='layout app'>
       <RouterProvider router={router} />
       <SnackbarProvider className='snackbar' />
     </div>

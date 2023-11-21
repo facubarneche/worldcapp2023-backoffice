@@ -1,10 +1,13 @@
+import { useState } from "react"
 import { Outlet } from "react-router-dom"
+import './LayoutFooter.css'
 
-const LayoutFooter = ({children}) => {
+const LayoutFooter = () => {
+  const [foterContent, setFoterContent] = useState()
 
   return <>
-    <Outlet />
-    <footer>{children}</footer>
+    <Outlet context={[setFoterContent]}/>    
+    <footer className="layoutFooter">{foterContent}</footer>
   </>
 }
 
