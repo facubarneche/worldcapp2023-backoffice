@@ -19,6 +19,9 @@ import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 
 // Import Styles
 import './App.css'
+import Error from './pages/error/Error'
+import { SnackbarProvider } from "notistack"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,8 +38,9 @@ const router = createBrowserRouter(
           <Route path="jugadores" element={<Players />}></Route>
           <Route path="puntos-de-venta" element={<SalesPoint />}></Route>
           <Route path="selecciones" element={<Teams />}></Route>
-          
         </Route>
+        <Route path='/error' element={<Error />}></Route>
+        <Route path='*' element={<Error />}></Route>
       </Route>
     </Route>
 
@@ -46,8 +50,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (    
-    //<>Vacio</>
-    <RouterProvider router={router} />
+    <div className='app'>
+      <RouterProvider router={router} />
+      <SnackbarProvider className='snackbar' />
+    </div>
+
   )
 }
 
