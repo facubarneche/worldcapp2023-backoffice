@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import { useOnInit } from "src/customHooks/hooks"
 
 import DashboardBox from "components/dashboardBox/DashboardBox"
@@ -11,8 +11,10 @@ import "./Home.css"
 const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState([])
   const navigate = useNavigate()
-  
+  const [setHeaderTitle] = useOutletContext()
+
   useOnInit(async ()=> {
+    setHeaderTitle('HOME')
     try {
       const dataDashboard = await dashboardService.getStaticsDashboard()
       const transformedData = dataDashboard.addIconsDashboardBox()
