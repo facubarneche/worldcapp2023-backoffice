@@ -39,7 +39,7 @@ const Cards = () => {
         </>
       }
       {
-        displayForm && <FiguritasForm />
+        displayForm && <FiguritasForm changeDisplay={changeDisplay} />
       }
     </>
   )
