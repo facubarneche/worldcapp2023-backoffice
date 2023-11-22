@@ -1,17 +1,18 @@
 import { Box, Button, TextField } from "@mui/material"
-import SalesPointForm from "../../components/salesPointForm/SalesPointForm"
+import SalesPointForm from "../../components/forms/salesPointForm/SalesPointForm"
 import './SalesPoint.css'
 import { useState } from "react"
 
-export default function SalesPoint() {
+const SalesPoint = () => {
   const [displayForm, setDisplayForm] = useState(false)
 
-  const lalal = () => {
-    setDisplayForm(true)
+  const changeDisplay = () => {
+    setDisplayForm(!displayForm)
   }
 
   return (
     <>
+      <h1>FIGURITAS PAGE</h1>
       {
         !displayForm &&
         // TODO: Agregar la card, el resto de componentes vienen por layout
@@ -35,7 +36,7 @@ export default function SalesPoint() {
               <h2>Mock2</h2>
             </section>
           </Box>
-          <Button className="salespoint__button" onClick={lalal}>+</Button>
+          <Button className="salespoint__button" onClick={changeDisplay}>+</Button>
         </>
       }
       {
@@ -44,3 +45,6 @@ export default function SalesPoint() {
     </>
   )
 }
+
+
+export default SalesPoint
