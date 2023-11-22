@@ -1,35 +1,46 @@
 import { Box, Button, TextField } from "@mui/material"
+import SalesPointForm from "../../components/salesPointForm/SalesPointForm"
 import './SalesPoint.css'
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 export default function SalesPoint() {
-  const navigate = useNavigate()
+  const [displayForm, setDisplayForm] = useState(false)
 
-  const goToLocation = () => {
-    navigate('/puntos-de-venta/new')
+  const lalal = () => {
+    setDisplayForm(true)
   }
+
   return (
     <>
-      <TextField id="outlined-search" label="Search field" type="search" />
-      <Box className='salespoint'>
-        <section className="salespoint__section">
-          Mock
-        </section>
-        <section className="salespoint__section">
-          <strong className="salespoint__quantity">20</strong>
-          <h2>Mock</h2>
-        </section>
-      </Box>
-      <Box className='salespoint'>
-        <section className="salespoint__section">
-          Mock2
-        </section>
-        <section className="salespoint__section">
-          <strong className="salespoint__quantity">20</strong>
-          <h2>Mock2</h2>
-        </section>
-      </Box>
-      <Button className="salespoint__button" onClick={goToLocation}>+</Button>
+      {
+        !displayForm &&
+        // TODO: Agregar la card, el resto de componentes vienen por layout
+        <>
+          <TextField id="outlined-search" label="Search field" type="search" />
+          <Box className='salespoint'>
+            <section className="salespoint__section">
+              Mock
+            </section>
+            <section className="salespoint__section">
+              <strong className="salespoint__quantity">20</strong>
+              <h2>Mock</h2>
+            </section>
+          </Box>
+          <Box className='salespoint'>
+            <section className="salespoint__section">
+              Mock2
+            </section>
+            <section className="salespoint__section">
+              <strong className="salespoint__quantity">20</strong>
+              <h2>Mock2</h2>
+            </section>
+          </Box>
+          <Button className="salespoint__button" onClick={lalal}>+</Button>
+        </>
+      }
+      {
+        displayForm && <SalesPointForm />
+      }
     </>
   )
 }
