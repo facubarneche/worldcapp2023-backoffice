@@ -1,7 +1,15 @@
 import { Box } from "@mui/material"
 import './SalesPoint.css'
+import { useOnInit } from "src/customHooks/hooks"
+import { useOutletContext } from "react-router-dom"
 
 export default function SalesPoint() {
+  const [setHeaderTitle] = useOutletContext()
+  
+  useOnInit(() => {
+    setHeaderTitle('Puntos de venta')
+  })
+
   return (
     <>
       <input placeholder="SEARCH"/>

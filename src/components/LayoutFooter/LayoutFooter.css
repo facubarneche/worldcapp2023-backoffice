@@ -1,0 +1,8 @@
+.layoutFooter {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 6rem;
+  font-size: 2rem;
+  background-color: var(--color-secondary);
+}

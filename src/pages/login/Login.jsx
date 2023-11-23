@@ -2,14 +2,20 @@ import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
 import { formToJSON } from 'axios'
 import { LogoComponent } from 'components/LogoComponent/LogoComponent'
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
+import { useOnInit } from 'src/customHooks/hooks'
 import HandleError from 'src/utils/handleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false)
+  const [setFoterContent] = useOutletContext()
+  
+  useOnInit(()=> {
+    setFoterContent(<span>pablito/sol pongan lo que va en el footer aca</span>)
+  })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
