@@ -3,13 +3,14 @@ import { Outlet, useOutletContext } from "react-router-dom"
 import './LayoutHeader.css'
 import { Typography } from "@mui/material"
 import { useOnInit } from "src/customHooks/hooks"
+import NavBar from "../NavBar/NavBar"
 
 const LayoutHeader = () => {
   const [headerTitle, setHeaderTitle] = useState('hola')
   const [setFoterContent] = useOutletContext()
   
   useOnInit(()=> {
-    setFoterContent(<span>Ale pone el coso de navegacion aca</span>)
+    setFoterContent(<NavBar/>)
   })
 
   return <>
