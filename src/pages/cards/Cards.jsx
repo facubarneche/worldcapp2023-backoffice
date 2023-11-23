@@ -1,9 +1,23 @@
 import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import FiguritasForm from "src/components/forms/figuritasForm/figuritasForm"
+import { useOnInit } from "src/customHooks/hooks"
+import { cardService } from "src/domain/services/cardService/CardService"
+import HandleError from "src/utils/handleError/HandleError"
 
 const Cards = () => {
   const [displayForm, setDisplayForm] = useState(false)
+  const navigate = useNavigate()
+
+  useOnInit(async ()=> {
+    try {
+      const card = await cardService.getCards()
+      console.log(card.dataCard)
+    } catch (error) {
+      HandleError(error, navigate)
+    }
+  })
 
   const changeDisplay = () => {
     setDisplayForm(!displayForm)
@@ -12,6 +26,7 @@ const Cards = () => {
   return (
     <>
       <h1>FIGURITAS PAGE</h1>
+      card
       {
         !displayForm &&
         // TODO: Agregar la card, el resto de componentes vienen por layout
