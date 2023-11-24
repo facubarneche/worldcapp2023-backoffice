@@ -2,13 +2,20 @@ import { Box, Button, TextField } from "@mui/material"
 import SalesPointForm from "../../components/forms/salesPointForm/SalesPointForm"
 import './SalesPoint.css'
 import { useState } from "react"
+import { useOnInit } from "src/customHooks/hooks"
+import { useOutletContext } from "react-router-dom"
 
 const SalesPoint = () => {
   const [displayForm, setDisplayForm] = useState(false)
+  const [setHeaderTitle] = useOutletContext()
 
   const changeDisplay = () => {
     setDisplayForm(!displayForm)
   }
+  
+  useOnInit(() => {
+    setHeaderTitle('Puntos de venta')
+  })
 
   return (
     <>

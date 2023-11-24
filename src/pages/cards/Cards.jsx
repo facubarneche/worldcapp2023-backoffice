@@ -5,15 +5,18 @@ import FiguritasForm from "src/components/forms/figuritasForm/figuritasForm"
 import { useOnInit } from "src/customHooks/hooks"
 import { cardService } from "src/domain/services/cardService/CardService"
 import HandleError from "src/utils/handleError/HandleError"
+import { useOutletContext } from "react-router-dom"
 
 const Cards = () => {
   const [displayForm, setDisplayForm] = useState(false)
+  const [setHeaderTitle] = useOutletContext()
   const navigate = useNavigate()
 
   useOnInit(async ()=> {
     try {
+      setHeaderTitle('Figuritas')
       const card = await cardService.getCards()
-      console.log(card.dataCard)
+      console.log(card)
     } catch (error) {
       HandleError(error, navigate)
     }
@@ -26,7 +29,6 @@ const Cards = () => {
   return (
     <>
       <h1>FIGURITAS PAGE</h1>
-      card
       {
         !displayForm &&
         // TODO: Agregar la card, el resto de componentes vienen por layout

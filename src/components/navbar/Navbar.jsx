@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import { HomeRounded, LogoutRounded, DirectionsRunRounded, StoreRounded, AssignmentIndRounded } from '@mui/icons-material'
+import './NavBar.css'
 
 const iconSize = 30
 
@@ -29,9 +30,10 @@ const NavBar = () => {
   }, [location.pathname])
 
   return (
-    <BottomNavigation value={value} onChange={handleChange}>
+    <BottomNavigation className="navbar" component="nav" value={value} onChange={handleChange}>
       {navigationButtons.map((route, index) => 
         <BottomNavigationAction
+          className='navbar_buttons'
           key={index}
           value={route.path}
           icon={route.icon}
