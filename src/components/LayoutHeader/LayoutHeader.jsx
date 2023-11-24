@@ -14,8 +14,8 @@ const LayoutHeader = () => {
   })
 
   return <>
-    <header className="layoutHeader">
-      <Typography className="layoutHeader_title" variant="h2">{headerTitle}</Typography>
+    <header className="layout-header">
+      <Typography className="layout-header__title" variant="h2">{headerTitle}</Typography>
     </header>
     <article className="layout__content">
       <Outlet context={[setHeaderTitle]}/>
