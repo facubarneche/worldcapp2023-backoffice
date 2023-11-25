@@ -1,10 +1,11 @@
 import { Checkbox, FormControlLabel, TextField } from "@mui/material"
+import './SalesPointForm.css'
 
 const SalesPointForm = () => {
   const lala = ['lala1', 'lala2']
 
   return (
-    <>
+    <div className="sales-point-form">
       <FormControlLabel control={<Checkbox defaultChecked={true} />} label="label" />
       <TextField
         required
@@ -30,7 +31,7 @@ const SalesPointForm = () => {
           )
         }
       </TextField>
-    </>
+    </div>
   )
 }
 
