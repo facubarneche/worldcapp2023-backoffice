@@ -1,32 +1,28 @@
-import { Checkbox, FormControlLabel, TextField } from "@mui/material"
+import { TextField } from "@mui/material"
 import './SalesPointForm.css'
 
 const SalesPointForm = () => {
-  const lala = ['lala1', 'lala2']
+  
+  const businessesType = ['Kiosko', 'Libreria', 'Supermercado']
 
   return (
     <div className="sales-point-form">
-      <FormControlLabel control={<Checkbox defaultChecked={true} />} label="label" />
-      <TextField
+      <TextField required label="Nombre"/>
+      <TextField required label="Dirección"/>
+      <TextField required label="Coordenada X" type="number"/>
+      <TextField required label="Coordenada Y" type="number"/>
+      <TextField required label="Sobres Disponibles" type="number"/>
+      <TextField required label="Pedidos Pendientes" type="number"/>
+      <TextField className="figuritas-form__select"
         required
-        label="label"
-        type="text"
-        defaultValue="default"
-      >
-      </TextField>
-
-      <TextField
-        required
-        label="label"
-        type="text"
-        defaultValue="default"
         select
         SelectProps={{ native: true }}
       >
         {
-          lala.map((option) =>
-            <option key={option} value={option}>
-              {option}
+          businessesType.map( businessType =>
+          //TODO: Ver bien lo del value luego
+            <option key={businessType} value={businessType}>
+              {businessType}
             </option>
           )
         }
