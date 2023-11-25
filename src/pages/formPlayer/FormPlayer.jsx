@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom'
-import StepFooter from 'src/components/StepFooter/StepFooter'
+import FormActions from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
 
 const FormPlayer = ({ headerTitle }) => {
@@ -13,7 +13,7 @@ const FormPlayer = ({ headerTitle }) => {
   return (
     <>
       <p>FormPlayer</p>
-      <StepFooter
+      <FormActions
         leftButtonClick={() => {
           console.log('jijia')
         }}

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
-import './StepFooter.css'
+import './FormActions.css'
 
-const StepFooter = ({
+const FormActions = ({
   leftButtonText = 'Guardar',
   leftButtonClick = () => {
     console.log('Guardar')
@@ -38,4 +38,4 @@ const StepFooter = ({
     </footer>
   )
 }
-export default StepFooter
+export default FormActions
