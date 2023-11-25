@@ -2,42 +2,38 @@ import { Button } from '@mui/material'
 import './StepFooter.css'
 
 const StepFooter = ({
-  leftButton = {
-    text: 'Guardar',
-    function: () => {
-      console.log('Guardar')
-    },
-  },
-  rightButton = {
-    text: 'Volver',
-    function: () => {
-      console.log('Volver')
-    },
+  leftButtonText = 'Guardar',
+  leftButtonClick = () => {
+    console.log('Guardar')
   },
   leftButtonProps = {},
+  rightButtonText = 'Volver',
+  rightButtonClick = () => {
+    console.log('Volver')
+  },
   rightButtonProps = {},
 }) => {
   return (
     <footer className="stepFooter">
       <Button
-        onClick={() => {
-          leftButton.function()
-        }}
-        {...leftButtonProps}
         variant="contained"
         size="large"
+        {...leftButtonProps}
+        onClick={() => {
+          leftButtonClick()
+        }}
       >
-        {leftButton.text ?? 'Guardar'}
+        {leftButtonText}
       </Button>
       <Button
-        onClick={() => {
-          rightButton.function()
-        }}
-        {...rightButtonProps}
-        variant="outlined"
         size="large"
+        variant="outlined"
+        {...rightButtonProps}
+        onClick={() => {
+          rightButtonClick()
+        }}
       >
-        {rightButton.text ?? 'Volver'}
+        {rightButtonText}
       </Button>
     </footer>
   )
