@@ -47,6 +47,10 @@
   margin-left: 0.3em;
 }
 
+.card-base__text--title{
+  text-transform: capitalize;
+}
+
 .card-base__text--upper {
   text-transform: uppercase;
 }

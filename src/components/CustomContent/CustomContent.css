@@ -1,0 +1,23 @@
+.card-content__section,
+.card-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-content__text--pipe,
+.card-content__text {
+  font-size: 2em;
+  margin-left: 0.3em;
+}
+
+.card-content__text--pipe {
+  height: 100%;
+  width: 5px;
+  background-color: var(--text-color-2lighter);
+}
+
+.card-content__icons {
+  font-size: 1.3em;
+}

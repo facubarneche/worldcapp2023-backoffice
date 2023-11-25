@@ -1,19 +1,25 @@
-import { CardContent, Typography } from "@mui/material"
+import { Box, CardContent, Typography } from "@mui/material"
 import { Place, AccountBox } from '@mui/icons-material'
+import './CustomContent.css'
+import '../CardBase/CardBase.css'
 
-export default function CustomSalesPointContent({ props }) {
+export default function CustomSalesPointContent({ stock, direccion }) {
 
   return (
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        <Place fontSize="large" />
-        {props.direccion}
-      </Typography>
-      <span>|</span>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        <AccountBox fontSize="large" />
-        {props.stock}
-      </Typography>
+    <CardContent className='card-content'>
+      <Box className="card-content__section">
+        <Place className="card-base__icons" />
+        <Typography className="card-content__text">
+          {direccion}
+        </Typography>
+      </Box>
+      <span className="card-content__text--pipe"/>
+      <Box className="card-content__section">
+        <AccountBox className="card-base__icons" />
+        <Typography className="card-content__text">
+          {stock}
+        </Typography>
+      </Box>
     </CardContent>
   )
 }
