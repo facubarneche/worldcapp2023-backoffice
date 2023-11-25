@@ -10,12 +10,6 @@
     background-color: var(--color-focus-lighter);
 }
 
-.salespoint:hover{
-    transition: all 0.4s;
-    translate: 0.1em -0.1em;
-    box-shadow: 4px 4px 6px black;
-}
-
 .salespoint__section{
     margin: auto;
 }

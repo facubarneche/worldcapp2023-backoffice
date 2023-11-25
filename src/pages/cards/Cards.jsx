@@ -6,17 +6,19 @@ import { useOnInit } from "src/customHooks/hooks"
 import { cardService } from "src/domain/services/cardService/CardService"
 import HandleError from "src/utils/handleError/HandleError"
 import { useOutletContext } from "react-router-dom"
+import "./Cards.css"
 
 const Cards = () => {
   const [displayForm, setDisplayForm] = useState(false)
+  const [cards, setCards] = useState([])
+  // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const navigate = useNavigate()
 
-  useOnInit(async ()=> {
+  useOnInit(async () => {
     try {
       setHeaderTitle('Figuritas')
-      const card = await cardService.getCards()
-      console.log(card)
+      setCards(await cardService.getCards())
     } catch (error) {
       HandleError(error, navigate)
     }
@@ -34,25 +36,25 @@ const Cards = () => {
         // TODO: Agregar la card, el resto de componentes vienen por layout
         <>
           <TextField id="outlined-search" label="BUSCADOR Q" type="search" placeholder="BUSCADOR" />
-          <Box className='salespoint'>
-            <section className="salespoint__section">
-              Mock
-            </section>
-            <section className="salespoint__section">
-              <strong className="salespoint__quantity">20</strong>
-              <h2>Mock</h2>
-            </section>
-          </Box>
-          <Box className='salespoint'>
-            <section className="salespoint__section">
-              Mock2
-            </section>
-            <section className="salespoint__section">
-              <strong className="salespoint__quantity">20</strong>
-              <h2>Mock2</h2>
-            </section>
-          </Box>
-          <Button className="salespoint__button" onClick={changeDisplay}>+</Button>
+          {
+            cards.map(card =>
+              <Box key={card.id} className='cards'>
+                <div className='lala'>
+                  {`${card.firstName} ${card.lastName}`}
+                </div>
+                <div className='lala'>
+                  #{card.number}
+                </div>
+                <div className='lala'>
+                  {card.baseValoration()}
+                </div>
+                <div className='lala'>{card.onFire ? 'On Fire' : <del>On Fire</del>}</div>
+                <div className='lala'>{card.printLevel.nombre}</div>
+                <div className='lala'>{card.totalValoration()}</div>
+              </Box>
+            )
+          }
+          <Button className="cards__button" onClick={changeDisplay}>+</Button>
         </>
       }
       {
