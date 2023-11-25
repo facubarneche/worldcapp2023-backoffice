@@ -1,4 +1,4 @@
-.cards{
+.card{
     display: block;
     border: 1px solid black;
     border-radius: 2em;
@@ -8,4 +8,31 @@
     margin: 1.5em 1em;
     color: var(--text-color);
     background-color: var(--color-focus-lighter);
+}
+
+.card__section{
+    margin: auto;
+}
+
+.card__quantity{
+    font-size: 5em;
+}
+
+.card .card__icon{
+    font-size: 6em;
+}
+
+.card__icon--primary{
+    color: lightblue;
+}
+.card__icon--secondary{
+    color: palevioletred;
+}
+.card__button{
+    font-size: 5em;
+    color:white;
+    border: 1px solid black;
+    float: right;
+    background-color: red;
+    border-radius: 40%;
 }

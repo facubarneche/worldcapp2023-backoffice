@@ -1,5 +1,5 @@
+export const BASE_VALUE = 100
 export class Card {
-  BASE_VALUE = 100
 
   constructor(dataCard) {
     this.id = dataCard.id
@@ -15,7 +15,7 @@ export class Card {
 
   totalValoration = () => this.valoration + this.baseValoration()
 
-  baseValoration = () => this.BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
+  baseValoration = () => BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
 
   onFireMultiplier = () => this.onFire ? 1.2 : 1.0
 

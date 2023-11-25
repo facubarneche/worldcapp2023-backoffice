@@ -4,8 +4,10 @@ import { Card } from "src/domain/models/Card.model"
 
 
 class CardService {
-  getCards = async () => 
+  getCards = async () =>
     (await axios.get(`${REST_SERVER_URL}/figuritas/index`)).data.map(figurita => Card.fromJson(figurita))
+
+  getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/obtener-jugadores`)).data
 }
 
 export const cardService = new CardService()
