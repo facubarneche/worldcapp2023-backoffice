@@ -16,19 +16,15 @@ import SalesPoint from 'pages/salesPoint/SalesPoint'
 import LayoutFooter from 'components/LayoutFooter/LayoutFooter'
 import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 
-
 // Import Styles
 import './App.css'
 import Error from './pages/error/Error'
-import { SnackbarProvider } from "notistack"
-
+import { SnackbarProvider } from 'notistack'
+import FormPlayer from './pages/formPlayer/FormPlayer'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-
-    <Route element={
-      <LayoutFooter />
-    }>
+    <Route element={<LayoutFooter />}>
       <Route path="/">
         <Route index element={<Navigate to="login" />} />
         <Route path="login" element={<Login />}></Route>
@@ -36,25 +32,26 @@ const router = createBrowserRouter(
           <Route path="home" element={<Home />}></Route>
           <Route path="figuritas" element={<Cards />}></Route>
           <Route path="jugadores" element={<Players />}></Route>
+          <Route
+            path="nuevo-jugador"
+            element={<FormPlayer headerTitle={'Nuevo jugador'} />}
+          ></Route>
           <Route path="puntos-de-venta" element={<SalesPoint />}></Route>
           <Route path="selecciones" element={<Teams />}></Route>
         </Route>
-        <Route path='/error' element={<Error />}></Route>
-        <Route path='*' element={<Error />}></Route>
+        <Route path="/error" element={<Error />}></Route>
+        <Route path="*" element={<Error />}></Route>
       </Route>
-    </Route>
-
-    ,
+    </Route>,
   ),
 )
 
 function App() {
-  return (    
-    <div className='layout app'>
+  return (
+    <div className="layout app">
       <RouterProvider router={router} />
-      <SnackbarProvider className='snackbar' />
+      <SnackbarProvider className="snackbar" />
     </div>
-
   )
 }
 
