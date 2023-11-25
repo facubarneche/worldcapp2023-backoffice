@@ -13,7 +13,17 @@ const FormPlayer = ({ headerTitle }) => {
   return (
     <>
       <p>FormPlayer</p>
-      <StepFooter />
+      <StepFooter
+        leftButtonClick={() => {
+          console.log('jijia')
+        }}
+        rightButtonText="Cancelar"
+        rightButtonProps={{
+          className: 'ButtonLolazo',
+          variant: 'contained',
+          disabled: true,
+        }}
+      />
     </>
   )
 }
