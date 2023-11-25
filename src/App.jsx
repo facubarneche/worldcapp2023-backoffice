@@ -20,7 +20,7 @@ import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 import './App.css'
 import Error from './pages/error/Error'
 import { SnackbarProvider } from 'notistack'
-import FormPlayer from './pages/formPlayer/FormPlayer'
+import FormPlayer from './pages/FormPlayer/FormPlayer'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

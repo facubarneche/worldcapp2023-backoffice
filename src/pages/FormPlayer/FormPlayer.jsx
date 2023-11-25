@@ -1,6 +1,7 @@
 import { useOutletContext } from 'react-router-dom'
 import FormActions from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
+import './FormPlayer.css'
 
 const FormPlayer = ({ headerTitle }) => {
   // @ts-ignore
@@ -11,7 +12,7 @@ const FormPlayer = ({ headerTitle }) => {
   })
 
   return (
-    <>
+    <main className="formPlayer">
       <p>FormPlayer</p>
       <FormActions
         leftButtonClick={() => {
@@ -24,7 +25,7 @@ const FormPlayer = ({ headerTitle }) => {
           disabled: true,
         }}
       />
-    </>
+    </main>
   )
 }
 export default FormPlayer
