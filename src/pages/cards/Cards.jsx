@@ -3,12 +3,17 @@
 
 import { CardBase } from 'components/CardBase/CardBase'
 import { useOutletContext } from 'react-router-dom'
+import CustomCardContent from 'src/components/CustomContent/CustomCardContent'
 import { useOnInit } from 'src/customHooks/hooks'
 
 const props = {
   title: 'CardTitle',
   footer: 'CardFooter',
-  content: 'CardContent',
+  content: {
+    numero: 1,
+    onFire: 'on fire',
+    nivelImpresion: 'Alto',
+  },
 }
 
 export default function Cards() {
@@ -18,6 +23,10 @@ export default function Cards() {
   useOnInit(() => {
     setHeaderTitle('Figuritas')
   })
-
-  return <CardBase cardProps={props} customCardContent={props.content} />
+  return (
+    <CardBase
+      cardProps={props}
+      customCardContent={CustomCardContent(props.content)}
+    />
+  )
 }
