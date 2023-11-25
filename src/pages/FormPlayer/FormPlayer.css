@@ -1,0 +1,15 @@
+.formPlayer__flexContainer {
+  display: flex;
+  flex-direction: column;
+}
+.formPlayer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 2rem;
+}
+.formPlayer__form {
+  padding: 0 2rem;
+}
+.formPlayer__input-container {
+}
