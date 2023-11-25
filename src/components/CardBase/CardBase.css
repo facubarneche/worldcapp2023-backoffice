@@ -1,7 +1,10 @@
 .card-base {
+  display: flex;
+  justify-content: column;
   min-width: 27.5em;
   max-width: 90vw;
   min-height: 15em;
+  height: fit-content;
   border: 1px solid red;
   box-shadow: var(--box-shadow);
 }
