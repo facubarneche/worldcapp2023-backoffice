@@ -15,10 +15,11 @@ const FiguritasForm = ({ changeDisplay }) => {
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
   const [valorationBase, setValorationBase] = useState(0)
-  // const [totalValoration, setTotalValoration] = useState(0)
+  const [totalValoration, setTotalValoration] = useState(0)
   const nroRef = useRef(1)
   const onFireRef = useRef(false)
   const printLevelRef = useRef(1)
+  const playerRef = useRef(1)
   const navigate = useNavigate()
 
   useOnInit(async () => {
@@ -27,6 +28,7 @@ const FiguritasForm = ({ changeDisplay }) => {
       const { jugadores, levelPrints } = await cardService.getDataCreateCards()
       setPlayers(jugadores)
       setPrintsLevel(levelPrints)
+      calculateBaseValoration()
     } catch (error) {
       HandleError(error, navigate)
     }
@@ -38,7 +40,7 @@ const FiguritasForm = ({ changeDisplay }) => {
   const calculateBaseValoration = () => {
     const baseValue = BASE_VALUE * onFireMultiplier() * evenMultiplier() * printLevelRef.current.value
     setValorationBase(baseValue)
-    // setTotalValoration( + baseValue)
+    setTotalValoration(Number(playerRef.current.value) + baseValue)
   }
 
 
@@ -56,11 +58,14 @@ const FiguritasForm = ({ changeDisplay }) => {
         required
         select
         SelectProps={{ native: true }}
+        inputRef={playerRef} 
+        defaultValue={1} 
+        onChange={calculateBaseValoration}
       >
         {
           players.map((player, index) =>
             //TODO: Ver bien lo del value luego
-            <option key={index} value={player} >
+            <option key={index} value={player.valoracion} >
               {`${player.nombre} ${player.apellido}`}
             </option>
           )
@@ -69,7 +74,7 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       <FormControlLabel 
         className="figuritas-form__checkbox" 
-        control={<Checkbox defaultChecked={true} />} 
+        control={<Checkbox defaultChecked={false} />} 
         label="On Fire" 
         inputRef={onFireRef}
         onChange={calculateBaseValoration}
@@ -80,6 +85,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         select
         SelectProps={{ native: true }}
         inputRef={printLevelRef} 
+        defaultValue={1} 
         onChange={calculateBaseValoration}
       >
         {
@@ -96,7 +102,7 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       {/* TODO: Terminar esto */}
       <strong>Valoración base {valorationBase.toFixed(2)}</strong>
-      <strong>Valoración total {1000}</strong>
+      <strong>Valoración total {totalValoration}</strong>
       {/* totalValoration = () => this.valoration + this.baseValoration() */}
 
 
