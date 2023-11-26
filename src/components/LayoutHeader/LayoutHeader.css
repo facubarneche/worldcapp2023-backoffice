@@ -1,4 +1,4 @@
-.layoutHeader {
+.layout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,7 +8,7 @@
   box-shadow: var(--box-shadow);
   background-image: var(--gradient-primary);
 }
-.layoutHeader_title {
+.layout-header__title {
   font-weight: 900;
   color: var(--typeface-color);
 }
