@@ -1,5 +1,4 @@
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material"
-
 import './figuritasForm.css'
 import { useOnInit } from "src/customHooks/hooks"
 import { cardService } from "src/domain/services/cardService/CardService"
@@ -15,23 +14,27 @@ const FiguritasForm = ({ changeDisplay }) => {
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
+
   // Inputs del form
   const [nro, setNro] = useState("") // Estado para el número
   const [isOnFire, setIsOnFire] = useState(true) // Estado para la casilla de verificación "On Fire"
   const [selectedPrintLevel, setSelectedPrintLevel] = useState("bajo") // Estado para el nivel de impresión
   const [valoracionBase, setValoracionBase] = useState(0)
+  const [, setValoracionJugador] = useState(0)
+  const [valoracionTotal, setValoracionTotal] = useState(0)
+  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0)
 
   useOnInit(async () => {
     try {
       setHeaderTitle('Nueva Figuritas')
-      const { jugadores, levelPrints } = await cardService.getDataCreateCards()
+      const { jugadores, levelPrints, valoracion } = await cardService.getDataCreateCards()
       setPlayers(jugadores)
       setPrintsLevel(levelPrints)
+      setValoracionJugador(valoracion)
     } catch (error) {
       HandleError(error, navigate)
     }
   })
-
 
   const calculateBaseValoration = (nro, isOnFire, selectedPrintLevel) => {
     const baseValue = BASE_VALUE
@@ -40,22 +43,23 @@ const FiguritasForm = ({ changeDisplay }) => {
     const printLevelMultiplier = selectedPrintLevel === "bajo" ? 1.0 : 0.85
 
     return baseValue * onFireMultiplier * evenMultiplier * printLevelMultiplier
- 
-  } 
-  
+  }
+
   useEffect(() => {
-    // Convertir el número a un entero
-    const parsedNro = parseInt(nro, 10)
- 
     const calculatedValoracionBase = calculateBaseValoration(
-      parsedNro,
+      nro,
       isOnFire,
       selectedPrintLevel
     )
-    // Actualizar el estado de la valoración base
-    setValoracionBase(calculatedValoracionBase)
-  }, [nro, isOnFire, selectedPrintLevel])
 
+    const selectedPlayer = players[selectedPlayerIndex]
+    const playerValoracion = selectedPlayer ? selectedPlayer.valoracion : 0
+
+    const valoracionTotal = calculatedValoracionBase + playerValoracion
+
+    setValoracionBase(calculatedValoracionBase)
+    setValoracionTotal(valoracionTotal)
+  }, [nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players])
 
   return (
     <div className="figuritas-form">
@@ -72,9 +76,11 @@ const FiguritasForm = ({ changeDisplay }) => {
         required
         select
         SelectProps={{ native: true }}
+        value={selectedPlayerIndex}
+        onChange={(e) => setSelectedPlayerIndex(parseInt(e.target.value, 10))}
       >
         {players.map((player, index) => 
-          <option key={index} value={player.nombre}>
+          <option key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
           </option>
         )}
@@ -115,19 +121,18 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       {/* Mostrar la valoración base actualizada */}
       <strong>Valoración base {valoracionBase}</strong>
-      <strong>Valoración total {1000}</strong>
+      <strong>Valoración total {valoracionTotal}</strong>
 
-      {/* totalValoration = () => this.valoration + this.baseValoration() */}
-
+      {/* Botones para guardar y volver */}
       <Button variant="contained" onClick={changeDisplay}>
-      Guardar
+        Guardar
       </Button>
       <Button variant="outlined" onClick={changeDisplay}>
-      Volver
+        Volver
       </Button>
     </div>
   )
-
 }
 
 export default FiguritasForm
+
