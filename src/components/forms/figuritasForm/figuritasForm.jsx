@@ -49,7 +49,6 @@ const FiguritasForm = ({ changeDisplay }) => {
       <TextField 
         required label="Nro" 
         type="number" 
-        defaultValue={1} 
         inputRef={nroRef} 
         onChange={calculateBaseValoration}
       />
@@ -59,7 +58,6 @@ const FiguritasForm = ({ changeDisplay }) => {
         select
         SelectProps={{ native: true }}
         inputRef={playerRef} 
-        defaultValue={1} 
         onChange={calculateBaseValoration}
       >
         {
@@ -85,7 +83,6 @@ const FiguritasForm = ({ changeDisplay }) => {
         select
         SelectProps={{ native: true }}
         inputRef={printLevelRef} 
-        defaultValue={1} 
         onChange={calculateBaseValoration}
       >
         {
@@ -100,11 +97,8 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
-      {/* TODO: Terminar esto */}
       <strong>Valoración base {valorationBase.toFixed(2)}</strong>
       <strong>Valoración total {totalValoration}</strong>
-      {/* totalValoration = () => this.valoration + this.baseValoration() */}
-
 
       <Button variant="contained" onClick={changeDisplay}>Guardar</Button>
       <Button variant="outlined" onClick={changeDisplay}>Volver</Button>

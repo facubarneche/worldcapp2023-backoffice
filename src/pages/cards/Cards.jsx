@@ -30,23 +30,22 @@ const Cards = () => {
 
   return (
     <>
-      <h1>FIGURITAS PAGE</h1>
       {
         !displayForm &&
         // TODO: Agregar la card, el resto de componentes vienen por layout
         <>
           <TextField id="outlined-search" label="BUSCADOR Q" type="search" placeholder="BUSCADOR" />
           {
-            cards.map(card =>
-              <Box key={card.id} className='card'>
-                <div>{`${card.firstName} ${card.lastName}`}</div>
-                <div>#{card.number}</div>
-                <div>{card.baseValoration()}</div>
-                <div>{card.onFire ? 'On Fire' : <del>On Fire</del>}</div>
-                <div>{card.printLevel.nombre}</div>
-                <div>{card.totalValoration()}</div>
-              </Box>
-            )
+            // cards.map(card =>
+            //   <Box key={card.id} className='card'>
+            //     <div>{`${card.firstName} ${card.lastName}`}</div>
+            //     <div>#{card.number}</div>
+            //     <div>{card.baseValoration()}</div>
+            //     <div>{card.onFire ? 'On Fire' : <del>On Fire</del>}</div>
+            //     <div>{card.printLevel.nombre}</div>
+            //     <div>{card.totalValoration()}</div>
+            //   </Box>
+            // )
           }
           <Button className="card__button" onClick={changeDisplay}>+</Button>
         </>
