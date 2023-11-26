@@ -1,5 +1,4 @@
 import { Box, Button, TextField } from "@mui/material"
-import SalesPointForm from "../../components/forms/salesPointForm/SalesPointForm"
 import './SalesPoint.css'
 import { useState } from "react"
 import { useOnInit } from "src/customHooks/hooks"
@@ -11,12 +10,7 @@ const SalesPoint = () => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [salesPoint, setSalesPoint] = useState([])
-  const [displayForm, setDisplayForm] = useState(false)
   const navigate = useNavigate()
-
-  const changeDisplay = () => {
-    setDisplayForm(!displayForm)
-  }
   
   useOnInit(async () => {
     try {
@@ -27,10 +21,13 @@ const SalesPoint = () => {
     }
   })
 
+  const redirect = () => {
+    navigate('/nuevo-punto-de-venta')
+  }
+
   return (
     <>
       {
-        !displayForm &&
         // TODO: Agregar la card, el resto de componentes vienen por layout
         <>
           <TextField id="outlined-search" label="Search field" type="search" />
@@ -45,11 +42,8 @@ const SalesPoint = () => {
               </Box>
             )
           }
-          <Button className="salespoint__button" onClick={changeDisplay}>+</Button>
+          <Button className="salespoint__button" onClick={redirect}>+</Button>
         </>
-      }
-      {
-        displayForm && <SalesPointForm />
       }
     </>
   )

@@ -1,9 +1,19 @@
 import { TextField } from "@mui/material"
 import './SalesPointForm.css'
+import FormActions from "src/components/FormActions/FormActions"
+import { useOnInit } from "src/customHooks/hooks"
+import { useNavigate, useOutletContext } from 'react-router-dom'
 
-const SalesPointForm = () => {
-  
+
+const SalesPointForm = ({headerTitle}) => {
+  // @ts-ignore
+  const [setHeaderTitle] = useOutletContext()
   const businessesType = ['Kiosko', 'Libreria', 'Supermercado']
+  const navigate = useNavigate()
+
+  useOnInit(() => {
+    setHeaderTitle(headerTitle)
+  })
 
   return (
     <div className="sales-point-form">
@@ -27,6 +37,18 @@ const SalesPointForm = () => {
           )
         }
       </TextField>
+      <FormActions
+        leftButtonClick={() => {
+          console.log('Guardar')
+        }}
+        rightButtonClick={() => {
+          navigate('/puntos-de-venta')
+        }}
+        rightButtonText="Volver"
+        rightButtonProps={{
+          variant: 'outlined',
+        }}
+      />
     </div>
   )
 }

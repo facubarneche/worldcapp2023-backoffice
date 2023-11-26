@@ -21,6 +21,7 @@ import './App.css'
 import Error from './pages/error/Error'
 import { SnackbarProvider } from 'notistack'
 import FormPlayer from './pages/formPlayer/FormPlayer'
+import SalesPointForm from './pages/salesPointForm/SalesPointForm'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,10 @@ const router = createBrowserRouter(
             element={<FormPlayer headerTitle={'Nuevo jugador'} />}
           ></Route>
           <Route path="puntos-de-venta" element={<SalesPoint />}></Route>
+          <Route
+            path="nuevo-punto-de-venta"
+            element={<SalesPointForm headerTitle={'Nuevo punto de venta'} />}
+          ></Route>
           <Route path="selecciones" element={<Teams />}></Route>
         </Route>
         <Route path="/error" element={<Error />}></Route>
