@@ -5,7 +5,7 @@ import { useOnInit } from "src/customHooks/hooks"
 import { cardService } from "src/domain/services/cardService/CardService"
 import HandleError from "src/utils/handleError/HandleError"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useOutletContext } from "react-router-dom"
 import { BASE_VALUE } from "src/domain/models/Card.model"
 
@@ -14,6 +14,11 @@ const FiguritasForm = ({ changeDisplay }) => {
   const [setHeaderTitle] = useOutletContext()
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
+  const [valorationBase, setValorationBase] = useState(0)
+  // const [totalValoration, setTotalValoration] = useState(0)
+  const nroRef = useRef(1)
+  const onFireRef = useRef(false)
+  const printLevelRef = useRef(1)
   const navigate = useNavigate()
 
   useOnInit(async () => {
@@ -26,18 +31,26 @@ const FiguritasForm = ({ changeDisplay }) => {
       HandleError(error, navigate)
     }
   })
+  
+  const onFireMultiplier = () => onFireRef.current.checked ? 1.2 : 1.0
+  const evenMultiplier = () => nroRef.current.value % 2 == 0 ? 1.1 : 1.0
 
-  const handleChange = (event) => {
-    const newValue = event.target.value
-    console.log(newValue)
+  const calculateBaseValoration = () => {
+    const baseValue = BASE_VALUE * onFireMultiplier() * evenMultiplier() * printLevelRef.current.value
+    setValorationBase(baseValue)
+    // setTotalValoration( + baseValue)
   }
-  const calculateBaseValoration = () => BASE_VALUE
-  // baseValoration = () => this.BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier() */}
 
 
   return (
     <div className="figuritas-form">
-      <TextField required label="Nro" type="number" onChange={handleChange}/>
+      <TextField 
+        required label="Nro" 
+        type="number" 
+        defaultValue={1} 
+        inputRef={nroRef} 
+        onChange={calculateBaseValoration}
+      />
 
       <TextField className="figuritas-form__select"
         required
@@ -46,23 +59,32 @@ const FiguritasForm = ({ changeDisplay }) => {
       >
         {
           players.map((player, index) =>
-          //TODO: Ver bien lo del value luego
-            <option key={index} value={player.nombre}>
+            //TODO: Ver bien lo del value luego
+            <option key={index} value={player} >
               {`${player.nombre} ${player.apellido}`}
             </option>
           )
         }
       </TextField>
 
-      <FormControlLabel className="figuritas-form__checkbox" control={<Checkbox defaultChecked={true} />} label="On Fire" />
+      <FormControlLabel 
+        className="figuritas-form__checkbox" 
+        control={<Checkbox defaultChecked={true} />} 
+        label="On Fire" 
+        inputRef={onFireRef}
+        onChange={calculateBaseValoration}
+      />
 
       <TextField className="figuritas-form__select"
         required
         select
         SelectProps={{ native: true }}
+        inputRef={printLevelRef} 
+        onChange={calculateBaseValoration}
       >
         {
           printsLevel.map((printLevel) =>
+          //TODO: Ver value aca, el back seguramente necesite el nombre
             <option key={printLevel.nombre} value={printLevel.afectaValorEn}>
               {printLevel.nombre}
             </option>
@@ -73,7 +95,7 @@ const FiguritasForm = ({ changeDisplay }) => {
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
       {/* TODO: Terminar esto */}
-      <strong>Valoración base {calculateBaseValoration()}</strong>
+      <strong>Valoración base {valorationBase.toFixed(2)}</strong>
       <strong>Valoración total {1000}</strong>
       {/* totalValoration = () => this.valoration + this.baseValoration() */}
 
