@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import DashboardBox from "./DashboardBox"
+import DashboardBox from "./Dashboard"
 import { itemsDashboardBoxMock } from "src/domain/mocks/ItemsDashboardBox.mock"
 
 

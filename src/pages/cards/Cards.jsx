@@ -1,60 +1,43 @@
-import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import FiguritasForm from "src/components/forms/figuritasForm/figuritasForm"
+import { useOutletContext } from "react-router-dom"
+import { CardBase } from "src/components/CardBase/CardBase"
+import CustomCardContent from "src/components/CustomContent/CustomCardContent"
+import { Searchbar } from "src/components/Searchbar/Searchbar"
 import { useOnInit } from "src/customHooks/hooks"
+import { CustomSearch } from "src/domain/models/CustomSearch/CustomSearch"
 import { cardService } from "src/domain/services/cardService/CardService"
 import HandleError from "src/utils/handleError/HandleError"
-import { useOutletContext } from "react-router-dom"
-import "./Cards.css"
 
-const Cards = () => {
-  const [displayForm, setDisplayForm] = useState(false)
+export const Cards = () => {
   const [cards, setCards] = useState([])
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-  const navigate = useNavigate()
-
+  
   useOnInit(async () => {
     try {
       setHeaderTitle('Figuritas')
-      setCards(await cardService.getCards())
+      getCards(new CustomSearch())
     } catch (error) {
-      HandleError(error, navigate)
+      HandleError(error)
     }
   })
 
-  const changeDisplay = () => {
-    setDisplayForm(!displayForm)
+  const getCards = async (filter) => {
+    setCards(await cardService.getCards(filter))
   }
 
   return (
     <>
-      {
-        !displayForm &&
-        // TODO: Agregar la card, el resto de componentes vienen por layout
-        <>
-          <TextField id="outlined-search" label="BUSCADOR Q" type="search" placeholder="BUSCADOR" />
-          {
-            // cards.map(card =>
-            //   <Box key={card.id} className='card'>
-            //     <div>{`${card.firstName} ${card.lastName}`}</div>
-            //     <div>#{card.number}</div>
-            //     <div>{card.baseValoration()}</div>
-            //     <div>{card.onFire ? 'On Fire' : <del>On Fire</del>}</div>
-            //     <div>{card.printLevel.nombre}</div>
-            //     <div>{card.totalValoration()}</div>
-            //   </Box>
-            // )
-          }
-          <Button className="card__button" onClick={changeDisplay}>+</Button>
-        </>
-      }
-      {
-        displayForm && <FiguritasForm changeDisplay={changeDisplay} />
-      }
+      <div className="layout__content">
+        <Searchbar getFilterCards={getCards} />
+        {cards.map((card, index) =>
+          <CardBase
+            key={index}
+            card={card}
+            content={CustomCardContent(card)}
+          />
+        )}
+      </div>
     </>
   )
 }
-
-export default Cards

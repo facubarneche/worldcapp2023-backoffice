@@ -6,7 +6,7 @@ import HandleError from "src/utils/handleError/HandleError"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useOutletContext } from "react-router-dom"
-import { BASE_VALUE } from "src/domain/models/Card.model"
+import { BASE_VALUE } from "src/domain/models/CardModel/Card.model"
 
 const FiguritasForm = ({ changeDisplay }) => {
   // @ts-ignore
@@ -79,7 +79,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPlayerIndex}
         onChange={(e) => setSelectedPlayerIndex(parseInt(e.target.value, 10))}
       >
-        {players.map((player, index) => 
+        {players.map((player, index) =>
           <option key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
           </option>
@@ -105,7 +105,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPrintLevel}
         onChange={(e) => setSelectedPrintLevel(e.target.value)}
       >
-        {printsLevel.map((printLevel) => 
+        {printsLevel.map((printLevel) =>
           <option key={printLevel.nombre} value={printLevel.afectaValorEn}>
             {printLevel.nombre}
           </option>
