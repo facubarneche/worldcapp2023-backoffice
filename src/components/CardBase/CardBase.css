@@ -1,0 +1,59 @@
+.card-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 85vw;
+  height: fit-content;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+}
+
+.card-base__header {
+  display: flex;
+  width: 92%;
+  min-height: 6.5em;
+  box-shadow: var(--box-shadow-line);
+}
+
+.card-base__title {
+  display: flex;
+  align-items: center;
+  flex-basis: 90%;
+  min-height: 4.5em;
+}
+
+.card-base__actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3em;
+  align-items: flex-end;
+  flex-basis: 10%;
+}
+
+.card-base__icons {
+  font-size: 2.1em;
+}
+
+.card-base__footer {
+  padding: 0.3em;
+}
+
+.card-base__text {
+  font-size: 2em;
+  font-weight: 600;
+  margin-left: 0.3em;
+}
+
+.card-base__text--title{
+  text-transform: capitalize;
+}
+
+.card-base__text--upper {
+  text-transform: uppercase;
+}
+
+.card-base .MuiSvgIcon-root {
+  margin: 0 !important;
+}
