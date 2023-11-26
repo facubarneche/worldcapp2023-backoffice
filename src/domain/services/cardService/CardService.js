@@ -7,7 +7,7 @@ class CardService {
   getCards = async () =>
     (await axios.get(`${REST_SERVER_URL}/figuritas/index`)).data.map(figurita => Card.fromJson(figurita))
 
-  getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/obtener-jugadores`)).data
+  getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/data-create-figurita`)).data
 }
 
 export const cardService = new CardService()
