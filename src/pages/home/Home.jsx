@@ -3,8 +3,8 @@ import { useNavigate, useOutletContext } from "react-router-dom"
 import { useOnInit } from "src/customHooks/hooks"
 
 import DashboardBox from "components/dashboardBox/DashboardBox"
-import { dashboardService } from "src/domain/services/homeService/Home.service"
 import HandleError from "src/utils/handleError/HandleError"
+import { dashboardService } from "src/domain/services/homeService/HomeService"
 
 import "./Home.css"
 

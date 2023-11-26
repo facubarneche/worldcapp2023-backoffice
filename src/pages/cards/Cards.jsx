@@ -1,12 +1,4 @@
-// import { useOutletContext } from "react-router-dom"
-// import { useOnInit } from "src/customHooks/hooks"
-
-import { CardBase } from 'components/CardBase/CardBase'
-import { useOutletContext } from 'react-router-dom'
-import CustomCardContent from 'src/components/CustomContent/CustomCardContent'
-import CustomPlayerContent from 'src/components/CustomContent/CustomPlayerContent'
-import CustomSalesPointContent from 'src/components/CustomContent/CustomSalesPointContent'
-import { useOnInit } from 'src/customHooks/hooks'
+import { CardBase } from "components/CardBase/CardBase"
 
 const propsCardStub = {
   title: 'card figurita',
@@ -40,13 +32,19 @@ const propsSalesStub = {
   },
 }
 
-export default function Cards() {
-  // @ts-ignore
+export const Cards = () => {  
+  const [cards, setCards] = useState([])  
   const [setHeaderTitle] = useOutletContext()
-
-  useOnInit(() => {
-    setHeaderTitle('Figuritas')
+  
+  useOnInit(async () => {
+    try {
+      setHeaderTitle('Figuritas')
+      setCards(await cardService.getCards())
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   })
+
   return (
     <CardBase
       cardProps={propsSalesStub}
