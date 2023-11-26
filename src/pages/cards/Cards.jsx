@@ -1,54 +1,43 @@
-import { CardBase } from "components/CardBase/CardBase"
+import { useState } from "react"
+import { useOutletContext } from "react-router-dom"
+import { CardBase } from "src/components/CardBase/CardBase"
+import CustomCardContent from "src/components/CustomContent/CustomCardContent"
+import { Searchbar } from "src/components/Searchbar/Searchbar"
+import { useOnInit } from "src/customHooks/hooks"
+import { CustomSearch } from "src/domain/models/CustomSearch/CustomSearch"
+import { cardService } from "src/domain/services/cardService/CardService"
+import HandleError from "src/utils/handleError/HandleError"
 
-const propsCardStub = {
-  title: 'card figurita',
-  footer: 'card footer',
-  content: {
-    numero: 1,
-    onFire: 'on fire',
-    nivelImpresion: 'Alto',
-  },
-}
-
-const propsPlayerStub = {
-  title: 'card jugador',
-  footer: 'card footer',
-  content: {
-    anioDebut: '14/07/2001', 
-    nroCamiseta: '11', 
-    seleccion:'Argentina', 
-    posicion: 'Delantero',
-    altura: "1.74", 
-    peso: '80'
-  },
-}
-
-const propsSalesStub = {
-  title: 'card punto venta',
-  footer: 'card footer',
-  content: {
-    direccion: 'calle genial',
-    stock: 123
-  },
-}
-
-export const Cards = () => {  
-  const [cards, setCards] = useState([])  
+export const Cards = () => {
+  const [cards, setCards] = useState([])
+  // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   
   useOnInit(async () => {
     try {
       setHeaderTitle('Figuritas')
-      setCards(await cardService.getCards())
+      getCards(new CustomSearch())
     } catch (error) {
-      HandleError(error, navigate)
+      HandleError(error)
     }
   })
 
+  const getCards = async (filter) => {
+    setCards(await cardService.getCards(filter))
+  }
+
   return (
-    <CardBase
-      cardProps={propsSalesStub}
-      customCardContent={CustomSalesPointContent(propsSalesStub.content)}
-    />
+    <>
+      <div className="layout__content">
+        <Searchbar getFilterCards={getCards} />
+        {cards.map((card, index) =>
+          <CardBase
+            key={index}
+            card={card}
+            content={CustomCardContent(card)}
+          />
+        )}
+      </div>
+    </>
   )
 }

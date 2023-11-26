@@ -9,8 +9,8 @@ import {
 // Import Pages
 import { Login } from 'pages/login/Login'
 import Home from 'pages/home/Home'
-import Cards from 'pages/cards/Cards'
 import Players from 'pages/players/Players'
+import { Cards } from 'pages/cards/Cards'
 import Teams from 'pages/teams/Teams'
 import SalesPoint from 'pages/salesPoint/SalesPoint'
 import LayoutFooter from 'components/LayoutFooter/LayoutFooter'
@@ -48,10 +48,10 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <div className="layout app">
+    <>
       <RouterProvider router={router} />
       <SnackbarProvider className="snackbar" />
-    </div>
+    </>
   )
 }
 

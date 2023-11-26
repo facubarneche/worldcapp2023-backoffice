@@ -3,48 +3,48 @@ import { SportsSoccer, Flag, Height, MonitorWeight, GpsFixed } from '@mui/icons-
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
 
-export default function CustomPlayerContent({ anioDebut, nroCamiseta, seleccion, posicion, altura, peso }) {
+export default function CustomPlayerContent(jugador) {
 
   return (
     <CardContent className='card-content'>
       <Box className="card-content__section">
         <Typography className="card-content__text">
-          {anioDebut}
+          {jugador.anioDebut}
         </Typography>
       </Box>
       <span className="card-content__text--pipe"/>
       <Box className="card-content__section">
         <SportsSoccer className="card-base__icons"/>
         <Typography className="card-content__text">
-          {nroCamiseta}
+          {jugador.nroCamiseta}
         </Typography>
       </Box>
       <span className="card-content__text--pipe"/>
       <Box className="card-content__section">
         <Flag className="card-base__icons"/>
         <Typography className="card-content__text">
-          {seleccion}
+          {jugador.seleccion}
         </Typography>
       </Box>
       <span className="card-content__text--pipe"/>
       <Box className="card-content__section">
         <GpsFixed className="card-base__icons"/>
         <Typography className="card-content__text">
-          {posicion}
+          {jugador.posicion}
         </Typography>
       </Box>
       <span className="card-content__text--pipe"/>
       <Box className="card-content__section">
         <Height className="card-base__icons"/>
         <Typography className="card-content__text">
-          {altura}
+          {jugador.altura}
         </Typography>
       </Box>
       <span className="card-content__text--pipe"/>
       <Box className="card-content__section">
         <Typography className="card-content__text">
           <MonitorWeight fontSize="large" />
-          {peso}
+          {jugador.peso}
         </Typography>
       </Box>
     </CardContent>

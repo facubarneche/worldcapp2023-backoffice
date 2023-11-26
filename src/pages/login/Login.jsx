@@ -11,6 +11,7 @@ import HandleError from 'src/utils/handleError/HandleError'
 export const Login = () => {
   const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false)
+  // @ts-ignore
   const [setFoterContent] = useOutletContext()
   
   useOnInit(()=> {

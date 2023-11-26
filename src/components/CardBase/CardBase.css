@@ -1,10 +1,9 @@
 .card-base {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   min-width: 85vw;
-  min-height: 15em;
   height: fit-content;
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow);
