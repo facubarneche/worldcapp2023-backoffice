@@ -1,3 +1,9 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .layout__content {
   display: flex;
   flex-direction: column;
@@ -5,4 +11,5 @@
   gap: 2em;
   padding: 1rem 0;
   min-height: calc(100vh - 14rem);
+
 }

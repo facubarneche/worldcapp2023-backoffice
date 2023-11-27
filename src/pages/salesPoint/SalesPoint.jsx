@@ -1,54 +1,51 @@
-import { Box, Button, TextField } from "@mui/material"
-import SalesPointForm from "../../components/forms/salesPointForm/SalesPointForm"
+import { Button } from "@mui/material"
 import './SalesPoint.css'
 import { useState } from "react"
 import { useOnInit } from "src/customHooks/hooks"
-import { useOutletContext } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
+import { getSalesPoint } from "src/domain/services/salesPointService/SalesPointService"
+import HandleError from "src/utils/handleError/HandleError"
+import { Searchbar } from "src/components/Searchbar/Searchbar"
+import { CustomSearch } from "src/domain/models/CustomSearch/CustomSearch"
+import CustomSalesPointContent from "src/components/CustomContent/CustomSalesPointContent"
+import { SalePointBase } from "src/components/salePointBase/SalePointBase"
 
 const SalesPoint = () => {
-  const [displayForm, setDisplayForm] = useState(false)
+  // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-
-  const changeDisplay = () => {
-    setDisplayForm(!displayForm)
-  }
+  const [salesPoint, setSalesPoint] = useState([])
+  const navigate = useNavigate()
   
-  useOnInit(() => {
-    setHeaderTitle('Puntos de venta')
+  useOnInit(async () => {
+    try {
+      setHeaderTitle('Puntos de venta')
+      getCards(new CustomSearch())
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   })
+
+  const getCards = async (filter) => {
+    setSalesPoint(await getSalesPoint(filter))
+  }
+
+  const redirect = () => {
+    navigate('/nuevo-punto-de-venta')
+  }
 
   return (
     <>
-      <h1>FIGURITAS PAGE</h1>
-      {
-        !displayForm &&
-        // TODO: Agregar la card, el resto de componentes vienen por layout
-        <>
-          <TextField id="outlined-search" label="Search field" type="search" />
-          <Box className='salespoint'>
-            <section className="salespoint__section">
-              Mock
-            </section>
-            <section className="salespoint__section">
-              <strong className="salespoint__quantity">20</strong>
-              <h2>Mock</h2>
-            </section>
-          </Box>
-          <Box className='salespoint'>
-            <section className="salespoint__section">
-              Mock2
-            </section>
-            <section className="salespoint__section">
-              <strong className="salespoint__quantity">20</strong>
-              <h2>Mock2</h2>
-            </section>
-          </Box>
-          <Button className="salespoint__button" onClick={changeDisplay}>+</Button>
-        </>
-      }
-      {
-        displayForm && <SalesPointForm />
-      }
+      <div className="layout__content">
+        <Searchbar getFilterCards={getCards} />
+        {salesPoint.map((salePoint, index) =>
+          <SalePointBase
+            key={index}
+            salePoint={salePoint}
+            content={CustomSalesPointContent(salePoint)}
+          />
+        )}
+        <Button className="salespoint__button" onClick={redirect}>+</Button>
+      </div>
     </>
   )
 }
