@@ -7,12 +7,12 @@ import {
 } from 'react-router-dom'
 
 // Import Pages
-import { Login } from 'pages/login/Login'
-import Home from 'pages/home/Home'
+import { Login } from 'pages/Login/Login'
+import Home from 'pages/Home/Home'
 import Players from 'pages/players/Players'
-import { Cards } from 'pages/cards/Cards'
+import { Cards } from 'pages/Cards/Cards'
 import Teams from 'pages/teams/Teams'
-import SalesPoint from 'pages/salesPoint/SalesPoint'
+import { Markets } from 'pages/Markets/Markets'
 import LayoutFooter from 'components/LayoutFooter/LayoutFooter'
 import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 
@@ -20,8 +20,8 @@ import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 import './App.css'
 import Error from './pages/error/Error'
 import { SnackbarProvider } from 'notistack'
-import FormPlayer from './pages/formPlayer/FormPlayer'
-import SalesPointForm from './pages/salesPointForm/SalesPointForm'
+import FormPlayer from 'pages/FormPlayer/FormPlayer'
+import { MarketForm } from 'pages/Markets/MarketForm'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,10 +37,10 @@ const router = createBrowserRouter(
             path="nuevo-jugador"
             element={<FormPlayer headerTitle={'Nuevo jugador'} />}
           ></Route>
-          <Route path="puntos-de-venta" element={<SalesPoint />}></Route>
+          <Route path="puntos-de-venta" element={<Markets />}></Route>
           <Route
-            path="nuevo-punto-de-venta"
-            element={<SalesPointForm headerTitle={'Nuevo punto de venta'} />}
+            path="punto-de-venta-nuevo"
+            element={<MarketForm headerTitle={'Nuevo punto de venta'} />}
           ></Route>
           <Route path="selecciones" element={<Teams />}></Route>
         </Route>

@@ -3,7 +3,7 @@ import { SportsSoccer, Flag, Height, MonitorWeight, GpsFixed } from '@mui/icons-
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
 
-export default function CustomPlayerContent(jugador) {
+export const CustomPlayerContent = (jugador) => {
 
   return (
     <CardContent className='card-content'>

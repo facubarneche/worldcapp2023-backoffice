@@ -1,16 +1,29 @@
-export const BASE_VALUE = 100
+export const BASE_VALUE = 100.0
 export class Card {
 
-  constructor(dataCard) {
-    this.id = dataCard.id
-    this.numero = dataCard.numero
-    this.onFire = dataCard.onFire
-    this.nivelImpresion = dataCard.nivelImpresion
-    this.nombre = dataCard.nombre + " " + dataCard.apellido
-    this.valoracion = dataCard.valoracion
+  constructor(data) {
+    this.id = data.id
+    this.numero = data.numero
+    this.onFire = data.onFire
+    this.nivelImpresion = data.nivelImpresion
+    this.nombre = data.nombre
+    this.apellido = data.apellido
+    this.valoracion = data.valoracion    
   }
 
-  static fromJson = (dataCardDTO) => new Card(dataCardDTO)
+  static fromJson = (cardata) => new Card(cardata)  
+
+  title = () => this.nombre + " " + this.apellido
+  
+  content = () => { 
+    return {
+      numero: this.numero,
+      onFire: this.onFire,
+      cantidadImpresa: this.nivelImpresion 
+    }
+  }
+  
+  footer = () => "Valoración: " + this.totalValoration()
 
   totalValoration = () => this.valoracion + this.baseValoration()
 
@@ -20,7 +33,5 @@ export class Card {
 
   evenMultiplier = () => this.numero % 2 == 0 ? 1.1 : 1.0
 
-  printMultiplier = () => this.nivelImpresion.afectaValorEn
-
-
+  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'bajo' ? 1.0 : 0.85
 }

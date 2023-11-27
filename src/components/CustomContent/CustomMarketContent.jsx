@@ -3,21 +3,19 @@ import { Place, AccountBox } from '@mui/icons-material'
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
 
-export default function CustomSalesPointContent(puntoVenta) {
-
+export const CustomMarketContent = (content) => {
   return (
-    <CardContent className='card-content'>
+    <CardContent className='card-content card-content--column'>
       <Box className="card-content__section">
         <Place className="card-base__icons" />
         <Typography className="card-content__text">
-          {`${puntoVenta.streetName} ${puntoVenta.streetNumber}`}
+          {content.direccion}
         </Typography>
-      </Box>
-      <span className="card-content__text--pipe"/>
+      </Box>      
       <Box className="card-content__section">
         <AccountBox className="card-base__icons" />
         <Typography className="card-content__text">
-          {puntoVenta.envelopeStock}
+          {content.stock}
         </Typography>
       </Box>
     </CardContent>

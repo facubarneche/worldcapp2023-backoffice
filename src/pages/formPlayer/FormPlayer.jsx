@@ -1,6 +1,6 @@
 import { useOutletContext } from 'react-router-dom'
-import FormActions from 'src/components/FormActions/FormActions'
-import { useOnInit } from 'src/customHooks/hooks'
+import { FormActions } from 'components/FormActions/FormActions'
+import { useOnInit } from 'customHooks/hooks'
 
 const FormPlayer = ({ headerTitle }) => {
   // @ts-ignore

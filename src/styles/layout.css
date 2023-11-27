@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
-  padding: 1rem 0;
-  min-height: calc(100vh - 14rem);
-
+  position: relative;
+  gap: 2rem;
+  padding: 2rem 4rem;
+  min-height: calc(100vh - 14rem);  
 }
