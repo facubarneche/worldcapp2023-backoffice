@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 import './FormActions.css'
 
-const FormActions = ({
+export const FormActions = ({
   leftButtonText = 'Guardar',
   leftButtonClick = () => {
     console.log('Guardar')
@@ -38,4 +38,3 @@ const FormActions = ({
     </footer>
   )
 }
-export default FormActions

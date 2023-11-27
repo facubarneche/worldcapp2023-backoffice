@@ -6,7 +6,7 @@ import { Searchbar } from 'components/Searchbar/Searchbar'
 import { useOnInit } from 'src/customHooks/hooks'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { cardService } from 'services/CardService/CardService'
-import { HandleError } from 'src/utils/handleError/HandleError'
+import { HandleError } from 'src/utils/HandleError/HandleError'
 
 export const Cards = () => {
   const [cards, setCards] = useState([])
@@ -28,16 +28,14 @@ export const Cards = () => {
 
   return (
     <>
-      <div className="layout__content">
-        <Searchbar getFilterCards={getCards} />
-        {cards.map((card, index) => 
-          <CardBase
-            key={index}
-            card={card}
-            contentComponent={CustomCardContent(card.content())}
-          />
-        )}
-      </div>
+      <Searchbar getFilterCards={getCards} />
+      {cards.map((card, index) => 
+        <CardBase
+          key={index}
+          card={card}
+          contentComponent={CustomCardContent(card.content())}
+        />
+      )}
     </>
   )
 }

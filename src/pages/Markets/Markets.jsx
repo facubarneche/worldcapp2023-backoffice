@@ -4,7 +4,7 @@ import 'src/styles/addbutton.css'
 import { useState } from 'react'
 import { useOnInit } from 'src/customHooks/hooks'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import { HandleError } from 'src/utils/handleError/HandleError'
+import { HandleError } from 'src/utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CustomMarketContent } from 'src/components/CustomContent/CustomMarketContent'
@@ -32,25 +32,22 @@ export const Markets = () => {
   }
 
   const redirect = () => {
-    navigate('/nuevo-punto-de-venta')
+    navigate('/punto-de-venta-nuevo')
   }
 
   return (
     <>
-      <div className="layout__content">
-        <Searchbar getFilterCards={getMarkets} />
-        {markets.map((market, index) => 
-          <CardBase
-            key={index}
-            card={market}
-            contentComponent={CustomMarketContent(market.content())}
-          />
-        )}
-        <Button className="add__button" onClick={redirect}>
-          +
-        </Button>
-      </div>     
+      <Searchbar getFilterCards={getMarkets} />
+      {markets.map((market, index) => 
+        <CardBase
+          key={index}
+          card={market}
+          contentComponent={CustomMarketContent(market.content())}
+        />
+      )}
+      <Button className="add__button" onClick={redirect}>
+        +
+      </Button>
     </>
   )
 }
-

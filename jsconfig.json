@@ -18,6 +18,9 @@
       ],
       "models/*": [
         "./src/domain/models/*"
+      ],
+      "customHooks/*": [
+        "./src/customHooks/*"
       ]
     }
   }
