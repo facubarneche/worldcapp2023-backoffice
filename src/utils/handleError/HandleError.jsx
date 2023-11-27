@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from "notistack"
 
-const HandleError = ( error, navigate, notistack ) => {
+export const HandleError = ( error, navigate, notistack ) => {
   const errorData = error.response?.data ?? { status: 0 }
   let errorMessage = ''
   let navegar = false
@@ -31,5 +31,3 @@ const HandleError = ( error, navigate, notistack ) => {
     })
   }
 }
-
-export default HandleError

@@ -7,12 +7,12 @@ import {
 } from 'react-router-dom'
 
 // Import Pages
-import { Login } from 'pages/login/Login'
-import Home from 'pages/home/Home'
+import { Login } from 'src/pages/Login/Login'
+import Home from 'src/pages/Home/Home'
 import Players from 'pages/players/Players'
-import { Cards } from 'pages/cards/Cards'
+import { Cards } from 'src/pages/Cards/Cards'
 import Teams from 'pages/teams/Teams'
-import SalesPoint from 'pages/salesPoint/SalesPoint'
+import { Markets } from 'src/pages/Markets/Markets'
 import LayoutFooter from 'components/LayoutFooter/LayoutFooter'
 import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
             path="nuevo-jugador"
             element={<FormPlayer headerTitle={'Nuevo jugador'} />}
           ></Route>
-          <Route path="puntos-de-venta" element={<SalesPoint />}></Route>
+          <Route path="puntos-de-venta" element={<Markets />}></Route>
           <Route
             path="nuevo-punto-de-venta"
             element={<SalesPointForm headerTitle={'Nuevo punto de venta'} />}

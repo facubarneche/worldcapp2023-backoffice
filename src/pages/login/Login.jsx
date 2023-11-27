@@ -1,12 +1,12 @@
 import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
 import { formToJSON } from 'axios'
-import { LogoComponent } from 'src/components/logoComponent/LogoComponent'
 import { useState } from 'react'
 import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
+import { LogoComponent } from 'components/LogoComponent/LogoComponent'
 import { useOnInit } from 'src/customHooks/hooks'
-import HandleError from 'src/utils/handleError/HandleError'
+import { HandleError } from 'src/utils/handleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()

@@ -6,7 +6,8 @@ import {
   ModeEdit,
 } from '@mui/icons-material'
 
-export const CardBase = ({card, content}) => {
+export const CardBase = ({card, contentComponent}) => {
+
   const handleClick = () => {}
 
   return (
@@ -15,7 +16,7 @@ export const CardBase = ({card, content}) => {
         <Box className="card-base__title">
           <AssignmentIndRounded className="card-base__icons" />
           <Typography className="card-base__text card-base__text--title">
-            {card.nombre}
+            {card.title()}
           </Typography>
         </Box>
         <Box className="card-base__actions">
@@ -23,10 +24,9 @@ export const CardBase = ({card, content}) => {
           <ModeEdit className="card-base__icons" onClick={handleClick} />
         </Box>
       </Box>
-
-      {content}
+      {contentComponent}
       <Typography className="card-base__footer card-base__text card-base__text--upper">
-        Valoracion: {card.valoracion}
+        {card.footer()}
       </Typography>
     </Card>
   )

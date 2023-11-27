@@ -1,0 +1,15 @@
+.add__button{
+  display: flex;
+  position: sticky;
+  font-size: 3.5rem;
+  color:white;  
+  background-color: var(--color-tertiary);
+  border-radius: 50%;    
+  bottom: 2rem;  
+  width: 7rem ;
+  margin-left: 33rem;  
+}
+
+.add__button:hover{
+  background-color: var(--color-tertiary);
+}

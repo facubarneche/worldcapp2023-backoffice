@@ -1,12 +1,12 @@
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material"
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import './figuritasForm.css'
-import { useOnInit } from "src/customHooks/hooks"
-import { cardService } from "src/domain/services/cardService/CardService"
-import HandleError from "src/utils/handleError/HandleError"
-import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { useOutletContext } from "react-router-dom"
-import { BASE_VALUE } from "src/domain/models/CardModel/Card.model"
+import { useOnInit } from 'src/customHooks/hooks'
+import { cardService } from 'src/domain/services/CardsService/CardsService'
+import HandleError from 'src/utils/handleError/HandleError'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
+import { BASE_VALUE } from 'src/domain/models/CardModel/Card.model'
 
 const FiguritasForm = ({ changeDisplay }) => {
   // @ts-ignore
@@ -16,9 +16,9 @@ const FiguritasForm = ({ changeDisplay }) => {
   const navigate = useNavigate()
 
   // Inputs del form
-  const [nro, setNro] = useState("") // Estado para el número
+  const [nro, setNro] = useState('') // Estado para el número
   const [isOnFire, setIsOnFire] = useState(true) // Estado para la casilla de verificación "On Fire"
-  const [selectedPrintLevel, setSelectedPrintLevel] = useState("bajo") // Estado para el nivel de impresión
+  const [selectedPrintLevel, setSelectedPrintLevel] = useState('bajo') // Estado para el nivel de impresión
   const [valoracionBase, setValoracionBase] = useState(0)
   const [, setValoracionJugador] = useState(0)
   const [valoracionTotal, setValoracionTotal] = useState(0)
@@ -27,7 +27,8 @@ const FiguritasForm = ({ changeDisplay }) => {
   useOnInit(async () => {
     try {
       setHeaderTitle('Nueva Figuritas')
-      const { jugadores, levelPrints, valoracion } = await cardService.getDataCreateCards()
+      const { jugadores, levelPrints, valoracion } =
+        await cardService.getDataCreateCards()
       setPlayers(jugadores)
       setPrintsLevel(levelPrints)
       setValoracionJugador(valoracion)
@@ -40,7 +41,7 @@ const FiguritasForm = ({ changeDisplay }) => {
     const baseValue = BASE_VALUE
     const onFireMultiplier = isOnFire ? 1.5 : 1
     const evenMultiplier = nro % 2 === 0 ? 1.1 : 1.0
-    const printLevelMultiplier = selectedPrintLevel === "bajo" ? 1.0 : 0.85
+    const printLevelMultiplier = selectedPrintLevel === 'bajo' ? 1.0 : 0.85
 
     return baseValue * onFireMultiplier * evenMultiplier * printLevelMultiplier
   }
@@ -49,7 +50,7 @@ const FiguritasForm = ({ changeDisplay }) => {
     const calculatedValoracionBase = calculateBaseValoration(
       nro,
       isOnFire,
-      selectedPrintLevel
+      selectedPrintLevel,
     )
 
     const selectedPlayer = players[selectedPlayerIndex]
@@ -79,7 +80,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPlayerIndex}
         onChange={(e) => setSelectedPlayerIndex(parseInt(e.target.value, 10))}
       >
-        {players.map((player, index) =>
+        {players.map((player, index) => 
           <option key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
           </option>
@@ -105,7 +106,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPrintLevel}
         onChange={(e) => setSelectedPrintLevel(e.target.value)}
       >
-        {printsLevel.map((printLevel) =>
+        {printsLevel.map((printLevel) => 
           <option key={printLevel.nombre} value={printLevel.afectaValorEn}>
             {printLevel.nombre}
           </option>
@@ -135,4 +136,3 @@ const FiguritasForm = ({ changeDisplay }) => {
 }
 
 export default FiguritasForm
-

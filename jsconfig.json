@@ -15,6 +15,9 @@
       ],
       "services/*": [
         "./src/domain/services/*"
+      ],
+      "models/*": [
+        "./src/domain/models/*"
       ]
     }
   }

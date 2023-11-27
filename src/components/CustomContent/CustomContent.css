@@ -6,9 +6,18 @@
   align-items: center;
 }
 
+.card-content--column {
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
 .card-content__text {
   font-size: 2em;
   margin-left: 0.3em;
+}
+
+.card-content__text--title {
+  text-transform: capitalize;
 }
 
 .card-content__text--pipe {
