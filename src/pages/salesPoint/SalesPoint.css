@@ -32,7 +32,9 @@
     font-size: 5em;
     color:white;
     border: 1px solid black;
-    float: right;
     background-color: red;
     border-radius: 40%;
+    position: fixed;
+    top: 500px;
+    right: 10px;
 }

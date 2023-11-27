@@ -1,10 +1,14 @@
-import { Box, Button, TextField } from "@mui/material"
+import { Button } from "@mui/material"
 import './SalesPoint.css'
 import { useState } from "react"
 import { useOnInit } from "src/customHooks/hooks"
 import { useNavigate, useOutletContext } from "react-router-dom"
 import { getSalesPoint } from "src/domain/services/salesPointService/SalesPointService"
 import HandleError from "src/utils/handleError/HandleError"
+import { Searchbar } from "src/components/Searchbar/Searchbar"
+import { CustomSearch } from "src/domain/models/CustomSearch/CustomSearch"
+import CustomSalesPointContent from "src/components/CustomContent/CustomSalesPointContent"
+import { SalePointBase } from "src/components/salePointBase/SalePointBase"
 
 const SalesPoint = () => {
   // @ts-ignore
@@ -15,11 +19,15 @@ const SalesPoint = () => {
   useOnInit(async () => {
     try {
       setHeaderTitle('Puntos de venta')
-      setSalesPoint(await getSalesPoint())
+      getCards(new CustomSearch())
     } catch (error) {
       HandleError(error, navigate)
     }
   })
+
+  const getCards = async (filter) => {
+    setSalesPoint(await getSalesPoint(filter))
+  }
 
   const redirect = () => {
     navigate('/nuevo-punto-de-venta')
@@ -27,24 +35,17 @@ const SalesPoint = () => {
 
   return (
     <>
-      {
-        // TODO: Agregar la card, el resto de componentes vienen por layout
-        <>
-          <TextField id="outlined-search" label="Search field" type="search" />
-          {
-            salesPoint.map(salePoint =>
-              <Box key={salePoint.id} className='card'>
-                <div>{salePoint.name}</div>
-                <div>{salePoint.type}</div>
-                <div>{salePoint.streetName}</div>
-                <div>{salePoint.streetNumber}</div>
-                <div>{salePoint.envelopeStock}</div>
-              </Box>
-            )
-          }
-          <Button className="salespoint__button" onClick={redirect}>+</Button>
-        </>
-      }
+      <div className="layout__content">
+        <Searchbar getFilterCards={getCards} />
+        {salesPoint.map((salePoint, index) =>
+          <SalePointBase
+            key={index}
+            salePoint={salePoint}
+            content={CustomSalesPointContent(salePoint)}
+          />
+        )}
+        <Button className="salespoint__button" onClick={redirect}>+</Button>
+      </div>
     </>
   )
 }
