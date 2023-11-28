@@ -5,8 +5,8 @@ import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { useOnInit } from 'src/customHooks/hooks'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
-import { cardService } from 'services/CardService/CardService'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { cardService } from 'src/domain/services/cardService/CardService'
+import { HandleError } from 'src/utils/handleError/HandleError'
 
 export const Cards = () => {
   const [cards, setCards] = useState([])

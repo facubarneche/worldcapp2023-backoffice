@@ -1,12 +1,12 @@
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import './figuritasForm.css'
 import { useOnInit } from 'src/customHooks/hooks'
-import { cardService } from 'src/domain/services/CardsService/CardsService'
-import HandleError from 'src/utils/HandleError/HandleError'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { BASE_VALUE } from 'src/domain/models/CardModel/Card.model'
+import { cardService } from 'src/domain/services/cardService/CardService'
+import { HandleError } from 'src/utils/handleError/HandleError'
 
 const FiguritasForm = ({ changeDisplay }) => {
   // @ts-ignore

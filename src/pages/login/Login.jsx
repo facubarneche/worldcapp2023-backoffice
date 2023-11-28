@@ -6,7 +6,7 @@ import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
 import { LogoComponent, LogoImageComponent } from 'components/logoComponent/LogoComponent'
 import { useOnInit } from 'src/customHooks/hooks'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { HandleError } from 'src/utils/handleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()
