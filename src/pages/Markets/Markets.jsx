@@ -1,14 +1,13 @@
-// import { Button } from '@mui/material'
-import 'src/styles/addbutton.css'
-import { useState } from 'react'
+import 'src/styles/button.css'
 import { useOnInit } from 'customHooks/hooks'
-import { useNavigate, useOutletContext } from 'react-router-dom'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
 import { marketService } from 'services/MarketService/MarketService'
 import { CardBase } from 'components/CardBase/CardBase'
+import { useState } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { Button } from '@mui/material'
 
 export const Markets = () => {
@@ -17,25 +16,31 @@ export const Markets = () => {
   const [markets, setMarkets] = useState([])
   const navigate = useNavigate()
 
-  useOnInit(async () => {
+  const getMarkets = async (filter = new CustomSearch()) => {
     try {
-      setHeaderTitle('Puntos de venta')
-      getMarkets(new CustomSearch())
-    } catch (error) {
-      HandleError(error, navigate)
+      const markets$ = await marketService.getMarkets(filter)
+      setMarkets(markets$)
+    } catch (e) {
+      HandleError(e, navigate)
     }
+  }
+
+  useOnInit(() => {
+    setHeaderTitle('Puntos de venta')
+    getMarkets()
   })
 
-  const getMarkets = async (filter) => {
-    setMarkets(await marketService.getMarkets(filter))
+  const redirect = (id = -1) => {
+    id === -1 ? navigate('/punto-de-venta/nuevo') : navigate(`/punto-de-venta/${id}/editar`)
   }
 
-  const redirect = (id = -1) => {    
-    id === -1 ? navigate('/punto-de-venta-nuevo') : navigate(`/punto-de-venta/${id}/editar`)
-  }
-
-  const handleDelete = (id) => {
-    console.log(id)
+  const handleDelete = async (id) => {
+    try {
+      await marketService.deleteMarket(id)
+      await getMarkets()
+    } catch (e) {
+      console.error('Salió mal,', e)
+    }
   }
 
   return (
@@ -47,13 +52,12 @@ export const Markets = () => {
           card={market}
           contentComponent={CustomMarketContent(market.content())}
           onEditClick={redirect}
-          onDeleteClick={handleDelete}
+          onDelete={handleDelete}
         />
       )}
       <Button className="add__button" onClick={() => redirect(-1)}>
         +
       </Button>
-      
     </>
   )
 }

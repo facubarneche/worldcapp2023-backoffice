@@ -1,12 +1,13 @@
+import './LayoutHeader.css'
 import { useState } from "react"
 import { Outlet, useOutletContext } from "react-router-dom"
-import './LayoutHeader.css'
 import { Typography } from "@mui/material"
-import { useOnInit } from "src/customHooks/hooks"
-import NavBar from "../navbar/Navbar"
+import { useOnInit } from "customHooks/hooks"
+import { NavBar } from "components/Navbar/Navbar"
 
-const LayoutHeader = () => {
+export const LayoutHeader = () => {
   const [headerTitle, setHeaderTitle] = useState('hola')
+  // @ts-ignore
   const [setFoterContent] = useOutletContext()
   
   useOnInit(()=> {
@@ -22,5 +23,3 @@ const LayoutHeader = () => {
     </article>
   </>
 }
-
-export default LayoutHeader

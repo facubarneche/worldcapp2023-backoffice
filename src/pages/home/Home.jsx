@@ -1,12 +1,12 @@
 import './Home.css'
-import { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
 import { useOnInit } from 'customHooks/hooks'
-import { HandleError } from 'utils/HandleError/HandleError'
+import { HandleError} from 'utils/HandleError/HandleError'
 import { dashboardService } from 'services/HomeService/HomeService'
-import { DashboardCard } from 'components/DashboardCard/Dashboard'
+import { DashboardCard } from 'src/components/DashboardCard/DashboardCard'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useState } from 'react'
 
-const Home = () => {
+export const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState([])
   const navigate = useNavigate()
   // @ts-ignore
@@ -32,5 +32,3 @@ const Home = () => {
     </>
   )
 }
-
-export default Home

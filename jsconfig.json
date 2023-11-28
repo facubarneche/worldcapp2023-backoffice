@@ -26,7 +26,7 @@
         "./src/customHooks/*"
       ],
       "mocks/*": [
-        "./src/mocks/*"
+        "./src/domain/mocks/*"
       ],
       "utils/*": [
         "./src/utils/*"

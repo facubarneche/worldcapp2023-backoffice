@@ -3,10 +3,10 @@
   width: 100%;
 }
 
-.navbar_buttons{
+.navbar-buttons{
   color: var(--typeface-color);
 }
 
-.navbar_buttons.Mui-selected {
+.navbar-buttons.Mui-selected {
   color: var(--color-tertiary);
 }

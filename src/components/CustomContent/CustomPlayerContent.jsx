@@ -1,7 +1,7 @@
-import { Box, CardContent, Typography } from "@mui/material"
-import { SportsSoccer, Flag, Height, MonitorWeight, GpsFixed } from '@mui/icons-material'
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
+import { Box, CardContent, Typography } from "@mui/material"
+import { SportsSoccer, Flag, Height, MonitorWeight, GpsFixed } from '@mui/icons-material'
 
 export const CustomPlayerContent = (jugador) => {
 

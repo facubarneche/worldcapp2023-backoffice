@@ -5,6 +5,7 @@ import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
 import { useState } from 'react'
+import { BusinessType } from 'services/constants'
 
 const cardStub = {
   id: -1,
@@ -23,11 +24,6 @@ export const MarketForm = ({ headerTitle }) => {
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-  const BusinessesType = {
-    Kiosko: 'Kiosko',
-    Libreria: 'Libreria',
-    Supermercado: 'Supermercado',
-  }
   const navigate = useNavigate()
 
   useOnInit(() => {
@@ -87,8 +83,8 @@ export const MarketForm = ({ headerTitle }) => {
         label="Pedidos Pendientes"        
         onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
       />
-      <TextField className="field" defaultValue={BusinessesType.Kiosko} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
-        {Object.entries(BusinessesType).map(([key, value]) => 
+      <TextField className="field" defaultValue={BusinessType.Kioscos} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
+        {Object.entries(BusinessType).map(([key, value]) => 
           <option key={key} value={value}>
             {value}
           </option>
@@ -96,7 +92,7 @@ export const MarketForm = ({ headerTitle }) => {
       </TextField>
       <FormActions
         leftButtonClick={() => {
-          console.log('Guardar')
+          marketService.createMarket(marketData)
         }}
         rightButtonClick={() => {          
           //TODO: Handle clear of marketData

@@ -1,10 +1,10 @@
+import './Error.css'
 import { Button } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom"
-import './Error.css'
 
 const AXIOSNOTERROR = 'No message available'
 
-const Error = () => {
+export const Error = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
   const data = state ?? {status: 404, message: 'El recurso no ha sido encontrado'}
@@ -35,5 +35,3 @@ const Error = () => {
     </div>
   )
 }
-
-export default Error

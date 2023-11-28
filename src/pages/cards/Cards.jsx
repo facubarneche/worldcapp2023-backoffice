@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
 import { CardBase } from 'components/CardBase/CardBase'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { Searchbar } from 'components/Searchbar/Searchbar'
@@ -7,6 +5,8 @@ import { useOnInit } from 'customHooks/hooks'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
+import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
 
 export const Cards = () => {
   const [cards, setCards] = useState([])
@@ -35,7 +35,7 @@ export const Cards = () => {
           card={card}
           contentComponent={CustomCardContent(card.content())} 
           onEditClick={undefined} 
-          onDeleteClick={undefined}        
+          onDelete={undefined}        
         />
       )}
     </>

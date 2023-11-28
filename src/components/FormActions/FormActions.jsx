@@ -14,7 +14,7 @@ export const FormActions = ({
   rightButtonProps = {},
 }) => {
   return (
-    <footer className="stepFooter">
+    <footer className="step-footer">
       <Button
         variant="contained"
         size="large"

@@ -18,11 +18,28 @@ class MarketService {
   }
 
   deleteMarket = async (id) => {
-    console.log(id)
+    try {
+      const response$ = await axios.delete(`${REST_SERVER_URL}/punto-de-venta/eliminar/${id}`)
+      console.log('Elemento eliminado correctamente', response$.data)
+    } catch (e) {
+      console.error('Error al eliminar el elemento')      
+    }
   }
 
   createMarket = async (market) => {
-    console.log(market)
+    //TODO: Pasar market con formato CardMarketDTO
+    // {
+    //   "nombre": "Nombre fafa",
+    //   "tipoPuntoDeVenta": "Kioscos",
+    //   "direccion": {
+    //     "calle": "Urquiza",
+    //     "altura": 31,
+    //     "ubiGeografica": "x: -34.11119065556780327597152790986001491546630859375, y: -58.1111189167800006316610961221158504486083984375"
+    //   }, 
+    //   "stockSobres": 20,
+    //   "pedidosPendientes": 2
+    // }
+    await axios.post(`${REST_SERVER_URL}/punto-de-venta/nuevo`, market)
   }
 }
 

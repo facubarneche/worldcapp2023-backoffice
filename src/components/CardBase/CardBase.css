@@ -26,14 +26,23 @@
 .card-base__actions {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.3em;
+  justify-content:space-evenly;  
   align-items: flex-end;
   flex-basis: 10%;
 }
 
-.card-base__icons {
-  font-size: 2.1em;
+.card-base__icon {
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.card-base__icon--large {
+  font-size: 2.4em;
+  margin-right: 0.2em;
+}
+
+.card-base__icon--danger{
+  color: var(--color-hot)
 }
 
 .card-base__footer {

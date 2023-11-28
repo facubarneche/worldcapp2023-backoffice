@@ -1,7 +1,7 @@
-import { Box, CardContent, Typography } from '@mui/material'
-import { LocalFireDepartment, Tag, Print } from '@mui/icons-material'
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
+import { Box, CardContent, Typography } from '@mui/material'
+import { LocalFireDepartment, Tag, Print } from '@mui/icons-material'
 
 export const CustomCardContent = (content) => {
   return (
