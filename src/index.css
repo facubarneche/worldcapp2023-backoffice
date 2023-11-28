@@ -78,15 +78,15 @@ body {
   max-width: var(--maxWidth);
 }
 
-.fas-lp {
+.fa-lp {
   padding-left: 0.15em;
 }
 
-.fas-rp {
+.fa-rp {
   padding-right: 0.4em;
 }
 
-.fas--hot {
+.fa--hot {
   color: var(--color-hot);
 }
 

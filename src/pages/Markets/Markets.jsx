@@ -14,7 +14,7 @@ export const Markets = () => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [markets, setMarkets] = useState([])
-  const navigate = useNavigate()  
+  const navigate = useNavigate()
 
   const getMarkets = async (filter = new CustomSearch()) => {
     try {
@@ -34,9 +34,13 @@ export const Markets = () => {
     id === -1 ? navigate('/punto-de-venta/nuevo') : navigate(`/punto-de-venta/${id}/editar`)
   }
 
-  const handleDelete = (id) => {
-    marketService.deleteMarket(id)
-    getMarkets()
+  const handleDelete = async (id) => {
+    try {
+      await marketService.deleteMarket(id)
+      await getMarkets()
+    } catch (e) {
+      console.error('Salió mal,', e)
+    }
   }
 
   return (
@@ -48,7 +52,7 @@ export const Markets = () => {
           card={market}
           contentComponent={CustomMarketContent(market.content())}
           onEditClick={redirect}
-          onDeleteClick={handleDelete}
+          onDelete={handleDelete}
         />
       )}
       <Button className="add__button" onClick={() => redirect(-1)}>

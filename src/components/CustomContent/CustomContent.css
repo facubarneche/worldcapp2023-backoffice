@@ -27,6 +27,6 @@
   background-color: var(--text-color-2lighter);
 }
 
-.card-content__icons {
-  font-size: 1.3em;
+.card-content__icon {
+  font-size: 1.6em;
 }

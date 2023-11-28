@@ -9,9 +9,11 @@
   box-shadow: var(--box-shadow);
   background-image: var(--gradient-primary);
 }
+
 .layout-header__title {
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 800;
+  text-transform: capitalize;
   font-family: var(--typeface-primary);
   color: var(--typeface-color);
 }
