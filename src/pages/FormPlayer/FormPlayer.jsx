@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 
 const FormPlayer = ({ headerTitle }) => {
   // @ts-ignore
@@ -26,10 +27,7 @@ const FormPlayer = ({ headerTitle }) => {
     posicion: '',
   })
   //TODO: realizar
-  const [nationalTeamOptions, setNationalTeamOptions] = useState([
-    'Argentina',
-    'Brazil',
-  ])
+  const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const positions = [
     'Arquero',
     'Delantero',
@@ -39,6 +37,11 @@ const FormPlayer = ({ headerTitle }) => {
   ]
 
   useOnInit(() => {
+    const setNationalTeams = async () => {
+      const data = await nationalTeamService.getAllNames()
+      setNationalTeamOptions(data)
+    }
+    setNationalTeams()
     setHeaderTitle(headerTitle)
   })
 
