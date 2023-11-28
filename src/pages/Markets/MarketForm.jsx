@@ -10,7 +10,7 @@ const cardStub = {
   id: -1,
   nombre: '',
   tipoPuntoDeVenta: '',
-  direccion: '',
+  direccionPlana: '',
   geoX: 0,
   geoY: 0,
   stockSobres: 0,

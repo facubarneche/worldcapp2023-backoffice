@@ -4,7 +4,7 @@ export class Market {
     this.id = storedata.id
     this.nombre = storedata.nombre
     this.tipo = storedata.tipoPuntoDeVenta
-    this.direccion = storedata.direccion        
+    this.direccion = storedata.direccionPlana        
     this.geoX = storedata.geoX
     this.geoY = storedata.geoY
     this.stock = storedata.stockSobres
