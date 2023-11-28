@@ -22,7 +22,23 @@ class MarketService {
   }
 
   createMarket = async (market) => {
-    console.log(market)
+    //TODO: Pasar market con formato CardMarketDTO
+    // {
+    //   "id": -1,
+    //   "nombre": "Nombre fafa",
+    //   "tipoPuntoDeVenta": "Kioscos",
+    //   "direccion": {
+    //     "calle": "Urquiza",
+    //     "altura": 31,
+    //     "ubiGeografica": "x: -34.11119065556780327597152790986001491546630859375, y: -58.1111189167800006316610961221158504486083984375"
+    //   },
+    //   "direccionPlana": "Urquiza 31",
+    //   "geoX": -34.1111906555678,
+    //   "geoY": -58.11111891678,
+    //   "stockSobres": 20,
+    //   "pedidosPendientes": 2
+    // }
+    await axios.post(`${REST_SERVER_URL}/punto-de-venta/nuevo`, market)
   }
 }
 

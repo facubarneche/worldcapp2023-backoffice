@@ -96,7 +96,7 @@ export const MarketForm = ({ headerTitle }) => {
       </TextField>
       <FormActions
         leftButtonClick={() => {
-          console.log('Guardar')
+          marketService.createMarket(marketData)
         }}
         rightButtonClick={() => {          
           //TODO: Handle clear of marketData
