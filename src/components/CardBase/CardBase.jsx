@@ -6,9 +6,7 @@ import {
   ModeEdit,
 } from '@mui/icons-material'
 
-export const CardBase = ({card, contentComponent}) => {
-
-  const handleClick = () => {}
+export const CardBase = ({card, contentComponent, onEditClick, onDeleteClick }) => {
 
   return (
     <Card className="card-base">
@@ -19,9 +17,9 @@ export const CardBase = ({card, contentComponent}) => {
             {card.title()}
           </Typography>
         </Box>
-        <Box className="card-base__actions">
-          <DeleteForever className="card-base__icons" />
-          <ModeEdit className="card-base__icons" onClick={handleClick} />
+        <Box className="card-base__actions">          
+          <DeleteForever className="card-base__icons" onClick={() => onDeleteClick(card.id)}/>
+          <ModeEdit className="card-base__icons" onClick={() => onEditClick(card.id)} />
         </Box>
       </Box>
       {contentComponent}

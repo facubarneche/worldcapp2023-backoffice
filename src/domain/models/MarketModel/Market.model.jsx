@@ -4,11 +4,10 @@ export class Market {
     this.id = storedata.id
     this.nombre = storedata.nombre
     this.tipo = storedata.tipoPuntoDeVenta
-    this.calle = storedata.direccion.calle
-    this.altura = storedata.direccion.altura
+    this.direccion = storedata.direccionPlana        
+    this.geoX = storedata.geoX
+    this.geoY = storedata.geoY
     this.stock = storedata.stockSobres
-    this.valoracion = storedata.valoracion
-    this.ubiGeografica = storedata.direccion.ubiGeografica    
     this.pedidosPendientes = storedata.pedidosPendientes    
   }
 
@@ -18,10 +17,21 @@ export class Market {
   
   content = () => { 
     return {
-      direccion: this.calle + ' ' + this.altura,      
+      direccion: this.direccion,     
       stock: this.stock + ' sobres'
     }
   }
   
-  footer = () => "Tipo " + this.tipo  
+  footer = () => "Tipo " + this.tipo 
 }
+
+
+// // Dividir la cadena en dos partes
+// const parts = cardStub.direccion.ubiGeografica.split(',');
+
+// // Eliminar los caracteres no deseados y convertir en número
+// const x = Number(parts[0].replace('x: ', ''));
+// const y = Number(parts[1].replace(' y: ', ''));
+
+// // Crear el nuevo objeto
+// const ubiGeografica = { x, y };

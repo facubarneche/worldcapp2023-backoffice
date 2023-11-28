@@ -4,6 +4,7 @@
   align-items: center;
   padding: 0 2rem;
   width: 100vw;
+  max-width: var(--maxWidth);
   height: 6rem;
   box-shadow: var(--box-shadow);
   background-image: var(--gradient-primary);
