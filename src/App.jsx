@@ -8,14 +8,14 @@ import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
 import './App.css'
 import { SnackbarProvider } from 'notistack'
 import { MarketForm } from 'pages/Markets/MarketForm'
-import { Login } from './pages/login/Login'
-import Home from './pages/home/Home'
-import { Cards } from './pages/cards/Cards'
-import Players from './pages/players/Players'
-import FormPlayer from './pages/formPlayer/FormPlayer'
-import { Markets } from './pages/Markets/Markets'
-import Teams from './pages/teams/Teams'
-import Error from './pages/error/Error'
+import { Login } from 'pages/Login/Login'
+import Home from 'pages/Home/Home'
+import { Cards } from 'pages/Cards/Cards'
+import Players from 'src/pages/Players/Players'
+import FormPlayer from 'pages/FormPlayer/FormPlayer'
+import { Markets } from 'pages/Markets/Markets'
+import Teams from 'src/pages/Teams/Teams'
+import Error from 'pages/Error/Error'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
           <Route path="jugadores" element={<Players />}></Route>
           <Route path="nuevo-jugador" element={<FormPlayer headerTitle={'Nuevo jugador'} />}></Route>
           <Route path="puntos-de-venta" element={<Markets />}></Route>          
-          <Route path="punto-de-venta-nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
+          <Route path="punto-de-venta/nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
           <Route path="punto-de-venta/:id/editar" element={<MarketForm headerTitle={'Editar punto de venta'}/>} />
           <Route path="selecciones" element={<Teams />}></Route>
         </Route>

@@ -34,6 +34,11 @@
 
 .card-base__icons {
   font-size: 2.1em;
+  cursor: pointer;
+}
+
+.card-base__icons--danger{
+  color: var(--color-hot)
 }
 
 .card-base__footer {

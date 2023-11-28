@@ -1,4 +1,4 @@
-import 'src/styles/addbutton.css'
+import 'src/styles/button.css'
 import { useState } from 'react'
 import { useOnInit } from 'customHooks/hooks'
 import { useNavigate, useOutletContext } from 'react-router-dom'
@@ -14,27 +14,29 @@ export const Markets = () => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [markets, setMarkets] = useState([])
-  const navigate = useNavigate()
+  const navigate = useNavigate()  
 
-  useOnInit(async () => {
+  const getMarkets = async (filter = new CustomSearch()) => {
     try {
-      setHeaderTitle('Puntos de venta')
-      getMarkets(new CustomSearch())
-    } catch (error) {
-      HandleError(error, navigate)
+      const markets$ = await marketService.getMarkets(filter)
+      setMarkets(markets$)
+    } catch (e) {
+      HandleError(e, navigate)
     }
-  })
-
-  const getMarkets = async (filter) => {
-    setMarkets(await marketService.getMarkets(filter))
   }
 
-  const redirect = (id = -1) => {    
-    id === -1 ? navigate('/punto-de-venta-nuevo') : navigate(`/punto-de-venta/${id}/editar`)
+  useOnInit(() => {
+    setHeaderTitle('Puntos de venta')
+    getMarkets()
+  })
+
+  const redirect = (id = -1) => {
+    id === -1 ? navigate('/punto-de-venta/nuevo') : navigate(`/punto-de-venta/${id}/editar`)
   }
 
   const handleDelete = (id) => {
-    console.log(id)
+    marketService.deleteMarket(id)
+    getMarkets()
   }
 
   return (
@@ -52,7 +54,6 @@ export const Markets = () => {
       <Button className="add__button" onClick={() => redirect(-1)}>
         +
       </Button>
-      
     </>
   )
 }

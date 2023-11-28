@@ -18,7 +18,7 @@ export const CardBase = ({card, contentComponent, onEditClick, onDeleteClick }) 
           </Typography>
         </Box>
         <Box className="card-base__actions">          
-          <DeleteForever className="card-base__icons" onClick={() => onDeleteClick(card.id)}/>
+          <DeleteForever className="card-base__icons card-base__icons--danger" onClick={() => onDeleteClick(card.id)}/>
           <ModeEdit className="card-base__icons" onClick={() => onEditClick(card.id)} />
         </Box>
       </Box>
