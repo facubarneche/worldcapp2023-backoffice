@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { useOnInit } from 'src/customHooks/hooks'
 import { HandleError } from 'src/utils/HandleError/HandleError'
-import { dashboardService } from 'src/domain/services/homeService/HomeService'
+import { dashboardService } from 'src/domain/services/HomeService/HomeService'
 import DashboardBox from 'src/components/Dashboard/Dashboard'
 
 const Home = () => {

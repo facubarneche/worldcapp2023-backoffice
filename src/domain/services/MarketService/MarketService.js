@@ -12,6 +12,18 @@ class MarketService {
     const marketJson = await axios.get(`${REST_SERVER_URL}/punto-de-venta/${id}`)
     return Market.fromJson(marketJson.data)
   }
+
+  updateMarket = async (market) => {
+
+  }
+
+  deleteMarket = async (id) => {
+    
+  }
+
+  createMarket = async (market) => {
+
+  }
 }
 
 export const marketService = new MarketService()

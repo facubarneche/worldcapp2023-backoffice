@@ -63,16 +63,14 @@ export const MarketForm = ({ headerTitle }) => {
         className="field"
         value={marketData.geoX}
         inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada X"
-        type="number"
+        label="Coordenada X"        
         onChange={(e) => handleChange('geoX', e.target.value)}
       />
       <TextField
         className="field"
         value={marketData.geoY}
         inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada Y"
-        type="number"
+        label="Coordenada Y"        
         onChange={(e) => handleChange('geoY', e.target.value)}
       />
       <TextField
@@ -80,15 +78,13 @@ export const MarketForm = ({ headerTitle }) => {
         value={marketData.stock}
         inputProps={{ type: 'number', min: 0 }}
         label="Sobres Disponibles"
-        type="number"
         onChange={(e) => handleChange('stock', e.target.value)}
       />
       <TextField
         className="field"
         value={marketData.pedidosPendientes}
         inputProps={{ type: 'number', min: 0 }}
-        label="Pedidos Pendientes"
-        type="number"
+        label="Pedidos Pendientes"        
         onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
       />
       <TextField className="field" defaultValue={BusinessesType.Kiosko} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
