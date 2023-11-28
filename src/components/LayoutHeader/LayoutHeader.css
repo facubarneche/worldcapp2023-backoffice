@@ -10,6 +10,8 @@
   background-image: var(--gradient-primary);
 }
 .layout-header__title {
-  font-weight: 900;
+  font-size: 3rem;
+  font-weight: 600;
+  font-family: var(--typeface-primary);
   color: var(--typeface-color);
 }

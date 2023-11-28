@@ -4,18 +4,18 @@ import { useState } from 'react'
 import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
-import { LogoComponent } from 'components/LogoComponent/LogoComponent'
+import { LogoComponent, LogoImageComponent } from 'components/logoComponent/LogoComponent'
 import { useOnInit } from 'src/customHooks/hooks'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false)
-  // @ts-ignore
+  //@ts-ignore
   const [setFoterContent] = useOutletContext()
 
   useOnInit(() => {
-    setFoterContent(<span>pablito/sol pongan lo que va en el footer aca</span>)
+    setFoterContent(<LogoImageComponent/>)
   })
 
   const handleSubmit = async (event) => {
