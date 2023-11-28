@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  min-width: 85vw;
+  width: 100%;
   height: fit-content;
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow);

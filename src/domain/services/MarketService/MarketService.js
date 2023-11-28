@@ -4,8 +4,13 @@ import { Market } from "models/MarketModel/Market.model"
 
 class MarketService {
   getMarkets = async (search) => {
-    const salesPointJSON = await axios.get(`${REST_SERVER_URL}/puntos-de-venta`, {params: search})
-    return salesPointJSON.data.map(market => Market.fromJson(market))
+    const marketsJson = await axios.get(`${REST_SERVER_URL}/puntos-de-venta`, {params: search})
+    return marketsJson.data.map(market => Market.fromJson(market))
+  }
+
+  getMarketById = async (id) => {    
+    const marketJson = await axios.get(`${REST_SERVER_URL}/punto-de-venta/${id}`)
+    return Market.fromJson(marketJson.data)
   }
 }
 

@@ -1,31 +1,100 @@
-import './MarketForm.css'
 import { TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'src/customHooks/hooks'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useOnInit } from 'customHooks/hooks'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { Market } from 'models/MarketModel/Market.model'
+import { marketService } from 'services/MarketService/MarketService'
+import { useState } from 'react'
+
+const cardStub = {
+  id: -1,
+  nombre: '',
+  tipoPuntoDeVenta: '',
+  direccion: '',
+  geoX: 0,
+  geoY: 0,
+  stockSobres: 0,
+  pedidosPendientes: 0,
+}
 
 export const MarketForm = ({ headerTitle }) => {
+  const { id } = useParams()
+  const [marketData, setMarketData] = useState(Market.fromJson(structuredClone(cardStub)))
+
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-  const businessesType = ['Kiosko', 'Libreria', 'Supermercado']
+  const BusinessesType = {
+    Kiosko: 'Kiosko',
+    Libreria: 'Libreria',
+    Supermercado: 'Supermercado',
+  }
   const navigate = useNavigate()
 
   useOnInit(() => {
     setHeaderTitle(headerTitle)
+    id && getCardToEdit()
   })
+
+  const getCardToEdit = async () => {
+    const card = await marketService.getMarketById(id)
+    setMarketData(card)
+  }
+
+  const handleChange = (key, value) => {
+    marketData[key] = value    
+    generarNuevoMarket(marketData)
+  }
+
+  const generarNuevoMarket = (market) => {
+    const nuevoMarket = Object.assign(new Market(market), market)
+    setMarketData(nuevoMarket)
+  }
 
   return (
     <>
-      <TextField className="field" label="Nombre" />
-      <TextField className="field" label="Dirección" />
-      <TextField inputProps={{ type:'number', step: 0.00001, min: -90, max: 90 }} className="field" label="Coordenada X" type="number" />
-      <TextField inputProps={{ type:'number', step: 0.00001, min: -90, max: 90 }} className="field" label="Coordenada Y" type="number" />
-      <TextField inputProps={{ type:'number', min: 0 }} className="field" label="Sobres Disponibles" type="number" />
-      <TextField inputProps={{ type:'number', min: 0 }} className="field" label="Pedidos Pendientes" type="number" />
-      <TextField className="field" select SelectProps={{ native: true }}>
-        {businessesType.map((businessType) =>           
-          <option key={businessType} value={businessType}>
-            {businessType}
+      <TextField className="field" value={marketData.nombre} label="Nombre" onChange={(e) => handleChange('nombre', e.target.value)} />
+      <TextField
+        className="field"
+        value={marketData.direccion}
+        label="Dirección"
+        onChange={(e) => handleChange('direccion', e.target.value)}
+      />
+      <TextField
+        className="field"
+        value={marketData.geoX}
+        inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
+        label="Coordenada X"
+        type="number"
+        onChange={(e) => handleChange('geoX', e.target.value)}
+      />
+      <TextField
+        className="field"
+        value={marketData.geoY}
+        inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
+        label="Coordenada Y"
+        type="number"
+        onChange={(e) => handleChange('geoY', e.target.value)}
+      />
+      <TextField
+        className="field"
+        value={marketData.stock}
+        inputProps={{ type: 'number', min: 0 }}
+        label="Sobres Disponibles"
+        type="number"
+        onChange={(e) => handleChange('stock', e.target.value)}
+      />
+      <TextField
+        className="field"
+        value={marketData.pedidosPendientes}
+        inputProps={{ type: 'number', min: 0 }}
+        label="Pedidos Pendientes"
+        type="number"
+        onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
+      />
+      <TextField className="field" defaultValue={BusinessesType.Kiosko} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
+        {Object.entries(BusinessesType).map(([key, value]) => 
+          <option key={key} value={value}>
+            {value}
           </option>
         )}
       </TextField>
@@ -33,7 +102,8 @@ export const MarketForm = ({ headerTitle }) => {
         leftButtonClick={() => {
           console.log('Guardar')
         }}
-        rightButtonClick={() => {
+        rightButtonClick={() => {          
+          //TODO: Handle clear of marketData
           navigate('/puntos-de-venta')
         }}
         rightButtonText="Volver"

@@ -33,7 +33,9 @@ export const Cards = () => {
         <CardBase
           key={index}
           card={card}
-          contentComponent={CustomCardContent(card.content())}
+          contentComponent={CustomCardContent(card.content())} 
+          onEditClick={undefined} 
+          onDeleteClick={undefined}        
         />
       )}
     </>

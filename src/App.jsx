@@ -1,10 +1,4 @@
-import {
-  Navigate,
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom'
+import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 
 // Import Pages
 import { Login } from 'pages/Login/Login'
@@ -33,15 +27,10 @@ const router = createBrowserRouter(
           <Route path="home" element={<Home />}></Route>
           <Route path="figuritas" element={<Cards />}></Route>
           <Route path="jugadores" element={<Players />}></Route>
-          <Route
-            path="nuevo-jugador"
-            element={<FormPlayer headerTitle={'Nuevo jugador'} />}
-          ></Route>
-          <Route path="puntos-de-venta" element={<Markets />}></Route>
-          <Route
-            path="punto-de-venta-nuevo"
-            element={<MarketForm headerTitle={'Nuevo punto de venta'} />}
-          ></Route>
+          <Route path="nuevo-jugador" element={<FormPlayer headerTitle={'Nuevo jugador'} />}></Route>
+          <Route path="puntos-de-venta" element={<Markets />}></Route>          
+          <Route path="punto-de-venta-nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
+          <Route path="punto-de-venta/:id/editar" element={<MarketForm headerTitle={'Editar punto de venta'}/>} />
           <Route path="selecciones" element={<Teams />}></Route>
         </Route>
         <Route path="/error" element={<Error />}></Route>

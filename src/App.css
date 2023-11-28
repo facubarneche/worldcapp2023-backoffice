@@ -1,3 +1,7 @@
+#root{
+  max-width: var(--maxWidth);  
+}
+
 .snackbar {
   background-color: var(--color-hot);
 }

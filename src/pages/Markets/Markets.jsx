@@ -1,15 +1,14 @@
 // import { Button } from '@mui/material'
-import './Markets.css'
 import 'src/styles/addbutton.css'
 import { useState } from 'react'
-import { useOnInit } from 'src/customHooks/hooks'
+import { useOnInit } from 'customHooks/hooks'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
-import { CustomMarketContent } from 'src/components/CustomContent/CustomMarketContent'
-import { marketService } from 'src/domain/services/MarketService/MarketService'
-import { CardBase } from 'src/components/CardBase/CardBase'
+import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
+import { marketService } from 'services/MarketService/MarketService'
+import { CardBase } from 'components/CardBase/CardBase'
 import { Button } from '@mui/material'
 
 export const Markets = () => {
@@ -31,8 +30,12 @@ export const Markets = () => {
     setMarkets(await marketService.getMarkets(filter))
   }
 
-  const redirect = () => {
-    navigate('/punto-de-venta-nuevo')
+  const redirect = (id = -1) => {    
+    id === -1 ? navigate('/punto-de-venta-nuevo') : navigate(`/punto-de-venta/${id}/editar`)
+  }
+
+  const handleDelete = (id) => {
+    console.log(id)
   }
 
   return (
@@ -43,11 +46,14 @@ export const Markets = () => {
           key={index}
           card={market}
           contentComponent={CustomMarketContent(market.content())}
+          onEditClick={redirect}
+          onDeleteClick={handleDelete}
         />
       )}
-      <Button className="add__button" onClick={redirect}>
+      <Button className="add__button" onClick={() => redirect(-1)}>
         +
       </Button>
+      
     </>
   )
 }

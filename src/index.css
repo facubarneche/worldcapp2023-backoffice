@@ -3,6 +3,7 @@
 @import url(./styles/layout.css);
 
 :root {
+  --maxWidth: 450px;
   /* Colors */
   --typeface-color: hsla(0, 0%, 100%, 1);
   --color-primary: hsla(207, 100%, 25%, 1);
@@ -66,9 +67,15 @@
 }
 
 html {
+  display: flex;
+  justify-content: center;  
   font-family: var(--typeface-primary);
   font-size: 10px;
   color: var(--text-color);
+}
+
+body {
+  max-width: var(--maxWidth);
 }
 
 .fas-lp {
