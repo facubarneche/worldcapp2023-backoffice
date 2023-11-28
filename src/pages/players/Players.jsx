@@ -1,5 +1,5 @@
 
-import 'src/styles/addbutton.css'
+import 'src/styles/button.css'
 import { Button } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
@@ -48,7 +48,7 @@ export const Players = () => {
           card={player}
           contentComponent={CustomPlayerContent(player.content())}
           onEditClick={redirect}
-          onDeleteClick={handleDelete}
+          onDelete={handleDelete}
         />
       )}
       <Button className="add__button" onClick={() => redirect(-1)}>

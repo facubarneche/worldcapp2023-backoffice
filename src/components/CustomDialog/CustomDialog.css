@@ -1,6 +1,6 @@
 .c-dialog .MuiPaper-root{  
   min-width: 35em;  
-  height: 15em;
+  min-height: 18em;
   background-color: var(--color-hot);
   color: var(--typeface-color);  
   letter-spacing: 0.05em;
