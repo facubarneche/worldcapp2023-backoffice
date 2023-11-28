@@ -22,7 +22,7 @@ export class Player {
   
   content = () => { 
     return {
-      anioDebut: this.anioDebut,     
+      fechaNacimiento: this.fechaNacimiento,     
       nroCamiseta: this.nroCamiseta,
       seleccion: this.seleccion,     
       posicion: this.posicion,
