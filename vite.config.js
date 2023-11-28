@@ -12,10 +12,13 @@ export default defineConfig({
     alias: {
       src: '/src',
       components: '/src/components',
+      assets: '/src/assets',
       pages: '/src/pages',
       services: '/src/domain/services',
       models: '/src/domain/models',
       customHooks: '/src/customHooks',
+      mocks: '/src/domain/mocks',
+      utils: '/src/utils',
     },
   },
   test: {

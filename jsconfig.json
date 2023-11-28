@@ -10,6 +10,9 @@
       "components/*": [
         "./src/components/*"
       ],
+      "assets/*": [
+        "./src/assets/*"
+      ],
       "pages/*": [
         "./src/pages/*"
       ],
@@ -21,6 +24,12 @@
       ],
       "customHooks/*": [
         "./src/customHooks/*"
+      ],
+      "mocks/*": [
+        "./src/mocks/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
       ]
     }
   }

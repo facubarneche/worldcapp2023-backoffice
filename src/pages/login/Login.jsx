@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
-import { LogoComponent, LogoImageComponent } from 'components/logoComponent/LogoComponent'
-import { useOnInit } from 'src/customHooks/hooks'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { LogoComponent, LogoImageComponent } from 'components/LogoComponent/LogoComponent'
+import { useOnInit } from 'customHooks/hooks'
+import { HandleError } from 'utils/HandleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()

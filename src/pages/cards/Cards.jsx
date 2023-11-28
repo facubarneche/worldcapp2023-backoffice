@@ -3,10 +3,10 @@ import { useOutletContext } from 'react-router-dom'
 import { CardBase } from 'components/CardBase/CardBase'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { Searchbar } from 'components/Searchbar/Searchbar'
-import { useOnInit } from 'src/customHooks/hooks'
+import { useOnInit } from 'customHooks/hooks'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { cardService } from 'services/CardService/CardService'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { HandleError } from 'utils/HandleError/HandleError'
 
 export const Cards = () => {
   const [cards, setCards] = useState([])

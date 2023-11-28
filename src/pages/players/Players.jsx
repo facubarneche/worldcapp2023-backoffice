@@ -1,15 +1,15 @@
-// import { Button } from '@mui/material'
+
+import 'src/styles/addbutton.css'
 import { Button } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import { CardBase } from 'src/components/CardBase/CardBase'
-import { CustomPlayerContent } from 'src/components/CustomContent/CustomPlayerContent'
-import { Searchbar } from 'src/components/Searchbar/Searchbar'
-import { useOnInit } from 'src/customHooks/hooks'
-import { CustomSearch } from 'src/domain/models/CustomSearch/CustomSearch'
-import { playerService } from 'src/domain/services/PlayerService/PlayerService'
-import 'src/styles/addbutton.css'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { CardBase } from 'components/CardBase/CardBase'
+import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
+import { Searchbar } from 'components/Searchbar/Searchbar'
+import { useOnInit } from 'customHooks/hooks'
+import { CustomSearch } from 'models/CustomSearch/CustomSearch'
+import { playerService } from 'services/PlayerService/PlayerService'
+import { HandleError } from 'utils/HandleError/HandleError'
 
 
 export const Players = () => {
