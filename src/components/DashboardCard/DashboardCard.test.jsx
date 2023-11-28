@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react"
-import DashboardBox from "./Dashboard"
-import { itemsDashboardBoxMock } from "src/domain/mocks/ItemsDashboardBox.mock"
+import { DashboardCard } from "./DashboardCard"
+import { itemsDashboardBoxMock } from "mocks/ItemsDashboardBox"
 
 
 describe('Tests DashboardBox', () => {
   it('Al renderizar se obtienen los valores correctos', () => {
     //Arrange
-    render(<DashboardBox itemBox={itemsDashboardBoxMock[0]}/>)
+    render(<DashboardCard itemBox={itemsDashboardBoxMock[0]}/>)
     //Assert
     const itemboxName = screen.getByTestId('itembox-name')
     const itemboxQuantity = screen.getByTestId('itembox-quantity')
@@ -16,7 +16,7 @@ describe('Tests DashboardBox', () => {
 
   it('El icono renderiza correctamente', () => {
     //Arrange
-    render(<DashboardBox itemBox={itemsDashboardBoxMock[2]}/>)
+    render(<DashboardCard itemBox={itemsDashboardBoxMock[2]}/>)
     //Assert
     const icon = screen.getByTestId('StoreIcon')
     expect(icon).toBeVisible()
@@ -24,7 +24,7 @@ describe('Tests DashboardBox', () => {
 
   it('Al renderizar se obtiene información sobre el icono correctamente', () => {
     //Arrange
-    render(<DashboardBox itemBox={itemsDashboardBoxMock[2]}/>)
+    render(<DashboardCard itemBox={itemsDashboardBoxMock[2]}/>)
     //Assert
     const itemboxIcon = screen.getByTestId('itembox-icon')
     const icon = screen.getByTestId('StoreIcon')

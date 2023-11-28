@@ -1,5 +1,5 @@
-import { Box, IconButton, InputBase } from "@mui/material"
 import './Searchbar.css'
+import { Box, IconButton, InputBase } from "@mui/material"
 import { CustomSearch } from "src/domain/models/CustomSearch/CustomSearch"
 import { Search } from "@mui/icons-material"
 

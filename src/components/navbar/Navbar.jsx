@@ -1,9 +1,8 @@
+import './NavBar.css'
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import { BottomNavigation, BottomNavigationAction } from '@mui/material'
 import { HomeRounded, LogoutRounded, DirectionsRunRounded, StoreRounded, AssignmentIndRounded } from '@mui/icons-material'
-import './NavBar.css'
 
 const iconSize = 30
 
@@ -15,7 +14,7 @@ const navigationButtons = [
   { path: '/login', icon: <LogoutRounded sx={{ fontSize: iconSize }} /> },
 ]
 
-const NavBar = () => {
+export const NavBar = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [value, setValue] = useState(location.pathname)
@@ -32,20 +31,8 @@ const NavBar = () => {
   return (
     <BottomNavigation className="navbar" component="nav" value={value} onChange={handleChange}>
       {navigationButtons.map((route, index) => 
-        <BottomNavigationAction
-          className='navbar_buttons'
-          key={index}
-          value={route.path}
-          icon={route.icon}
-        />
+        <BottomNavigationAction className="navbar-buttons" key={index} value={route.path} icon={route.icon} />
       )}
     </BottomNavigation>
   )
 }
-
-export default NavBar
-
-
-
-
-

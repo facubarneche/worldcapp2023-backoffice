@@ -1,14 +1,14 @@
 import 'src/styles/button.css'
-import { useState } from 'react'
 import { useOnInit } from 'customHooks/hooks'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
 import { marketService } from 'services/MarketService/MarketService'
 import { CardBase } from 'components/CardBase/CardBase'
+import { useState } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { HandleError } from 'src/utils/handleError/HandleError'
 
 export const Markets = () => {
   // @ts-ignore

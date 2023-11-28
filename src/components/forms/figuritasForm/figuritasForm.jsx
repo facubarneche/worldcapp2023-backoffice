@@ -1,12 +1,11 @@
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import './figuritasForm.css'
-import { useOnInit } from 'src/customHooks/hooks'
-import { useNavigate } from 'react-router-dom'
+import { useOnInit } from 'customHooks/hooks'
+import { cardService } from 'services/CardService/CardService'
+import { HandleError } from 'utils/HandleError/HandleError'
+import { BASE_VALUE } from 'models/CardModel/Card.model'
 import { useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
-import { BASE_VALUE } from 'src/domain/models/CardModel/Card.model'
-import { cardService } from 'src/domain/services/cardService/CardService'
-import { HandleError } from 'src/utils/handleError/HandleError'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 
 const FiguritasForm = ({ changeDisplay }) => {
   // @ts-ignore
@@ -27,8 +26,7 @@ const FiguritasForm = ({ changeDisplay }) => {
   useOnInit(async () => {
     try {
       setHeaderTitle('Nueva Figuritas')
-      const { jugadores, levelPrints, valoracion } =
-        await cardService.getDataCreateCards()
+      const { jugadores, levelPrints, valoracion } = await cardService.getDataCreateCards()
       setPlayers(jugadores)
       setPrintsLevel(levelPrints)
       setValoracionJugador(valoracion)
@@ -47,11 +45,7 @@ const FiguritasForm = ({ changeDisplay }) => {
   }
 
   useEffect(() => {
-    const calculatedValoracionBase = calculateBaseValoration(
-      nro,
-      isOnFire,
-      selectedPrintLevel,
-    )
+    const calculatedValoracionBase = calculateBaseValoration(nro, isOnFire, selectedPrintLevel)
 
     const selectedPlayer = players[selectedPlayerIndex]
     const playerValoracion = selectedPlayer ? selectedPlayer.valoracion : 0
@@ -64,13 +58,7 @@ const FiguritasForm = ({ changeDisplay }) => {
 
   return (
     <div className="figuritas-form">
-      <TextField
-        required
-        label="Nro"
-        type="number"
-        value={nro}
-        onChange={(e) => setNro(e.target.value)}
-      />
+      <TextField required label="Nro" type="number" value={nro} onChange={(e) => setNro(e.target.value)} />
 
       <TextField
         className="figuritas-form__select"
@@ -89,12 +77,7 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       <FormControlLabel
         className="figuritas-form__checkbox"
-        control={
-          <Checkbox
-            checked={isOnFire}
-            onChange={(e) => setIsOnFire(e.target.checked)}
-          />
-        }
+        control={<Checkbox checked={isOnFire} onChange={(e) => setIsOnFire(e.target.checked)} />}
         label="On Fire"
       />
 
@@ -113,12 +96,7 @@ const FiguritasForm = ({ changeDisplay }) => {
         )}
       </TextField>
 
-      <TextField
-        className="figuritas-form__input"
-        required
-        label="Imagen"
-        type="text"
-      />
+      <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
       {/* Mostrar la valoración base actualizada */}
       <strong>Valoración base {valoracionBase}</strong>

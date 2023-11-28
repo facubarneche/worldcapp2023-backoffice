@@ -1,6 +1,6 @@
-import { Box, CardContent, Typography } from "@mui/material"
 import './CustomContent.css'
 import '../CardBase/CardBase.css'
+import { Box, CardContent, Typography } from "@mui/material"
 
 export const CustomMarketContent = (content) => {
   return (
