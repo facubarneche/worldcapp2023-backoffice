@@ -11,3 +11,14 @@ export const LogoComponent = () => {
     </Box>
   )
 }
+
+export const LogoImageComponent = () => {
+  return (
+    <Box className="logo-footer">
+      <img className="logo__img" src="/src/assets/logo-icon.png" alt="WorldCapp Logotipo" />
+      <section className="logo__text">
+        <span className="logo__center-dot">/</span><span className="logo__last-part"> 2023</span>
+      </section>
+    </Box>
+  )
+}

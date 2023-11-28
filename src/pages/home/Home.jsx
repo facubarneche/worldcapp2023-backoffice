@@ -4,7 +4,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom'
 import { useOnInit } from 'src/customHooks/hooks'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 import { dashboardService } from 'src/domain/services/HomeService/HomeService'
-import DashboardBox from 'src/components/Dashboard/Dashboard'
+import { DashboardCard } from 'src/components/DashboardCard/Dashboard'
 
 const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState([])
@@ -13,7 +13,7 @@ const Home = () => {
   const [setHeaderTitle] = useOutletContext()
 
   useOnInit(async () => {
-    setHeaderTitle('HOME')
+    setHeaderTitle('Dashboard')
     try {
       const dataDashboard = await dashboardService.getStaticsDashboard()
       const transformedData = dataDashboard.addIconsDashboardBox()
@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       {itemsDashboardBox.map((itemBox) => 
-        <DashboardBox key={itemBox.name} itemBox={itemBox} />
+        <DashboardCard key={itemBox.name} itemBox={itemBox} />
       )}
     </>
   )

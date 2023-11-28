@@ -11,6 +11,10 @@
   margin-bottom: -0.5em;
 }
 
+.logo-footer {
+  display: flex;
+}
+
 .logo__img {
   width: 1.4em;
   margin-right: 0.4em;
