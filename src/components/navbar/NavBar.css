@@ -4,8 +4,7 @@
 }
 
 .navbar-buttons{
-  color: var(--color-tertiary);
-  filter: brightness(1.3);
+  color: var(--color-tertiary-lighter);  
 }
 
 .navbar-buttons.Mui-selected {
