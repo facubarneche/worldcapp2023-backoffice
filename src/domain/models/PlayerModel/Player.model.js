@@ -1,35 +1,39 @@
 export class Player {
-
   constructor(playerdata) {
     this.id = playerdata.id
     this.nombre = playerdata.nombre
     this.apellido = playerdata.apellido
-    this.fechaNacimiento = playerdata.fechaNacimiento        
+    this.fechaNacimiento = playerdata.fechaNacimiento
     this.altura = playerdata.altura
     this.peso = playerdata.peso
     this.nroCamiseta = playerdata.nroCamiseta
-    this.seleccion = playerdata.seleccion 
+    this.seleccion = playerdata.seleccion
     this.anioDebut = playerdata.anioDebut
     this.posicion = playerdata.posicion
     this.esLider = playerdata.esLider
     this.cotizacion = playerdata.cotizacion
-
   }
 
-  static fromJson = (playerdata) => new Player(playerdata)  
+  static fromJson = (playerdata) => new Player(playerdata)
 
-  title = () => this.nombre + " " + this.apellido
-  
-  content = () => { 
+  get title() {
+    return this.nombre + ' ' + this.apellido
+  }
+
+  get content() {
     return {
-      fechaNacimiento: this.fechaNacimiento,     
+      fechaNacimiento: this.fechaNacimiento,
       nroCamiseta: this.nroCamiseta,
-      seleccion: this.seleccion,     
+      seleccion: this.seleccion,
       posicion: this.posicion,
-      altura: this.altura,     
+      altura: this.altura,
       peso: this.peso,
     }
   }
-  
-  footer = () => "U$S " + this.cotizacion 
+
+  get footer() {
+    return 'U$S ' + this.cotizacion
+  }
+
+  get tipo() { return 'Jugadores'}
 }

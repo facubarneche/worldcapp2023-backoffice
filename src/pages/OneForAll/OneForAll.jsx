@@ -49,8 +49,8 @@ export const OneForAll = ({ contentComponent, service }) => {
       {elements.map((element, index) => 
         <CardBase 
           key={index} 
-          card={element} 
-          contentComponent={contentComponent(element.content())} 
+          element={element} 
+          contentComponent={contentComponent(element.content)} 
           onEditClick={redirect} 
           onDelete={handleDelete} />
       )}
