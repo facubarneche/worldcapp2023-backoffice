@@ -1,17 +1,16 @@
 import './NavBar.css'
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { BottomNavigation, BottomNavigationAction } from '@mui/material'
-import { HomeRounded, LogoutRounded, DirectionsRunRounded, StoreRounded, AssignmentIndRounded } from '@mui/icons-material'
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material'
 
 const iconSize = 30
 
 const navigationButtons = [
-  { path: '/home', icon: <HomeRounded sx={{ fontSize: iconSize }} /> },
-  { path: '/figuritas', icon: <AssignmentIndRounded sx={{ fontSize: iconSize }} /> },
-  { path: '/jugadores', icon: <DirectionsRunRounded sx={{ fontSize: iconSize }} /> },
-  { path: '/puntos-de-venta', icon: <StoreRounded sx={{ fontSize: iconSize }} /> },
-  { path: '/login', icon: <LogoutRounded sx={{ fontSize: iconSize }} /> },
+  { path: '/home', icon: <Box className="fas fa-house-chimney" sx={{ fontSize: iconSize }}/> },
+  { path: '/figuritas', icon: <Box className="fas fa-id-badge" sx={{ fontSize: iconSize }}/> },
+  { path: '/jugadores', icon: <Box className="fas fa-shirt" sx={{ fontSize: iconSize }} /> },
+  { path: '/puntos-de-venta', icon: <Box className="fas fa-store" sx={{ fontSize: iconSize }} /> },
+  { path: '/login', icon: <Box className="fas fa-right-from-bracket" sx={{ fontSize: iconSize }} /> },
 ]
 
 export const NavBar = () => {

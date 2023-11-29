@@ -4,9 +4,10 @@
 }
 
 .navbar-buttons{
-  color: var(--typeface-color);
+  color: var(--color-tertiary);
+  filter: brightness(1.3);
 }
 
 .navbar-buttons.Mui-selected {
-  color: var(--color-tertiary);
+  color: var(--typeface-color);
 }
