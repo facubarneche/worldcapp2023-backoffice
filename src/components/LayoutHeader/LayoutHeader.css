@@ -1,8 +1,4 @@
-.layout-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
+.layout-header {        
   width: 100vw;
   max-width: var(--maxWidth);
   height: 6rem;
@@ -13,7 +9,9 @@
 .layout-header__title {
   font-size: 3rem;
   font-weight: 800;
-  text-transform: capitalize;
+  text-transform: capitalize; 
+  padding: 0 2rem;
+  line-height: 6rem;    
   font-family: var(--typeface-primary);
   color: var(--typeface-color);
 }
