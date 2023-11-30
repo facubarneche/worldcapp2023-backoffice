@@ -67,6 +67,10 @@ export class Player {
   }
 
   get isPolivalente() {
-    return this.posicion == 'Polivalente'
+    return this.posicion === 'Polivalente'
+  }
+
+  get isNew() {
+    return this.id === undefined
   }
 }

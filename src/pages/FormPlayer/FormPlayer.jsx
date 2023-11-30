@@ -42,8 +42,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       const response = await playerService.getById(id)
       setPlayer(response)
     }
-    console.log(params.id)
-    if (editPlayer) setPlayerInfo(params.id)
+    if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
 
     setHeaderTitle(headerTitle)
@@ -52,8 +51,6 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   useEffect(() => {
     console.log(player.objectCreateModifyPlayer)
   })
-
-  const editPlayer = params.id && +params.id >= 0
 
   const handleChecked = (e, key) => {
     const value = e.target.checked
@@ -71,7 +68,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
 
   const sendData = () => {
     if (!player.isPolivalente) setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, ['posiciones']: [] }))
-    editPlayer ? saveInfoSvFunc(params.id) : saveInfoSvFunc()
+    player.isNew ? saveInfoSvFunc(player.id) : saveInfoSvFunc()
   }
 
   const setRenderPolivalente = () => {
