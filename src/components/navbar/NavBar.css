@@ -4,9 +4,9 @@
 }
 
 .navbar-buttons{
-  color: var(--typeface-color);
+  color: var(--color-tertiary-lighter);  
 }
 
 .navbar-buttons.Mui-selected {
-  color: var(--color-tertiary);
+  color: var(--typeface-color);
 }
