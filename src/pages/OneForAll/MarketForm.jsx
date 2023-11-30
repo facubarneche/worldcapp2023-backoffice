@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
