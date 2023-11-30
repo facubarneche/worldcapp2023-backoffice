@@ -1,21 +1,21 @@
 import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 
 // Import Pages
-import LayoutFooter from 'components/LayoutFooter/LayoutFooter'
-import LayoutHeader from 'components/LayoutHeader/LayoutHeader'
+import { Login } from 'pages/Login/Login'
+import { Home } from 'pages/Home/Home'
+import { Players } from 'pages/Players/Players'
+import { Cards } from 'pages/Cards/Cards'
+import { Markets } from 'pages/Markets/Markets'
+import { LayoutFooter } from 'components/LayoutFooter/LayoutFooter'
+import { LayoutHeader } from 'components/LayoutHeader/LayoutHeader'
 
 // Import Styles
 import './App.css'
+import { Error } from 'pages/Error/Error'
 import { SnackbarProvider } from 'notistack'
+import { FormPlayer } from 'pages/FormPlayer/FormPlayer'
 import { MarketForm } from 'pages/Markets/MarketForm'
-import { Login } from 'pages/Login/Login'
-import Home from 'pages/Home/Home'
-import { Cards } from 'pages/Cards/Cards'
-import Players from 'src/pages/Players/Players'
-import FormPlayer from 'pages/FormPlayer/FormPlayer'
-import { Markets } from 'pages/Markets/Markets'
-import Teams from 'src/pages/Teams/Teams'
-import Error from 'pages/Error/Error'
+import { Teams } from 'pages/Teams/Teams'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

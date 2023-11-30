@@ -1,4 +1,5 @@
 .card-content__section,
+.card-content__row,
 .card-content {
   width: 100%;
   display: flex;
@@ -7,8 +8,14 @@
 }
 
 .card-content--column {
+  display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 0.5em;
+}
+
+.card-content__row {
+  justify-content: space-between;
 }
 
 .card-content__text {
@@ -27,6 +34,6 @@
   background-color: var(--text-color-2lighter);
 }
 
-.card-content__icons {
-  font-size: 1.3em;
+.card-content__icon {
+  font-size: 1.6em;
 }

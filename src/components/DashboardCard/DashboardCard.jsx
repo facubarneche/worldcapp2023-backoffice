@@ -1,5 +1,5 @@
+import "./DashboardCard.css"
 import { Box } from "@mui/material"
-import "./Dashboard.css"
 
 export const DashboardCard = ({ itemBox }) => {
   return (
