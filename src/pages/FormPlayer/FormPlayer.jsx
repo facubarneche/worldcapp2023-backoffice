@@ -25,6 +25,9 @@ const FormPlayer = ({ headerTitle }) => {
     seleccion: '',
     debut: undefined,
     posicion: '',
+    posiciones: undefined,
+    esLider: undefined,
+    cotizacion: undefined,
   })
   //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
