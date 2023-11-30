@@ -65,4 +65,8 @@ export class Player {
     const date$ = date.split('-')
     return date$[2] + '-' + date$[1] + '-' + date$[0]
   }
+
+  get isPolivalente() {
+    return this.posicion == 'Polivalente'
+  }
 }

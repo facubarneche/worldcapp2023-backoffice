@@ -70,14 +70,12 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   }
 
   const sendData = () => {
-    if (!isPolivalente) setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, ['posiciones']: [] }))
+    if (!player.isPolivalente) setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, ['posiciones']: [] }))
     editPlayer ? saveInfoSvFunc(params.id) : saveInfoSvFunc()
   }
 
-  const isPolivalente = player.posicion == 'Polivalente'
-
   const setRenderPolivalente = () => {
-    return isPolivalente
+    return player.isPolivalente
       ? {
           textLabel: 'Posiciones',
           key: 'posiciones',
