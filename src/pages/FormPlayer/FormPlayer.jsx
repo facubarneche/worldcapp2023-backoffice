@@ -40,7 +40,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     }
     const setPlayerInfo = async (id) => {
       const response = await playerService.getById(id)
-      setPlayer(response)
+      setPlayer(new Player({ ...response.objectCreateModifyPlayer, ['id']: id }))
     }
     if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
