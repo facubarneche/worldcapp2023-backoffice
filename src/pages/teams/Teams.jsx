@@ -1,7 +1,8 @@
 import { useOutletContext } from "react-router-dom"
 import { useOnInit } from "src/customHooks/hooks"
 
-export default function Teams() {
+export const Teams = () => {
+  // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   
   useOnInit(() => {

@@ -1,26 +1,29 @@
-import { useState } from "react"
-import { Outlet, useOutletContext } from "react-router-dom"
 import './LayoutHeader.css'
-import { Typography } from "@mui/material"
-import { useOnInit } from "src/customHooks/hooks"
-import NavBar from "../NavBar/NavBar"
+import { useState } from 'react'
+import { Outlet, useOutletContext } from 'react-router-dom'
+import { Typography } from '@mui/material'
+import { useOnInit } from 'customHooks/hooks'
+import { NavBar } from 'components/navbar/Navbar'
 
-const LayoutHeader = () => {
+export const LayoutHeader = () => {
   const [headerTitle, setHeaderTitle] = useState('hola')
+  // @ts-ignore
   const [setFoterContent] = useOutletContext()
-  
-  useOnInit(()=> {
-    setFoterContent(<NavBar/>)
+
+  useOnInit(() => {
+    setFoterContent(<NavBar />)
   })
 
-  return <>
-    <header className="layoutHeader">
-      <Typography className="layoutHeader_title" variant="h2">{headerTitle}</Typography>
-    </header>
-    <article className="layout__content">
-      <Outlet context={[setHeaderTitle]}/>
-    </article>
-  </>
+  return (
+    <>
+      <header className="layout-header">
+        <Typography className="layout-header__title" variant="h2">
+          {headerTitle}
+        </Typography>
+      </header>
+      <article className="layout__content">
+        <Outlet context={[setHeaderTitle]} />
+      </article>
+    </>
+  )
 }
-
-export default LayoutHeader

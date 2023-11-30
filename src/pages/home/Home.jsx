@@ -1,37 +1,34 @@
-import { useState } from "react"
-import { useNavigate, useOutletContext } from "react-router-dom"
-import { useOnInit } from "src/customHooks/hooks"
+import './Home.css'
+import { useOnInit } from 'customHooks/hooks'
+import { HandleError } from 'utils/handleError/HandleError'
+import { dashboardService } from 'services/homeService/HomeService'
+import { DashboardCard } from 'src/components/DashboardCard/DashboardCard'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useState } from 'react'
 
-import DashboardBox from "components/dashboardBox/DashboardBox"
-import { dashboardService } from "src/domain/services/homeService/Home.service"
-import HandleError from "src/utils/handleError/HandleError"
-
-import "./Home.css"
-
-const Home = () => {
+export const Home = () => {
   const [itemsDashboardBox, setItemsDashboardBox] = useState([])
   const navigate = useNavigate()
+  // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
 
-  useOnInit(async ()=> {
-    setHeaderTitle('HOME')
+  useOnInit(async () => {
+    setHeaderTitle('Dashboard')
     try {
       const dataDashboard = await dashboardService.getStaticsDashboard()
       const transformedData = dataDashboard.addIconsDashboardBox()
-      
+
       setItemsDashboardBox(transformedData)
     } catch (error) {
       HandleError(error, navigate)
     }
   })
-  
+
   return (
     <>
-      {
-        itemsDashboardBox.map( itemBox => <DashboardBox key={itemBox.name} itemBox={itemBox} />)
-      }
+      {itemsDashboardBox.map((itemBox) => (
+        <DashboardCard key={itemBox.name} itemBox={itemBox} />
+      ))}
     </>
   )
 }
-
-export default Home

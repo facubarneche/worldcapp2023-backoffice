@@ -1,14 +1,8 @@
 import { useOutletContext } from 'react-router-dom'
-import FormActions from 'src/components/FormActions/FormActions'
+import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
 import './FormPlayer.css'
-import {
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 
@@ -31,13 +25,7 @@ const FormPlayer = ({ headerTitle }) => {
   })
   //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
-  const positions = [
-    'Arquero',
-    'Delantero',
-    'Mediocampista',
-    'Defensor',
-    'Polivalente',
-  ]
+  const positions = ['Arquero', 'Delantero', 'Mediocampista', 'Defensor', 'Polivalente']
 
   useOnInit(() => {
     const setNationalTeams = async () => {
@@ -107,12 +95,7 @@ const FormPlayer = ({ headerTitle }) => {
     {
       inputElement: (
         <FormControlLabel
-          control={
-            <Checkbox
-              value={playerData['esLider']}
-              onChange={(e) => handleChecked(e, 'esLider')}
-            />
-          }
+          control={<Checkbox value={playerData['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
           label="Es Lider"
         />
       ),
@@ -124,19 +107,12 @@ const FormPlayer = ({ headerTitle }) => {
     <main className="formPlayer formPlayer__flexContainer">
       <form className="formPlayer__form">
         {inputsData.map((data, index) => (
-          <section
-            className="formPlayer__input-container formPlayer__flexContainer"
-            key={index}
-          >
+          <section className="formPlayer__input-container formPlayer__flexContainer" key={index}>
             <Typography component="label" variant="h5">
               {data.textLabel}
             </Typography>
             {data.inputElement ?? (
-              <TextField
-                value={playerData[data.key]}
-                onChange={(e) => handleChange(e, data.key)}
-                {...data.props}
-              >
+              <TextField value={playerData[data.key]} onChange={(e) => handleChange(e, data.key)} {...data.props}>
                 {data.children}
               </TextField>
             )}

@@ -3,15 +3,15 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  min-height: 60vh
+  min-height: 60vh;
 }
 
-.login-form__actions{
+.login-form__actions {
   font-size: 1.3em;
   width: 100%;
 }
 
-.input{
+.input {
   font-size: inherit;
   margin-top: 0px;
 }
@@ -21,8 +21,35 @@
   margin-bottom: 0;
 }
 
-.login__button{
+.login__button {
   font-size: inherit;
   height: 4em;
   margin-top: 2em;
+}
+
+.field {
+  font-family: var(--typeface-primary);
+  width: 100%;
+  box-shadow: var(--box-shadow);
+}
+
+.field * {
+  font-family: inherit;
+}
+
+.field input {
+  font-size: 1.4em;
+}
+
+.field select {
+  font-size: 1.4em;
+}
+
+.field label {
+  font-size: 1.4em;
+}
+
+.field span {
+  background-color: white;  
+  font-size: 1.4em;  
 }

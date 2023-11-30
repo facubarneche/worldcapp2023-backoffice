@@ -1,12 +1,9 @@
-import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded'
-import StoreIcon from '@mui/icons-material/Store'
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
-import ShieldIcon from '@mui/icons-material/Shield'
+import { Box } from "@mui/material"
 
 export const iconsDashboardBox = {
-  "Figuritas Ofrecidas": <AssignmentIndRoundedIcon key={1} className="dashboard-box__icon dashboard-box__icon--primary" />,
-  "Figuritas Faltantes": <AssignmentIndRoundedIcon key={2} className="dashboard-box__icon dashboard-box__icon--secondary" />,
-  "Puntos de Ventas" :<StoreIcon key={3} className="dashboard-box__icon" />,
-  "Usuarios Activos": <PeopleAltIcon key={4} className="dashboard-box__icon" />,
-  "Selecciones Activas":<ShieldIcon key={5} className="dashboard-box__icon" />
+  "Figuritas Ofrecidas": <Box className="fas fa-id-badge fa-2xl" sx={{color: 'var(--color-tertiary)'}}/>,
+  "Figuritas Faltantes": <Box className="fas fa-id-badge fa-2xl" sx={{color: 'var(--color-hot)'}}/>,
+  "Puntos de Ventas" :<Box className="fas fa-store fa-2xl" sx={{color: '#62208d'}}/>,
+  "Usuarios Activos": <Box className="fas fa-user fa-2xl" sx={{color: '#25982c'}}/>,
+  "Selecciones Activas":<Box className="fas fa-flag fa-2xl" sx={{color: '#3d84ff'}}/>
 }

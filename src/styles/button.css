@@ -1,0 +1,27 @@
+.button {
+  display: flex;
+  background-color: var(--color-tertiary);
+}
+
+.button--icon {
+  color: white;
+}
+
+.button--large {
+  font-size: 3.5rem;
+  width: 7rem;
+}
+
+.button--circle {
+  border-radius: 50%;
+}
+
+.button--float {
+  position: sticky;
+  bottom: 2rem;
+  margin-left: 90%;
+}
+
+.button--icon:hover {
+  background-color: var(--color-tertiary);
+}

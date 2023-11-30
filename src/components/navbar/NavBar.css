@@ -1,0 +1,12 @@
+.navbar {
+  background-color: transparent;
+  width: 100%;
+}
+
+.navbar-buttons{
+  color: var(--color-tertiary-lighter);  
+}
+
+.navbar-buttons.Mui-selected {
+  color: var(--typeface-color);
+}
