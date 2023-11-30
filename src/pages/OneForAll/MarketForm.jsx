@@ -32,12 +32,12 @@ export const MarketForm = ({ headerTitle }) => {
   const navigate = useNavigate()
 
   useOnInit(() => {
-    setHeaderTitle(headerTitle)
+    setHeaderTitle(headerTitle)    
     id && getCardToEdit()
   })
 
   const getCardToEdit = async () => {
-    const card = await marketService.getMarketById(id)
+    const card = await marketService.getById(id)
     setMarketData(card)
   }
 
@@ -107,7 +107,7 @@ export const MarketForm = ({ headerTitle }) => {
       </TextField>
       <FormActions
         leftButtonClick={() => {
-          marketService.createMarket(marketData)
+          marketService.create(marketData)
         }}
         rightButtonClick={() => {          
           //TODO: Handle clear of marketData

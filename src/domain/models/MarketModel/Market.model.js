@@ -1,5 +1,4 @@
 export class Market {
-
   constructor(storedata) {
     this.id = storedata.id
     this.nombre = storedata.nombre
@@ -11,18 +10,24 @@ export class Market {
     this.pedidosPendientes = storedata.pedidosPendientes    
   }
 
-  static fromJson = (storedata) => new Market(storedata)  
+  static fromJson = (storedata) => new Market(storedata)
 
-  title = () => this.nombre
-  
-  content = () => { 
+  get title() {
+    return this.nombre
+  }
+
+  get content() {
     return {
       direccion: this.direccionPlana,     
       stock: this.stockSobres + ' sobres'
     }
   }
-  
-  footer = () => "Tipo " + this.tipoPuntoDeVenta 
+
+  get footer() {
+    return 'Tipo ' + this.tipoPuntoDeVenta
+  }
+
+  get tipo() {return this.tipoPuntoDeVenta}
 
   static toJson = (storedata) => {
     return {
@@ -42,14 +47,3 @@ export class Market {
     }
   }
 }
-
-
-// // Dividir la cadena en dos partes
-// const parts = cardStub.direccion.ubiGeografica.split(',');
-
-// // Eliminar los caracteres no deseados y convertir en número
-// const x = Number(parts[0].replace('x: ', ''));
-// const y = Number(parts[1].replace(' y: ', ''));
-
-// // Crear el nuevo objeto
-// const ubiGeografica = { x, y };

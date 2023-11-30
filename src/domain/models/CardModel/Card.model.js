@@ -1,6 +1,5 @@
 export const BASE_VALUE = 100.0
 export class Card {
-
   constructor(data) {
     this.id = data.id
     this.numero = data.numero
@@ -8,22 +7,28 @@ export class Card {
     this.nivelImpresion = data.nivelImpresion
     this.nombre = data.nombre
     this.apellido = data.apellido
-    this.valoracion = data.valoracion    
+    this.valoracion = data.valoracion
   }
 
-  static fromJson = (cardata) => new Card(cardata)  
+  static fromJson = (cardata) => new Card(cardata)
 
-  title = () => this.nombre + " " + this.apellido
-  
-  content = () => { 
+  get title() {
+    return this.nombre + ' ' + this.apellido
+  }
+
+  get content() {
     return {
       numero: this.numero,
       onFire: this.onFire,
-      cantidadImpresa: this.nivelImpresion 
+      cantidadImpresa: this.nivelImpresion,
     }
   }
-  
-  footer = () => "Valoración: " + this.totalValoration()
+
+  get footer() {
+    return 'Valoración: ' + this.totalValoration()
+  }
+
+  get tipo() {return 'Figuritas'}
 
   totalValoration = () => this.valoracion + this.baseValoration()
 
