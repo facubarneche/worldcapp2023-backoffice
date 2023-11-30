@@ -19,7 +19,7 @@ class MarketService {
 
   delete = async (id) => {
     try {
-      const response$ = await axios.delete(`${REST_SERVER_URL}/punto-de-venta/eliminar/${id}`)
+      const response$ = await axios.delete(`${REST_SERVER_URL}/punto-de-venta/${id}/eliminar/`)
       console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
       console.error('Error al eliminar el elemento')      
