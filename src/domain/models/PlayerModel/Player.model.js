@@ -22,7 +22,7 @@ export class Player {
 
   get content() {
     return {
-      fechaNacimiento: this.fechaNacimiento,
+      fechaNacimiento: this.formatDate(this.fechaNacimiento),
       nroCamiseta: this.nroCamiseta,
       seleccion: this.seleccion,
       posicion: this.posicion,
@@ -35,5 +35,12 @@ export class Player {
     return 'U$S ' + this.cotizacion
   }
 
-  get tipo() { return 'Jugadores'}
+  get tipo() {
+    return 'Jugadores'
+  }
+
+  formatDate = (date) => {
+    const date$ = date.split('-')
+    return date$[2] + '-' + date$[1] + '-' + date$[0]
+  }
 }
