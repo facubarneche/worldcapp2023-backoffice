@@ -10,7 +10,7 @@ class PlayerService {
 
   getById = async (id) => {
     const playerJson = await axios.get(`${REST_SERVER_URL}/jugador/${id}`)
-    return Player.fromJson(playerJson.data)
+    return new Player(playerJson.data)
   }
 
   update = async (player) => {

@@ -6,24 +6,27 @@ import { Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mu
 import { useEffect, useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 import { playerService } from 'src/domain/services/PlayerService/PlayerService'
+import { Player } from 'src/domain/models/PlayerModel/Player.model'
 
 const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-  const [playerData, setPlayerData] = useState({
-    nombre: undefined,
-    apellido: undefined,
-    nacimiento: undefined,
-    altura: undefined,
-    peso: undefined,
-    camiseta: undefined,
-    seleccion: '',
-    debut: undefined,
-    posicion: '',
-    posiciones: [],
-    esLider: undefined,
-    cotizacion: undefined,
-  })
+  const [player, setPlayer] = useState(
+    new Player({
+      nombre: undefined,
+      apellido: undefined,
+      nacimiento: undefined,
+      altura: undefined,
+      peso: undefined,
+      camiseta: undefined,
+      seleccion: '',
+      debut: undefined,
+      posicion: '',
+      posiciones: [],
+      esLider: undefined,
+      cotizacion: undefined,
+    }),
+  )
   //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const positions = ['Arquero', 'Delantero', 'Mediocampista', 'Defensor', 'Polivalente']
@@ -37,7 +40,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     }
     const setPlayerInfo = async (id) => {
       const response = await playerService.getById(id)
-      setPlayerData(response)
+      setPlayer(response)
     }
     console.log(params.id)
     if (editPlayer) setPlayerInfo(params.id)
@@ -47,19 +50,19 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   })
 
   useEffect(() => {
-    console.log(playerData)
+    console.log(player.objectCreateModifyPlayer)
   })
 
   const editPlayer = params.id && +params.id >= 0
 
   const handleChecked = (e, key) => {
     const value = e.target.checked
-    setPlayerData((prev) => ({ ...prev, [key]: value }))
+    setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, [key]: value }))
   }
 
   const handleChange = (e, key) => {
     const value = e.target.value
-    setPlayerData((prev) => ({ ...prev, [key]: value }))
+    setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, [key]: value }))
   }
 
   const handleBack = () => {
@@ -67,11 +70,11 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   }
 
   const sendData = () => {
-    if (!isPolivalente) setPlayerData((prev) => ({ ...prev, ['posiciones']: [] }))
+    if (!isPolivalente) setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, ['posiciones']: [] }))
     editPlayer ? saveInfoSvFunc(params.id) : saveInfoSvFunc()
   }
 
-  const isPolivalente = playerData.posicion == 'Polivalente'
+  const isPolivalente = player.posicion == 'Polivalente'
 
   const setRenderPolivalente = () => {
     return isPolivalente
@@ -100,12 +103,12 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     { textLabel: 'Apellido', key: 'apellido', props: {} },
     {
       textLabel: 'Fecha de nacimineto',
-      key: 'nacimiento',
+      key: 'fechaNacimiento',
       props: { type: 'date' },
     },
     { textLabel: 'Altura', key: 'altura', props: { type: 'number' } },
     { textLabel: 'Peso', key: 'peso', props: { type: 'number' } },
-    { textLabel: 'Nro Camiseta', key: 'camiseta', props: { type: 'number' } },
+    { textLabel: 'Nro Camiseta', key: 'nroCamiseta', props: { type: 'number' } },
     {
       textLabel: 'Seleccion',
       key: 'seleccion',
@@ -140,10 +143,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     setRenderPolivalente(),
     {
       inputElement: (
-        <FormControlLabel
-          control={<Checkbox value={playerData['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
-          label="Es Lider"
-        />
+        <FormControlLabel control={<Checkbox value={player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />} label="Es Lider" />
       ),
     },
     { textLabel: 'Cotizacion', key: 'cotizacion', props: { type: 'number' } },
@@ -158,7 +158,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
               {data.textLabel}
             </Typography>
             {data.inputElement ?? (
-              <TextField value={playerData[data.key]} onChange={(e) => handleChange(e, data.key)} {...data.props}>
+              <TextField value={player[data.key]} onChange={(e) => handleChange(e, data.key)} {...data.props}>
                 {data.children}
               </TextField>
             )}
