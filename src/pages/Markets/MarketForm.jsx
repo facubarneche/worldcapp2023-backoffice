@@ -6,10 +6,16 @@ import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
 import { useState } from 'react'
 
+const BusinessesType = {
+  Kiosko: 'Kiosko',
+  Libreria: 'Libreria',
+  Supermercado: 'Supermercado',
+}
+
 const cardStub = {
   id: -1,
   nombre: '',
-  tipoPuntoDeVenta: '',
+  tipoPuntoDeVenta: BusinessesType.Kiosko,
   direccionPlana: '',
   geoX: 0,
   geoY: 0,
@@ -23,11 +29,6 @@ export const MarketForm = ({ headerTitle }) => {
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
-  const BusinessesType = {
-    Kiosko: 'Kiosko',
-    Libreria: 'Libreria',
-    Supermercado: 'Supermercado',
-  }
   const navigate = useNavigate()
 
   useOnInit(() => {
@@ -41,7 +42,7 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   const handleChange = (key, value) => {
-    marketData[key] = value    
+    marketData[key] = value  
     generarNuevoMarket(marketData)
   }
 
@@ -52,12 +53,16 @@ export const MarketForm = ({ headerTitle }) => {
 
   return (
     <>
-      <TextField className="field" value={marketData.nombre} label="Nombre" onChange={(e) => handleChange('nombre', e.target.value)} />
+      <TextField 
+        className="field" 
+        value={marketData.nombre} 
+        label="Nombre" 
+        onChange={(e) => handleChange('nombre', e.target.value)} />
       <TextField
         className="field"
-        value={marketData.direccion}
+        value={marketData.direccionPlana}
         label="Dirección"
-        onChange={(e) => handleChange('direccion', e.target.value)}
+        onChange={(e) => handleChange('direccionPlana', e.target.value)}
       />
       <TextField
         className="field"
@@ -75,10 +80,10 @@ export const MarketForm = ({ headerTitle }) => {
       />
       <TextField
         className="field"
-        value={marketData.stock}
+        value={marketData.stockSobres}
         inputProps={{ type: 'number', min: 0 }}
         label="Sobres Disponibles"
-        onChange={(e) => handleChange('stock', e.target.value)}
+        onChange={(e) => handleChange('stockSobres', e.target.value)}
       />
       <TextField
         className="field"
@@ -87,7 +92,13 @@ export const MarketForm = ({ headerTitle }) => {
         label="Pedidos Pendientes"        
         onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
       />
-      <TextField className="field" defaultValue={BusinessesType.Kiosko} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
+      <TextField 
+        className="field" 
+        defaultValue={BusinessesType.Kiosko} 
+        select 
+        SelectProps={{ native: true }} 
+        onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
+
         {Object.entries(BusinessesType).map(([key, value]) => 
           <option key={key} value={value}>
             {value}
