@@ -6,5 +6,10 @@ export const USER_KEY_STORAGE = 'userLogedID'
 export const BusinessType = {
   Kioscos: 'Kioscos',
   Librerias: 'Librerias',
-  Supermercados: 'Supermercados',
+  Supermercados: 'Supermercados',  
+}
+
+export const ElementType = {
+  Jugadores: 'Jugadores',
+  Figuritas: 'Figuritas',
 }
