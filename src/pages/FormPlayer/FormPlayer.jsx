@@ -1,12 +1,13 @@
-import { useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
 import './FormPlayer.css'
 import { Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
+import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 
-const FormPlayer = ({ headerTitle }) => {
+const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [playerData, setPlayerData] = useState({
@@ -19,26 +20,37 @@ const FormPlayer = ({ headerTitle }) => {
     seleccion: '',
     debut: undefined,
     posicion: '',
-    posiciones: undefined,
+    posiciones: [],
     esLider: undefined,
     cotizacion: undefined,
   })
   //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const positions = ['Arquero', 'Delantero', 'Mediocampista', 'Defensor', 'Polivalente']
+  const params = useParams()
+  const navigate = useNavigate()
 
   useOnInit(() => {
     const setNationalTeams = async () => {
       const data = await nationalTeamService.getAllNames()
       setNationalTeamOptions(data)
     }
+    const setPlayerInfo = async (id) => {
+      const response = await playerService.getById(id)
+      setPlayerData(response)
+    }
+    console.log(params.id)
+    if (editPlayer) setPlayerInfo(params.id)
     setNationalTeams()
+
     setHeaderTitle(headerTitle)
   })
 
   useEffect(() => {
     console.log(playerData)
   })
+
+  const editPlayer = params.id && +params.id >= 0
 
   const handleChecked = (e, key) => {
     const value = e.target.checked
@@ -48,6 +60,39 @@ const FormPlayer = ({ headerTitle }) => {
   const handleChange = (e, key) => {
     const value = e.target.value
     setPlayerData((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const handleBack = () => {
+    navigate('/jugadores')
+  }
+
+  const sendData = () => {
+    if (!isPolivalente) setPlayerData((prev) => ({ ...prev, ['posiciones']: [] }))
+    editPlayer ? saveInfoSvFunc(params.id) : saveInfoSvFunc()
+  }
+
+  const isPolivalente = playerData.posicion == 'Polivalente'
+
+  const setRenderPolivalente = () => {
+    return isPolivalente
+      ? {
+          textLabel: 'Posiciones',
+          key: 'posiciones',
+          props: {
+            select: true,
+            SelectProps: {
+              multiple: true,
+            },
+          },
+          children: positions
+            .filter((position) => position != 'Polivalente')
+            .map((position) => (
+              <MenuItem key={position} value={position}>
+                {position}
+              </MenuItem>
+            )),
+        }
+      : { inputElement: <></> }
   }
 
   const inputsData = [
@@ -92,6 +137,7 @@ const FormPlayer = ({ headerTitle }) => {
         </MenuItem>
       )),
     },
+    setRenderPolivalente(),
     {
       inputElement: (
         <FormControlLabel
@@ -119,7 +165,7 @@ const FormPlayer = ({ headerTitle }) => {
           </section>
         ))}
       </form>
-      <FormActions />
+      <FormActions leftButtonClick={sendData} rightButtonClick={handleBack} />
     </main>
   )
 }

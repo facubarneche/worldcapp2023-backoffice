@@ -5,11 +5,11 @@
 .formPlayer {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
   gap: 2rem;
 }
 .formPlayer__form {
-  padding: 0 2rem;
 }
 .formPlayer__input-container {
 }
