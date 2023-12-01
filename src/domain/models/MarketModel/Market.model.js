@@ -1,4 +1,5 @@
-import { BusinessType } from "services/constants"
+import { BusinessType } from 'services/constants'
+import { ValidateInputs } from 'utils/Validators/ValidateInputs'
 
 export class Market {
   constructor(storedata = {}) {
@@ -20,8 +21,8 @@ export class Market {
 
   get content() {
     return {
-      direccion: this.direccion,     
-      stock: this.stock + ' sobres'
+      direccion: this.direccion,
+      stock: this.stock + ' sobres',
     }
   }
 
@@ -29,7 +30,9 @@ export class Market {
     return 'Tipo ' + this.tipoPuntoDeVenta
   }
 
-  get tipo() {return this.tipoPuntoDeVenta}
+  get tipo() {
+    return this.tipoPuntoDeVenta
+  }
 
   static toJson = (storedata) => {
     return {
@@ -37,15 +40,31 @@ export class Market {
       nombre: storedata.nombre,
       tipoPuntoDeVenta: storedata.tipoPuntoDeVenta,
       direccion: {
-        calle: storedata.direccionPlana.split(' ')[0],
-        altura: parseInt(storedata.direccionPlana.split(' ')[1], 10) || null,
-        ubiGeografica: `${storedata.geoX} ${storedata.geoY}`
+        calle: storedata.direccion.split(' ')[0],
+        altura: parseInt(storedata.direccion.split(' ')[1], 10) || null,
+        ubiGeografica: `${storedata.geoX} ${storedata.geoY}`,
       },
-      direccionPlana: storedata.direccionPlana,
+      direccionPlana: storedata.direccion,
       geoX: storedata.geoX,
       geoY: storedata.geoY,
       stockSobres: storedata.stockSobres,
       pedidosPendientes: storedata.pedidosPendientes,
     }
+  }
+
+  get validAddress() {
+    return ValidateInputs.isAddress(this.direccion)
+  }
+
+  emptyData(prop) {
+    return ValidateInputs.isEmpty(prop)
+  }
+
+  get hasEmptyData() {
+    return Object.keys(this).map((prop) => this.emptyData(this[prop]) && prop).filter( Boolean )
+  }
+
+  get hasErrors() {
+    return this.hasEmptyData.length !== 0 || !this.validAddress
   }
 }

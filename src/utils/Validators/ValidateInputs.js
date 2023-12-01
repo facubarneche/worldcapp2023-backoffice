@@ -3,8 +3,7 @@ export class ValidateInputs {
     // Puedes inicializar cualquier configuración de validación aquí
   }
 
-  static isNotEmpty(value) {
-    return value.trim() !== ''
-  }
-}
+  static isEmpty = (value) => String(value).trim() === ''
 
+  static isAddress = (value) => /^[a-zA-Z]+\s\d+$/.test(value)
+}

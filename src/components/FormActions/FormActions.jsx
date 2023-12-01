@@ -15,6 +15,7 @@ export const FormActions = ({
       <Button
         variant="contained"
         size="large"
+        type="submit"
         {...leftButtonProps}
         onClick={handleLeftButtonClick}
       >
