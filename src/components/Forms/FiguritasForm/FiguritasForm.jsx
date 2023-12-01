@@ -3,8 +3,8 @@ import { useOnInit } from 'custom_hooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'
-import { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useOutletContext } from 'react-router-dom'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 
 const FiguritasForm = ({ changeDisplay }) => {
@@ -35,7 +35,7 @@ const FiguritasForm = ({ changeDisplay }) => {
     }
   })
 
-  useOnInit((nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players) => {
+  useEffect(() => {
     const selectedPlayer = players[selectedPlayerIndex]
     const playerValoracion = selectedPlayer ? selectedPlayer.valoracion : 0
   
@@ -43,12 +43,13 @@ const FiguritasForm = ({ changeDisplay }) => {
       numero: Number(nro),
       onFire: isOnFire,
       nivelImpresion: selectedPrintLevel,
-      valoracionJugador: playerValoracion,
+      valoracion: playerValoracion,
     })
-
+  
     setValoracionBase(card.baseValoration())
     setValoracionTotal(card.totalValoration())
-  })
+  }, [nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players])
+  
   
   return (
     <div className="figuritas-form">
