@@ -14,6 +14,7 @@ class PlayerService {
   }
 
   update = async (player,id) => {
+    console.log(player)
     await axios.patch(`${REST_SERVER_URL}/jugador/${id}/modificar`,player.JSONCreateModifyPlayer)
   }
 

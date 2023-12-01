@@ -17,7 +17,7 @@ export class Player {
 
   static fromJson = (playerdata) => new Player(playerdata)
 
-  get objectCreateModifyPlayer() {
+  get JSONCreateModifyPlayer() {
     return {
       nombre: this.nombre,
       apellido: this.apellido,
@@ -32,10 +32,6 @@ export class Player {
       esLider: this.esLider,
       cotizacion: this.cotizacion 
     }
-  }
-
-  get JSONCreateModifyPlayer() {
-    return JSON.stringify(this.objectCreateModifyPlayer)
   }
 
   get title() {

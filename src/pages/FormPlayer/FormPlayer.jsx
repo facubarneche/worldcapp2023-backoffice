@@ -43,7 +43,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     }
     const setPlayerInfo = async (id) => {
       const response = await playerService.getById(id)
-      setPlayer(new Player({ ...response.objectCreateModifyPlayer, ['id']: id }))
+      setPlayer(new Player({ ...response.JSONCreateModifyPlayer, id: id }))
     }
 
     if (params.id != undefined) setPlayerInfo(params.id)
@@ -53,17 +53,21 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   })
 
   useEffect(() => {
-    console.log(player)
+    console.log(player.id)
   })
+
+  const setPlayerValue = (key, value) => {
+    setPlayer((prev) => new Player({ id: player.id, ...prev.JSONCreateModifyPlayer, [key]: value }))
+  }
 
   const handleChecked = (e, key) => {
     const value = e.target.checked
-    setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, [key]: value }))
+    setPlayerValue(key, value)
   }
 
   const handleChange = (e, key) => {
     const value = e.target.value
-    setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, [key]: value }))
+    setPlayerValue(key, value)
   }
 
   const handleBack = () => {
@@ -71,8 +75,8 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   }
 
   const sendData = () => {
-    if (!player.isPolivalente) setPlayer((prev) => new Player({ ...prev.objectCreateModifyPlayer, ['posiciones']: [] }))
-    player.isNew ? saveInfoSvFunc(player.id) : saveInfoSvFunc()
+    if (!player.isPolivalente) setPlayerValue('posiciones', [])
+    player.isNew ? saveInfoSvFunc(player) : saveInfoSvFunc(player, player.id)
   }
 
   const setRenderPolivalente = () => {
@@ -92,12 +96,13 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
             </MenuItem>
           )),
         }
-      : { inputElement: <></> }
+      : { element: <></> }
   }
 
   const inputsData = [
     { textLabel: 'Nombre', key: 'nombre', props: {} },
     { textLabel: 'Apellido', key: 'apellido', props: {} },
+    { element: <hr /> },
     {
       textLabel: 'Fecha de nacimineto',
       key: 'fechaNacimiento',
@@ -105,6 +110,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     },
     { textLabel: 'Altura', key: 'altura', props: { type: 'number' } },
     { textLabel: 'Peso', key: 'peso', props: { type: 'number' } },
+    { element: <hr /> },
     { textLabel: 'Nro Camiseta', key: 'nroCamiseta', props: { type: 'number' } },
     {
       textLabel: 'Seleccion',
@@ -138,8 +144,10 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       )),
     },
     setRenderPolivalente(),
+    { element: <hr className="separador-esLider" /> },
+
     {
-      inputElement: (
+      element: (
         <FormControlLabel
           control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
           label="Es Lider"
@@ -154,7 +162,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       <form className="formPlayer__form">
         {inputsData.map((data, index) => (
           <section className="formPlayer__input-container formPlayer__flexContainer" key={index}>
-            {data.inputElement ?? (
+            {data.element ?? (
               <TextField
                 className="field"
                 label={data.textLabel}
