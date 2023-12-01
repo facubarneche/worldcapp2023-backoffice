@@ -7,6 +7,7 @@
   height: fit-content;
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow);
+  background-image: var(--card-bg-gradient);
 }
 
 .card-base__header {

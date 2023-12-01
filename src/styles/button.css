@@ -1,19 +1,27 @@
-.add__button{
+.button {
   display: flex;
-  position: sticky;
+  background-color: var(--color-tertiary);
+}
+
+.button--icon {
+  color: white;
+}
+
+.button--large {
   font-size: 3.5rem;
-  color:white;  
-  background-color: var(--color-tertiary);
-  border-radius: 50%;    
-  bottom: 2rem;  
-  width: 7rem ;
-  margin-left: 33rem;  
+  width: 7rem;
 }
 
-.add__button:hover{
-  background-color: var(--color-tertiary);
+.button--circle {
+  border-radius: 50%;
 }
 
-.icon__button{
-  
+.button--float {
+  position: sticky;
+  bottom: 2rem;
+  margin-left: 90%;
+}
+
+.button--icon:hover {
+  background-color: var(--color-tertiary);
 }

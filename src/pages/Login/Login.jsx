@@ -5,7 +5,7 @@ import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
 import { LogoComponent, LogoImageComponent } from 'components/LogoComponent/LogoComponent'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 import { HandleError } from 'utils/HandleError/HandleError'
 
 export const Login = () => {

@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom"
-import { useOnInit } from "src/customHooks/hooks"
+import { useOnInit } from "custom_hooks/hooks"
 
 export const Teams = () => {
   // @ts-ignore

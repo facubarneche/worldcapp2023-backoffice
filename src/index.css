@@ -9,6 +9,7 @@
   --color-primary: hsla(207, 100%, 25%, 1);
   --color-secondary: hsla(207, 66%, 43%, 1);
   --color-tertiary: hsla(197, 96%, 46%, 1);
+  --color-tertiary-lighter: hsla(197, 96%, 65%, 1);
   /* Poin of Interest Color */
   --color-highligthed: hsla(32, 100%, 50%, 1);
   --color-focus: hsla(32, 100%, 65%, 1);
@@ -71,11 +72,11 @@ html {
   justify-content: center;  
   font-family: var(--typeface-primary);
   font-size: 10px;
-  color: var(--text-color);
+  color: var(--text-color);    
 }
 
 body {
-  max-width: var(--maxWidth);
+  max-width: var(--maxWidth);  
 }
 
 .fa-lp {

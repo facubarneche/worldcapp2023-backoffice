@@ -1,5 +1,5 @@
 import './figuritasForm.css'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'

@@ -1,8 +1,8 @@
 import { useOutletContext } from 'react-router-dom'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 
-export const FormPlayer = ({ headerTitle }) => {
+export const PlayerForm = ({ headerTitle }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
 
@@ -12,7 +12,7 @@ export const FormPlayer = ({ headerTitle }) => {
 
   return (
     <>
-      <p>FormPlayer</p>
+      <p>PlayerForm</p>
       <FormActions
         leftButtonClick={() => {
           console.log('jijia')
