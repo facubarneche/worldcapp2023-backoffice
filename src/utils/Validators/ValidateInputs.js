@@ -5,5 +5,5 @@ export class ValidateInputs {
 
   static isEmpty = (value) => String(value).trim() === ''
 
-  static isAddress = (value) => /^[a-zA-Z]+\s\d+$/.test(value)
+  static isAddress = (value) => /.*\s\d+$/.test(value)
 }
