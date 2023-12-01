@@ -2,26 +2,21 @@ import { Button } from '@mui/material'
 import './FormActions.css'
 
 export const FormActions = ({
-  leftButtonText = 'Guardar',
-  leftButtonClick = () => {
-    console.log('Guardar')
-  },
+  leftButtonText = 'Confirmar',
+  rightButtonText = 'Cancelar',  
   leftButtonProps = {},
-  rightButtonText = 'Volver',
-  rightButtonClick = () => {
-    console.log('Volver')
-  },
   rightButtonProps = {},
-}) => {
+  handleLeftButtonClick = () =>{},
+  handleRightButtonClick = () => {},  
+}) => { 
+
   return (
     <footer className="step-footer">
       <Button
         variant="contained"
         size="large"
         {...leftButtonProps}
-        onClick={() => {
-          leftButtonClick()
-        }}
+        onClick={handleLeftButtonClick}
       >
         {leftButtonText}
       </Button>
@@ -29,9 +24,7 @@ export const FormActions = ({
         size="large"
         variant="outlined"
         {...rightButtonProps}
-        onClick={() => {
-          rightButtonClick()
-        }}
+        onClick={handleRightButtonClick}
       >
         {rightButtonText}
       </Button>
