@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
 import './FormPlayer.css'
-import { Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
+import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 import { playerService } from 'src/domain/services/PlayerService/PlayerService'
@@ -15,10 +15,10 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     new Player({
       nombre: undefined,
       apellido: undefined,
-      nacimiento: undefined,
+      fechaNacimiento: 'mm/dd/yyyy',
       altura: undefined,
       peso: undefined,
-      camiseta: undefined,
+      nroCamiseta: undefined,
       seleccion: '',
       debut: undefined,
       posicion: '',
@@ -120,7 +120,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       textLabel: 'Año de debut en la seleccion',
       key: 'debut',
       props: {
-        type: 'date',
+        type: 'number',
       },
     },
     {
@@ -149,11 +149,14 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       <form className="formPlayer__form">
         {inputsData.map((data, index) => (
           <section className="formPlayer__input-container formPlayer__flexContainer" key={index}>
-            <Typography component="label" variant="h5">
-              {data.textLabel}
-            </Typography>
             {data.inputElement ?? (
-              <TextField value={player[data.key]} onChange={(e) => handleChange(e, data.key)} {...data.props}>
+              <TextField
+                className="field"
+                label={data.textLabel}
+                value={player[data.key]}
+                onChange={(e) => handleChange(e, data.key)}
+                {...data.props}
+              >
                 {data.children}
               </TextField>
             )}

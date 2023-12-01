@@ -10,6 +10,9 @@
   gap: 2rem;
 }
 .formPlayer__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
 .formPlayer__input-container {
 }
