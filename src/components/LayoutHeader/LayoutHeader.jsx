@@ -2,8 +2,8 @@ import './LayoutHeader.css'
 import { useState } from 'react'
 import { Outlet, useOutletContext } from 'react-router-dom'
 import { Typography } from '@mui/material'
-import { useOnInit } from 'customHooks/hooks'
-import { NavBar } from 'components/navbar/Navbar'
+import { useOnInit } from 'custom_hooks/hooks'
+import { NavBar } from 'components/Navbar/Navbar'
 
 export const LayoutHeader = () => {
   const [headerTitle, setHeaderTitle] = useState('hola')

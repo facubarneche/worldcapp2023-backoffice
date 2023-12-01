@@ -1,13 +1,13 @@
 import 'src/styles/button.css'
-import { useOnInit } from 'customHooks/hooks'
-import { HandleError } from 'utils/handleError/HandleError'
+import { useOnInit } from 'custom_hooks/hooks'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
 import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { GetWordFromRoute } from 'src/utils/TitleFromRoute/GetWordFromRoute'
+import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
 export const OneForAll = ({ contentComponent, service }) => {
   // @ts-ignore

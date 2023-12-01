@@ -22,8 +22,8 @@
       "models/*": [
         "./src/domain/models/*"
       ],
-      "customHooks/*": [
-        "./src/customHooks/*"
+      "custom_hooks/*": [
+        "./src/custom_hooks/*"
       ],
       "mocks/*": [
         "./src/domain/mocks/*"
