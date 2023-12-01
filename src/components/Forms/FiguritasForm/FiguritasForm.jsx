@@ -4,10 +4,11 @@ import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'
 import { useState, useEffect } from 'react'
-import { useOutletContext } from 'react-router-dom'
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { FormActions } from 'src/components/FormActions/FormActions'
 
-const FiguritasForm = ({ changeDisplay }) => {
+const FiguritasForm = () => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [players, setPlayers] = useState([])
@@ -49,6 +50,10 @@ const FiguritasForm = ({ changeDisplay }) => {
     setValoracionBase(card.baseValoration())
     setValoracionTotal(card.totalValoration())
   }, [nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players])
+
+  const handleBack = () => {
+    navigate('/figuritas')
+  }
   
   
   return (
@@ -96,13 +101,7 @@ const FiguritasForm = ({ changeDisplay }) => {
       <strong>Valoración base {valoracionBase}</strong>
       <strong>Valoración total {valoracionTotal}</strong>
 
-      {/* Botones para guardar y volver */}
-      <Button variant="contained" onClick={changeDisplay}>
-        Guardar
-      </Button>
-      <Button variant="outlined" onClick={changeDisplay}>
-        Volver
-      </Button>
+      <FormActions rightButtonClick={handleBack} />
     </div>
   )
 }
