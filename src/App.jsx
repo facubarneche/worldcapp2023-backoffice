@@ -40,8 +40,14 @@ const router = createBrowserRouter(
             path="jugadores"
             element={<OneForAll key="One_For_All-2" service={playerService} contentComponent={CustomPlayerContent} />}
           ></Route>
-          <Route path="jugadores/nuevo" element={<FormPlayer headerTitle={'Nuevo jugador'} />}></Route>
-          <Route path="jugadores/:id/editar" element={<FormPlayer headerTitle={'Editar un jugador'} />} />
+          <Route
+            path="jugadores/nuevo"
+            element={<FormPlayer headerTitle={'Nuevo jugador'} saveInfoSvFunc={playerService.create} />}
+          ></Route>
+          <Route
+            path="jugadores/:id/editar"
+            element={<FormPlayer headerTitle={'Editar un jugador'} saveInfoSvFunc={playerService.update} />}
+          />
           <Route
             path="puntos-de-venta"
             element={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}

@@ -13,18 +13,18 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const [setHeaderTitle] = useOutletContext()
   const [player, setPlayer] = useState(
     new Player({
-      nombre: undefined,
-      apellido: undefined,
+      nombre: '',
+      apellido: '',
       fechaNacimiento: 'mm/dd/yyyy',
-      altura: undefined,
-      peso: undefined,
-      nroCamiseta: undefined,
+      altura: '',
+      peso: '',
+      nroCamiseta: '',
       seleccion: '',
-      debut: undefined,
+      debut: '',
       posicion: '',
       posiciones: [],
-      esLider: undefined,
-      cotizacion: undefined,
+      esLider: '',
+      cotizacion: '',
     }),
   )
   //TODO: realizar
@@ -49,7 +49,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   })
 
   useEffect(() => {
-    console.log(player.objectCreateModifyPlayer)
+    console.log(player)
   })
 
   const handleChecked = (e, key) => {
@@ -138,7 +138,10 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     setRenderPolivalente(),
     {
       inputElement: (
-        <FormControlLabel control={<Checkbox value={player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />} label="Es Lider" />
+        <FormControlLabel
+          control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
+          label="Es Lider"
+        />
       ),
     },
     { textLabel: 'Cotizacion', key: 'cotizacion', props: { type: 'number' } },
