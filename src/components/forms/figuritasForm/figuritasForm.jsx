@@ -2,8 +2,8 @@ import './figuritasForm.css'
 import { useOnInit } from 'customHooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
-import { BASE_VALUE } from 'models/CardModel/Card.model'
-import { useEffect, useState } from 'react'
+import { Card } from 'models/CardModel/Card.model'
+import { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 
@@ -15,9 +15,9 @@ const FiguritasForm = ({ changeDisplay }) => {
   const navigate = useNavigate()
 
   // Inputs del form
-  const [nro, setNro] = useState('') // Estado para el número
-  const [isOnFire, setIsOnFire] = useState(true) // Estado para la casilla de verificación "On Fire"
-  const [selectedPrintLevel, setSelectedPrintLevel] = useState('bajo') // Estado para el nivel de impresión
+  const [nro, setNro] = useState('')
+  const [isOnFire, setIsOnFire] = useState(true) 
+  const [selectedPrintLevel, setSelectedPrintLevel] = useState('bajo') 
   const [valoracionBase, setValoracionBase] = useState(0)
   const [, setValoracionJugador] = useState(0)
   const [valoracionTotal, setValoracionTotal] = useState(0)
@@ -35,27 +35,21 @@ const FiguritasForm = ({ changeDisplay }) => {
     }
   })
 
-  const calculateBaseValoration = (nro, isOnFire, selectedPrintLevel) => {
-    const baseValue = BASE_VALUE
-    const onFireMultiplier = isOnFire ? 1.5 : 1
-    const evenMultiplier = nro % 2 === 0 ? 1.1 : 1.0
-    const printLevelMultiplier = selectedPrintLevel === 'bajo' ? 1.0 : 0.85
-
-    return baseValue * onFireMultiplier * evenMultiplier * printLevelMultiplier
-  }
-
-  useEffect(() => {
-    const calculatedValoracionBase = calculateBaseValoration(nro, isOnFire, selectedPrintLevel)
-
+  useOnInit((nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players) => {
     const selectedPlayer = players[selectedPlayerIndex]
     const playerValoracion = selectedPlayer ? selectedPlayer.valoracion : 0
+  
+    const card = new Card({
+      numero: Number(nro),
+      onFire: isOnFire,
+      nivelImpresion: selectedPrintLevel,
+      valoracionJugador: playerValoracion,
+    })
 
-    const valoracionTotal = calculatedValoracionBase + playerValoracion
-
-    setValoracionBase(calculatedValoracionBase)
-    setValoracionTotal(valoracionTotal)
-  }, [nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players])
-
+    setValoracionBase(card.baseValoration())
+    setValoracionTotal(card.totalValoration())
+  })
+  
   return (
     <div className="figuritas-form">
       <TextField required label="Nro" type="number" value={nro} onChange={(e) => setNro(e.target.value)} />
@@ -98,7 +92,6 @@ const FiguritasForm = ({ changeDisplay }) => {
 
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
-      {/* Mostrar la valoración base actualizada */}
       <strong>Valoración base {valoracionBase}</strong>
       <strong>Valoración total {valoracionTotal}</strong>
 
