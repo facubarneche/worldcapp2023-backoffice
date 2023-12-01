@@ -3,7 +3,7 @@ import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/customHooks/hooks'
 import './FormPlayer.css'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
@@ -50,10 +50,6 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     setNationalTeams()
     setPositionsPlayer()
     setHeaderTitle(headerTitle)
-  })
-
-  useEffect(() => {
-    console.log(player.id)
   })
 
   const setPlayerValue = (key, value) => {
@@ -144,7 +140,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       )),
     },
     setRenderPolivalente(),
-    { element: <hr className="separador-esLider" /> },
+    { element: <hr /> },
 
     {
       element: (
