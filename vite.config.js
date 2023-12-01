@@ -16,7 +16,7 @@ export default defineConfig({
       pages: '/src/pages',
       services: '/src/domain/services',
       models: '/src/domain/models',
-      customHooks: '/src/customHooks',
+      custom_hooks: '/src/custom_hooks',
       mocks: '/src/domain/mocks',
       utils: '/src/utils',
     },

@@ -1,5 +1,5 @@
 import './Home.css'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 import { HandleError} from 'utils/HandleError/HandleError'
 import { dashboardService } from 'services/HomeService/HomeService'
 import { DashboardCard } from 'src/components/DashboardCard/DashboardCard'

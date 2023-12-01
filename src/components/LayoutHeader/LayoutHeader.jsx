@@ -2,7 +2,7 @@ import './LayoutHeader.css'
 import { useState } from "react"
 import { Outlet, useOutletContext } from "react-router-dom"
 import { Typography } from "@mui/material"
-import { useOnInit } from "customHooks/hooks"
+import { useOnInit } from "custom_hooks/hooks"
 import { NavBar } from "components/Navbar/Navbar"
 
 export const LayoutHeader = () => {

@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'customHooks/hooks'
+import { useOnInit } from 'custom_hooks/hooks'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
@@ -12,20 +12,9 @@ const BusinessesType = {
   Supermercado: 'Supermercado',
 }
 
-const cardStub = {
-  id: -1,
-  nombre: '',
-  tipoPuntoDeVenta: BusinessesType.Kiosko,
-  direccionPlana: '',
-  geoX: 0,
-  geoY: 0,
-  stockSobres: 0,
-  pedidosPendientes: 0,
-}
-
 export const MarketForm = ({ headerTitle }) => {
   const { id } = useParams()
-  const [marketData, setMarketData] = useState(Market.fromJson(structuredClone(cardStub)))
+  const [marketData, setMarketData] = useState(new Market())
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
@@ -60,7 +49,7 @@ export const MarketForm = ({ headerTitle }) => {
         onChange={(e) => handleChange('nombre', e.target.value)} />
       <TextField
         className="field"
-        value={marketData.direccionPlana}
+        value={marketData.direccion}
         label="Dirección"
         onChange={(e) => handleChange('direccionPlana', e.target.value)}
       />
@@ -80,7 +69,7 @@ export const MarketForm = ({ headerTitle }) => {
       />
       <TextField
         className="field"
-        value={marketData.stockSobres}
+        value={marketData.stock}
         inputProps={{ type: 'number', min: 0 }}
         label="Sobres Disponibles"
         onChange={(e) => handleChange('stockSobres', e.target.value)}
