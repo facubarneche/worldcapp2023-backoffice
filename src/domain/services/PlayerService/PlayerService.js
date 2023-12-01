@@ -29,6 +29,11 @@ class PlayerService {
     console.log(player)
     await axios.post(`${REST_SERVER_URL}/jugador/crear`,player.JSONCreateModifyPlayer)
   }
+
+  positions = async () => {
+    const response = axios.get(`${REST_SERVER_URL}/jugador/posiciones`)
+    return (await response).data
+  }
 }
 
 export const playerService = new PlayerService()

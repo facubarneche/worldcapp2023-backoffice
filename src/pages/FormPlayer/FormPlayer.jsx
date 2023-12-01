@@ -29,7 +29,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   )
   //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
-  const positions = ['Arquero', 'Delantero', 'Mediocampista', 'Defensor', 'Polivalente']
+  const [positions, setPositions] = useState({ posicionesGenericas: [], posiciones: [] })
   const params = useParams()
   const navigate = useNavigate()
 
@@ -38,13 +38,17 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       const data = await nationalTeamService.getAllNames()
       setNationalTeamOptions(data)
     }
+    const setPositionsPlayer = async () => {
+      setPositions(await playerService.positions())
+    }
     const setPlayerInfo = async (id) => {
       const response = await playerService.getById(id)
       setPlayer(new Player({ ...response.objectCreateModifyPlayer, ['id']: id }))
     }
+
     if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
-
+    setPositionsPlayer()
     setHeaderTitle(headerTitle)
   })
 
@@ -82,13 +86,11 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
               multiple: true,
             },
           },
-          children: positions
-            .filter((position) => position != 'Polivalente')
-            .map((position) => (
-              <MenuItem key={position} value={position}>
-                {position}
-              </MenuItem>
-            )),
+          children: positions.posicionesGenericas.map((position) => (
+            <MenuItem key={position} value={position}>
+              {position}
+            </MenuItem>
+          )),
         }
       : { inputElement: <></> }
   }
@@ -129,7 +131,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: positions.map((position) => (
+      children: positions.posiciones.map((position) => (
         <MenuItem key={position} value={position}>
           {position}
         </MenuItem>
