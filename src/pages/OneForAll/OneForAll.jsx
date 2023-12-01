@@ -7,7 +7,7 @@ import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
 import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { GetWordFromRoute } from 'src/utils/TitleFromRoute/GetWordFromRoute'
+import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
 export const OneForAll = ({ contentComponent, service }) => {
   // @ts-ignore
