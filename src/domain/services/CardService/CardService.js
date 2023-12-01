@@ -9,7 +9,8 @@ class CardService {
   }
 
   getById = async (id) => {
-    console.log(id)
+    const figuritasJSON = await axios.get(`${REST_SERVER_URL}/punto-de-venta/${id}`)
+    return Card.fromJson(figuritasJSON.data)
   }
 
   update = async (card) => {
@@ -18,9 +19,10 @@ class CardService {
 
   delete = async (id) => {
     try {
-      console.log(id)
+      const response$ = await axios.delete(`${REST_SERVER_URL}/figurita/eliminar/${id}`)
+      console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
-      console.log(err)
+      console.error('Error al eliminar el elemento')      
     }
   }
 
