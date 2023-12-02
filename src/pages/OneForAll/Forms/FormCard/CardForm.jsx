@@ -90,7 +90,7 @@ export const CardForm = ({ headerTitle }) => {
         onChange={(e) => setSelectedPrintLevel(e.target.value)}
       >
         {printsLevel.map((printLevel) => 
-          <option key={printLevel.nombre} value={printLevel.afectaValorEn}>
+          <option key={printLevel.nombre} value={printLevel.nombre}>
             {printLevel.nombre}
           </option>
         )}
