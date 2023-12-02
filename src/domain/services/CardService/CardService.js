@@ -13,8 +13,8 @@ class CardService {
     return Card.fromJson(figuritasJSON.data)
   }
 
-  update = async (card) => {
-    console.log(card)
+  update = async (card , id) => {
+    await axios.patch(`${REST_SERVER_URL}/figurita/modificar/${id}`, card.JSONCreateModifyCard)
   }
 
   delete = async (id) => {
@@ -27,7 +27,7 @@ class CardService {
   }
 
   create = async (card) => {
-    console.log(card)
+    await axios.post(`${REST_SERVER_URL}/jugador/crear`,card.JSONCreateModifyCard)
   }
 
   getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/data-create-figurita`)).data
