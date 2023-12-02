@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { REST_SERVER_URL } from '../constants'
 import { Market } from 'models/MarketModel/Market.model'
+import { HandleError } from 'src/utils/HandleError/HandleError'
 
 class MarketService {
   getAll = async (search) => {
@@ -18,7 +19,7 @@ class MarketService {
       const response$ = await axios.delete(`${REST_SERVER_URL}/punto-de-venta/${id}/eliminar`)
       console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
-      console.error('Error al eliminar el elemento', err.response.data)      
+      HandleError(err)      
     }
   }
 
