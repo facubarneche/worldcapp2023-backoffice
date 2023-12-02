@@ -19,11 +19,7 @@ class PlayerService {
   }
 
   delete = async (id) => {
-    try {
-      console.log(id)
-    } catch (err) {
-      console.log(err)
-    }
+    await axios.delete(`${REST_SERVER_URL}/jugador/${id}/eliminar`)
   }
 
   create = async (player) => {

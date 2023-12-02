@@ -39,7 +39,7 @@ export const OneForAll = ({ contentComponent, service }) => {
       await service.delete(id)
       await getAll()
     } catch (e) {
-      console.error('Salió mal,', e)
+      HandleError(e, navigate)
     }
   }
 
