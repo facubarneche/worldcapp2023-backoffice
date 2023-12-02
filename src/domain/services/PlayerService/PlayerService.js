@@ -10,11 +10,12 @@ class PlayerService {
 
   getById = async (id) => {
     const playerJson = await axios.get(`${REST_SERVER_URL}/jugador/${id}`)
-    return Player.fromJson(playerJson.data)
+    return new Player(playerJson.data)
   }
 
-  update = async (player) => {
+  update = async (player,id) => {
     console.log(player)
+    await axios.patch(`${REST_SERVER_URL}/jugador/${id}/modificar`,player.JSONCreateModifyPlayer)
   }
 
   delete = async (id) => {
@@ -27,6 +28,12 @@ class PlayerService {
 
   create = async (player) => {
     console.log(player)
+    await axios.post(`${REST_SERVER_URL}/jugador/crear`,player.JSONCreateModifyPlayer)
+  }
+
+  positions = async () => {
+    const response = axios.get(`${REST_SERVER_URL}/jugador/posiciones`)
+    return (await response).data
   }
 }
 

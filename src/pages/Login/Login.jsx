@@ -15,7 +15,7 @@ export const Login = () => {
   const [setFoterContent] = useOutletContext()
 
   useOnInit(() => {
-    setFoterContent(<LogoImageComponent/>)
+    setFoterContent(<LogoImageComponent />)
   })
 
   const handleSubmit = async (event) => {

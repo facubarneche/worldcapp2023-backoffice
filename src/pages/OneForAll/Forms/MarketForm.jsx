@@ -7,20 +7,9 @@ import { marketService } from 'services/MarketService/MarketService'
 import { useState } from 'react'
 import { BusinessType } from 'services/constants'
 
-const cardStub = {
-  id: -1,
-  nombre: '',
-  tipoPuntoDeVenta: '',
-  direccionPlana: '',
-  geoX: 0,
-  geoY: 0,
-  stockSobres: 0,
-  pedidosPendientes: 0,
-}
-
 export const MarketForm = ({ headerTitle }) => {
   const { id } = useParams()
-  const [marketData, setMarketData] = useState(Market.fromJson(structuredClone(cardStub)))
+  const [marketData, setMarketData] = useState(new Market())
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()

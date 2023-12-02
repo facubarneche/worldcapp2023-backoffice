@@ -7,7 +7,7 @@ import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
 import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { GetWordFromRoute } from 'src/utils/TitleFromRoute/GetWordFromRoute'
+import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
 export const OneForAll = ({ contentComponent, service }) => {
   // @ts-ignore
@@ -25,7 +25,7 @@ export const OneForAll = ({ contentComponent, service }) => {
     }
   }
 
-  useOnInit(() => {    
+  useOnInit(() => {
     setHeaderTitle(GetWordFromRoute(loc))
     getAll()
   })
@@ -46,14 +46,15 @@ export const OneForAll = ({ contentComponent, service }) => {
   return (
     <>
       <Searchbar getFilterCards={getAll} />
-      {elements.map((element, index) => 
-        <CardBase 
-          key={index} 
-          element={element} 
-          contentComponent={contentComponent(element.content)} 
-          onEditClick={redirect} 
-          onDelete={handleDelete} />
-      )}
+      {elements.map((element, index) => (
+        <CardBase
+          key={index}
+          element={element}
+          contentComponent={contentComponent(element.content)}
+          onEditClick={redirect}
+          onDelete={handleDelete}
+        />
+      ))}
       <Button className="button button--circle button--icon button--large button--float" onClick={() => redirect(-1)}>
         +
       </Button>

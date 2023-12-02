@@ -1,13 +1,15 @@
+import { BusinessType } from "services/constants"
+
 export class Market {
-  constructor(storedata) {
-    this.id = storedata.id
-    this.nombre = storedata.nombre
-    this.tipoPuntoVenta = storedata.tipoPuntoDeVenta
-    this.direccion = storedata.direccionPlana
-    this.geoX = storedata.geoX
-    this.geoY = storedata.geoY
-    this.stock = storedata.stockSobres
-    this.pedidosPendientes = storedata.pedidosPendientes
+  constructor(storedata = {}) {
+    this.id = storedata.id ?? -1
+    this.nombre = storedata.nombre ?? ''
+    this.tipoPuntoVenta = storedata.tipoPuntoDeVenta ?? BusinessType.Kioscos
+    this.direccion = storedata.direccionPlana ?? ''
+    this.geoX = storedata.geoX ?? 0
+    this.geoY = storedata.geoY ?? 0
+    this.stock = storedata.stockSobres ?? 0
+    this.pedidosPendientes = storedata.pedidosPendientes ?? 0
   }
 
   static fromJson = (storedata) => new Market(storedata)
