@@ -1,4 +1,4 @@
-import 'src/components/Forms/FiguritasForm/FiguritasForm.css'
+import './CardForm.css'
 import { useOnInit } from 'custom_hooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
