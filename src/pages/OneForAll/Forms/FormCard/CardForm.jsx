@@ -3,9 +3,9 @@ import { useOnInit } from 'custom_hooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { FormActions } from 'src/components/FormActions/FormActions'
 
 export const CardForm = ({ headerTitle }) => {
@@ -15,69 +15,57 @@ export const CardForm = ({ headerTitle }) => {
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
 
+  const [card, setCard] = useState(new Card({ numero: '', nombre: '', onFire: undefined, nivelImpresion: '' }))
   // Inputs del form
-  const [nro, setNro] = useState('')
-  const [isOnFire, setIsOnFire] = useState(true) 
-  const [selectedPrintLevel, setSelectedPrintLevel] = useState('bajo') 
-  const [valoracionBase, setValoracionBase] = useState(0)
-  const [, setValoracionJugador] = useState(0)
-  const [valoracionTotal, setValoracionTotal] = useState(0)
-  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0)
 
+  useEffect(() => {
+    console.log(card)
+  })
+g
   useOnInit(async () => {
     try {
       setHeaderTitle(headerTitle)
-      const { jugadores, levelPrints, valoracion } = await cardService.getDataCreateCards()
-      setPlayers(jugadores)
-      setPrintsLevel(levelPrints)
-      setValoracionJugador(valoracion)
+      const { jugadores, levelPrints } = await cardService.getDataCreateCards()
+      console.log(jugadores)
+      console.log(levelPrints)
+      setPlayers(jugadores.map((jugador) => jugador.nombre + ' ' + jugador.apellido))
+      setPrintsLevel(levelPrints.map((level) => level.nombre))
     } catch (error) {
       HandleError(error, navigate)
     }
   })
 
-  useEffect(() => {
-    const selectedPlayer = players[selectedPlayerIndex]
-    const playerValoracion = selectedPlayer ? selectedPlayer.valoracion : 0
-  
-    const card = new Card({
-      numero: Number(nro),
-      onFire: isOnFire,
-      nivelImpresion: selectedPrintLevel,
-      valoracion: playerValoracion,
-    })
-  
-    setValoracionBase(card.baseValoration())
-    setValoracionTotal(card.totalValoration())
-  }, [nro, isOnFire, selectedPrintLevel, selectedPlayerIndex, players])
-
   const handleBack = () => {
     navigate('/figuritas')
   }
-  
-  
+
+  const handleChange = (value, key) => {
+    setCard(new Card({ ...card.JSONCreateModifyCard, [key]: value }))
+  }
+
   return (
     <div className="figuritas-form">
-      <TextField required label="Nro" type="number" value={nro} onChange={(e) => setNro(e.target.value)} />
+      <TextField required label="Nro" type="number" value={card.numero} onChange={(e) => handleChange(e.target.value, 'numero')} />
 
       <TextField
         className="figuritas-form__select"
         required
         select
-        SelectProps={{ native: true }}
-        value={selectedPlayerIndex}
-        onChange={(e) => setSelectedPlayerIndex(parseInt(e.target.value, 10))}
+        value={card.nombre}
+        onChange={(e) => {
+          handleChange(e.target.value, 'nombre')
+        }}
       >
-        {players.map((player, index) => 
-          <option key={index} value={index}>
+        {players.map((player, index) => (
+          <MenuItem key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
-          </option>
-        )}
+          </MenuItem>
+        ))}
       </TextField>
 
       <FormControlLabel
         className="figuritas-form__checkbox"
-        control={<Checkbox checked={isOnFire} onChange={(e) => setIsOnFire(e.target.checked)} />}
+        control={<Checkbox checked={card.onFire} onChange={(e) => handleChange(e.target.checked, 'onFire')} />}
         label="On Fire"
       />
 
@@ -85,25 +73,23 @@ export const CardForm = ({ headerTitle }) => {
         className="figuritas-form__select"
         required
         select
-        SelectProps={{ native: true }}
-        value={selectedPrintLevel}
-        onChange={(e) => setSelectedPrintLevel(e.target.value)}
+        value={card.nivelImpresion}
+        onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
       >
-        {printsLevel.map((printLevel) => 
-          <option key={printLevel.nombre} value={printLevel.nombre}>
+        {printsLevel.map((printLevel) => (
+          <MenuItem key={printLevel.nombre} value={printLevel.nombre}>
             {printLevel.nombre}
-          </option>
-        )}
+          </MenuItem>
+        ))}
       </TextField>
 
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
-      <strong>Valoración base {valoracionBase}</strong>
-      <strong>Valoración total {valoracionTotal}</strong>
+      <strong>Valoración base {card.baseValoration()}</strong>
+      <strong>Valoración total {card.totalValoration()}</strong>
 
       <FormActions rightButtonClick={handleBack} />
     </div>
   )
-
 }
 export default CardForm

@@ -47,5 +47,5 @@ export class Card {
 
   evenMultiplier = () => this.numero % 2 == 0 ? 1.1 : 1.0
 
-  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'bajo' ? 1.0 : 0.85
+  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'baja' ? 1.0 : 0.85
 }
