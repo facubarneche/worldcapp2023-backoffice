@@ -12,6 +12,15 @@ export class Card {
 
   static fromJson = (cardata) => new Card(cardata)
 
+  get JSONCreateModifyCard() {
+    return {
+      numero: this.numero,
+      nombre:`${this.nombre} ${this.apellido}`,
+      onFire: this.onFire,
+      nivelImpresion: this.nivelImpresion
+    }
+  }
+
   get title() {
     return this.nombre + ' ' + this.apellido
   }
