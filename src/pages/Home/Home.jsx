@@ -1,6 +1,6 @@
 import './Home.css'
-import { useOnInit } from 'custom_hooks/hooks'
-import { HandleError} from 'utils/HandleError/HandleError'
+import { useOnInit } from 'src/hooks/useOnInit'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { dashboardService } from 'services/HomeService/HomeService'
 import { DashboardCard } from 'src/components/DashboardCard/DashboardCard'
 import { useNavigate, useOutletContext } from 'react-router-dom'

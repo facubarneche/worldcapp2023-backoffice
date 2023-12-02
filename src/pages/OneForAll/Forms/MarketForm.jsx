@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'custom_hooks/hooks'
+import { useOnInit } from 'src/hooks/useOnInit'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
@@ -16,7 +16,7 @@ export const MarketForm = ({ headerTitle }) => {
   const navigate = useNavigate()
 
   useOnInit(() => {
-    setHeaderTitle(headerTitle)    
+    setHeaderTitle(headerTitle)
     id && getCardToEdit()
   })
 
@@ -26,7 +26,7 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   const handleChange = (key, value) => {
-    marketData[key] = value    
+    marketData[key] = value
     generarNuevoMarket(marketData)
   }
 
@@ -48,14 +48,14 @@ export const MarketForm = ({ headerTitle }) => {
         className="field"
         value={marketData.geoX}
         inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada X"        
+        label="Coordenada X"
         onChange={(e) => handleChange('geoX', e.target.value)}
       />
       <TextField
         className="field"
         value={marketData.geoY}
         inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada Y"        
+        label="Coordenada Y"
         onChange={(e) => handleChange('geoY', e.target.value)}
       />
       <TextField
@@ -69,21 +69,27 @@ export const MarketForm = ({ headerTitle }) => {
         className="field"
         value={marketData.pedidosPendientes}
         inputProps={{ type: 'number', min: 0 }}
-        label="Pedidos Pendientes"        
+        label="Pedidos Pendientes"
         onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
       />
-      <TextField className="field" defaultValue={BusinessType.Kioscos} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
-        {Object.entries(BusinessType).map(([key, value]) => 
+      <TextField
+        className="field"
+        defaultValue={BusinessType.Kioscos}
+        select
+        SelectProps={{ native: true }}
+        onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}
+      >
+        {Object.entries(BusinessType).map(([key, value]) => (
           <option key={key} value={value}>
             {value}
           </option>
-        )}
+        ))}
       </TextField>
       <FormActions
         leftButtonClick={() => {
           marketService.create(marketData)
         }}
-        rightButtonClick={() => {          
+        rightButtonClick={() => {
           //TODO: Handle clear of marketData
           navigate('/puntos-de-venta')
         }}

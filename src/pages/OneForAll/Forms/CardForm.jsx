@@ -1,6 +1,6 @@
 import { useOutletContext } from 'react-router-dom'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'custom_hooks/hooks'
+import { useOnInit } from 'src/hooks/useOnInit'
 
 export const CardForm = ({ headerTitle }) => {
   // @ts-ignore

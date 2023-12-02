@@ -1,5 +1,5 @@
 import './figuritasForm.css'
-import { useOnInit } from 'custom_hooks/hooks'
+import { useOnInit } from 'src/hooks/useOnInit'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { BASE_VALUE } from 'models/CardModel/Card.model'
@@ -68,11 +68,11 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPlayerIndex}
         onChange={(e) => setSelectedPlayerIndex(parseInt(e.target.value, 10))}
       >
-        {players.map((player, index) => 
+        {players.map((player, index) => (
           <option key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
           </option>
-        )}
+        ))}
       </TextField>
 
       <FormControlLabel
@@ -89,11 +89,11 @@ const FiguritasForm = ({ changeDisplay }) => {
         value={selectedPrintLevel}
         onChange={(e) => setSelectedPrintLevel(e.target.value)}
       >
-        {printsLevel.map((printLevel) => 
+        {printsLevel.map((printLevel) => (
           <option key={printLevel.nombre} value={printLevel.afectaValorEn}>
             {printLevel.nombre}
           </option>
-        )}
+        ))}
       </TextField>
 
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
