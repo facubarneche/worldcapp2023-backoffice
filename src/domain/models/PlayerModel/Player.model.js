@@ -8,13 +8,31 @@ export class Player {
     this.peso = playerdata.peso
     this.nroCamiseta = playerdata.nroCamiseta
     this.seleccion = playerdata.seleccion
-    this.anioDebut = playerdata.anioDebut
+    this.debut = playerdata.debut
     this.posicion = playerdata.posicion
+    this.posiciones = playerdata.posiciones
     this.esLider = playerdata.esLider
     this.cotizacion = playerdata.cotizacion
   }
 
   static fromJson = (playerdata) => new Player(playerdata)
+
+  get JSONCreateModifyPlayer() {
+    return {
+      nombre: this.nombre,
+      apellido: this.apellido,
+      fechaNacimiento: this.fechaNacimiento,
+      altura: this.altura,
+      peso: this.peso,
+      nroCamiseta: this.nroCamiseta,
+      seleccion: this.seleccion,
+      debut: this.debut,
+      posicion: this.posicion,
+      posiciones: this.posiciones,
+      esLider: this.esLider,
+      cotizacion: this.cotizacion 
+    }
+  }
 
   get title() {
     return this.nombre + ' ' + this.apellido
@@ -42,5 +60,13 @@ export class Player {
   formatDate = (date) => {
     const date$ = date.split('-')
     return date$[2] + '-' + date$[1] + '-' + date$[0]
+  }
+
+  get isPolivalente() {
+    return this.posicion === 'Polivalente'
+  }
+
+  get isNew() {
+    return this.id === undefined
   }
 }

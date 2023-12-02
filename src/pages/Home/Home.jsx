@@ -26,9 +26,9 @@ export const Home = () => {
 
   return (
     <>
-      {itemsDashboardBox.map((itemBox) => 
+      {itemsDashboardBox.map((itemBox) => (
         <DashboardCard key={itemBox.name} itemBox={itemBox} />
-      )}
+      ))}
     </>
   )
 }
