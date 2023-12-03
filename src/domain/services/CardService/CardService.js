@@ -27,7 +27,7 @@ class CardService {
   }
 
   create = async (card) => {
-    await axios.post(`${REST_SERVER_URL}/jugador/crear`,card.JSONCreateModifyCard)
+    await axios.post(`${REST_SERVER_URL}/figurita/crear`,card.JSONCreateModifyCard)
   }
 
   getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/data-create-figurita`)).data
