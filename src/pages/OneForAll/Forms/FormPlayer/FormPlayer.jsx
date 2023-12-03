@@ -73,6 +73,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const sendData = () => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
     player.isNew ? saveInfoSvFunc(player) : saveInfoSvFunc(player, player.id)
+    handleBack()
   }
 
   const setRenderPolivalente = () => {
