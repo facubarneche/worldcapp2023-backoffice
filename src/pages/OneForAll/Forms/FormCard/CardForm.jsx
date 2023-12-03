@@ -114,7 +114,7 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
         <strong>Valoración base {card.baseValoration()}</strong>
         <strong>Valoración total {card.totalValoration()}</strong>
 
-        <FormActions leftButtonClick={handleSave} rightButtonClick={handleBack} />
+        <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={handleBack} />
       </div>
     </main>
   )
