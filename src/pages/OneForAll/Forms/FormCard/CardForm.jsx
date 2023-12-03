@@ -4,16 +4,17 @@ import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'
 import { useEffect, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { FormActions } from 'src/components/FormActions/FormActions'
 
-export const CardForm = ({ headerTitle }) => {
+export const CardForm = ({ headerTitle, saveFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
+  const params = useParams()
 
   const [card, setCard] = useState(new Card({ numero: '', nombre: '', onFire: false, nivelImpresion: '' }))
 
@@ -30,10 +31,27 @@ export const CardForm = ({ headerTitle }) => {
 
       setPlayers(jugadores)
       setPrintsLevel(levelPrints.map((level) => level.nombre))
+      
+      const setCardInfo = async (id) => {
+        const response = await cardService.getById(id)
+        setCard(new Card({ ...response.JSONCreateModifyCard, id: id }))
+      }
+
+      if (params.id !== undefined) {
+        setCardInfo(params.id)
+      }
+      setPlayers(jugadores)
+      setPrintsLevel(levelPrints.map((level) => level.nombre))
+      setHeaderTitle(headerTitle)
+      
     } catch (error) {
       HandleError(error, navigate)
     }
   })
+
+  const setCardValue = (key, value) => {
+    setCard((prev) => new Card({ id: card.id, ...prev.JSONCreateModifyCard, [key]: value }))
+  }
 
   const handleBack = () => {
     navigate('/figuritas')
@@ -41,6 +59,11 @@ export const CardForm = ({ headerTitle }) => {
 
   const handleChange = (value, key) => {
     setCard(new Card({ ...card.JSONCreateModifyCard, [key]: value }))
+    setCardValue(key, value)
+  }
+  const handleSave = () => {
+    card.isNew ? saveFunc(card) : saveFunc(card, card.id)
+    handleBack()
   }
 
   return (
@@ -56,8 +79,8 @@ export const CardForm = ({ headerTitle }) => {
           handleChange(e.target.value, 'nombre')
         }}
       >
-        {players.map((player, index) => 
-          <MenuItem key={index} value={index}>
+        {players.map((player) => 
+          <MenuItem key={`${player.nombre} ${player.apellido}`} value={`${player.nombre} ${player.apellido}`}>
             {`${player.nombre} ${player.apellido}`}
           </MenuItem>
         )}
@@ -88,7 +111,7 @@ export const CardForm = ({ headerTitle }) => {
       <strong>Valoración base {card.baseValoration()}</strong>
       <strong>Valoración total {card.totalValoration()}</strong>
 
-      <FormActions rightButtonClick={handleBack} />
+      <FormActions leftButtonClick={handleSave} rightButtonClick={handleBack} />
     </div>
   )
 }
