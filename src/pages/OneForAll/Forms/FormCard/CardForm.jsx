@@ -15,20 +15,20 @@ export const CardForm = ({ headerTitle }) => {
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
 
-  const [card, setCard] = useState(new Card({ numero: '', nombre: '', onFire: undefined, nivelImpresion: '' }))
-  // Inputs del form
+  const [card, setCard] = useState(new Card({ numero: '', nombre: '', onFire: false, nivelImpresion: '' }))
+
 
   useEffect(() => {
     console.log(card)
   })
-g
+
   useOnInit(async () => {
     try {
       setHeaderTitle(headerTitle)
       const { jugadores, levelPrints } = await cardService.getDataCreateCards()
       console.log(jugadores)
-      console.log(levelPrints)
-      setPlayers(jugadores.map((jugador) => jugador.nombre + ' ' + jugador.apellido))
+
+      setPlayers(jugadores)
       setPrintsLevel(levelPrints.map((level) => level.nombre))
     } catch (error) {
       HandleError(error, navigate)
@@ -56,11 +56,11 @@ g
           handleChange(e.target.value, 'nombre')
         }}
       >
-        {players.map((player, index) => (
+        {players.map((player, index) => 
           <MenuItem key={index} value={index}>
             {`${player.nombre} ${player.apellido}`}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <FormControlLabel
@@ -76,11 +76,11 @@ g
         value={card.nivelImpresion}
         onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
       >
-        {printsLevel.map((printLevel) => (
-          <MenuItem key={printLevel.nombre} value={printLevel.nombre}>
-            {printLevel.nombre}
+        {printsLevel.map((printLevel) => 
+          <MenuItem key={printLevel} value={printLevel}>
+            {printLevel}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <TextField className="figuritas-form__input" required label="Imagen" type="text" />
@@ -93,3 +93,4 @@ g
   )
 }
 export default CardForm
+

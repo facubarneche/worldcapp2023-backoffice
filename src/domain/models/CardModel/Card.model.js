@@ -7,7 +7,7 @@ export class Card {
     this.nivelImpresion = data.nivelImpresion
     this.nombre = data.nombre
     this.apellido = data.apellido
-    this.valoracion = data.valoracion
+    this.valoracionJugador = data.valoracion
   }
 
   static fromJson = (cardata) => new Card(cardata)
@@ -39,7 +39,7 @@ export class Card {
 
   get tipo() {return 'Figuritas'}
 
-  totalValoration = () => this.valoracion + this.baseValoration()
+  totalValoration = () => this.valoracionJugador + this.baseValoration()
 
   baseValoration = () => BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
 
