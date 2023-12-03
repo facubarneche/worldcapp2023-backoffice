@@ -10,7 +10,7 @@ import { LayoutHeader } from 'components/LayoutHeader/LayoutHeader'
 import './App.css'
 import { Error } from 'pages/Error/Error'
 import { SnackbarProvider } from 'notistack'
-import { PlayerForm } from 'src/pages/OneForAll/Forms/PlayerForm'
+import FormPlayer from './pages/OneForAll/Forms/FormPlayer/FormPlayer'
 import { CardForm } from 'src/pages/OneForAll/Forms/CardForm'
 import { MarketForm } from 'src/pages/OneForAll/Forms/MarketForm'
 import { Teams } from 'pages/Teams/Teams'
@@ -19,7 +19,7 @@ import { marketService } from 'services/MarketService/MarketService'
 import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
 import { cardService } from 'services/CardService/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
-import { playerService } from 'services/PlayerService/PlayerService'
+import { playerService } from './domain/services/PlayerService/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
 
 const router = createBrowserRouter(
@@ -40,8 +40,14 @@ const router = createBrowserRouter(
             path="jugadores"
             element={<OneForAll key="One_For_All-2" service={playerService} contentComponent={CustomPlayerContent} />}
           ></Route>
-          <Route path="jugadores/nuevo" element={<PlayerForm headerTitle={'Nuevo jugador'} />}></Route>
-          <Route path="jugadores/:id/editar" element={<PlayerForm headerTitle={'Editar un jugador'} />} />
+          <Route
+            path="jugadores/nuevo"
+            element={<FormPlayer headerTitle={'Nuevo jugador'} saveInfoSvFunc={playerService.create} />}
+          ></Route>
+          <Route
+            path="jugadores/:id/editar"
+            element={<FormPlayer headerTitle={'Editar un jugador'} saveInfoSvFunc={playerService.update} />}
+          />
           <Route
             path="puntos-de-venta"
             element={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
