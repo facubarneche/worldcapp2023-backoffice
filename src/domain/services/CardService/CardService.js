@@ -9,7 +9,7 @@ class CardService {
   }
 
   getById = async (id) => {
-    const figuritasJSON = await axios.get(`${REST_SERVER_URL}/punto-de-venta/${id}`)
+    const figuritasJSON = await axios.get(`${REST_SERVER_URL}/figurita/${id}`)
     return Card.fromJson(figuritasJSON.data)
   }
 
