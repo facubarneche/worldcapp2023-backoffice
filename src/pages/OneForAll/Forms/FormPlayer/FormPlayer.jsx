@@ -57,16 +57,6 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     setPlayer((prev) => new Player({ id: player.id, ...prev.JSONCreateModifyPlayer, [key]: value }))
   }
 
-  const handleChecked = (e, key) => {
-    const value = e.target.checked
-    setPlayerValue(key, value)
-  }
-
-  const handleChange = (e, key) => {
-    const value = e.target.value
-    setPlayerValue(key, value)
-  }
-
   const handleBack = () => {
     navigate('/jugadores')
   }
@@ -155,7 +145,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     {
       element: (
         <FormControlLabel
-          control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
+          control={<Checkbox checked={!!player['esLider']} onChange={(e) => setPlayerValue('esLider', e.target.checked)} />}
           label="Es Lider"
         />
       ),
@@ -173,7 +163,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
                 className="field"
                 label={data.textLabel}
                 value={player[data.key]}
-                onChange={(e) => handleChange(e, data.key)}
+                onChange={(e) => setPlayerValue(data.key, e.target.value)}
                 {...data.props}
               >
                 {data.children}
