@@ -1,14 +1,15 @@
 import { BusinessType } from 'services/constants'
+import { splitDireccion } from 'src/utils/serializers'
 import { ValidateInputs } from 'utils/Validators/ValidateInputs'
 
 export class Market {
   constructor(storedata = {}) {
     this.id = storedata.id ?? -1
     this.nombre = storedata.nombre ?? ''
-    this.tipoPuntoDeVenta = storedata.tipoPuntoDeVenta ?? BusinessType.Kioscos
-    this.direccion = storedata.direccionPlana ?? ''
-    this.geoX = storedata.geoX ?? 0
-    this.geoY = storedata.geoY ?? 0
+    this.tipoPuntoDeVenta = storedata.tipoPuntoDeVenta ?? BusinessType.Kiosco
+    this.direccion = storedata.direccion ? `${storedata.direccion.calle} ${storedata.direccion.altura}` : ''
+    this.geoX = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[0] : 0.0
+    this.geoY = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[1] : 0.0
     this.stock = storedata.stockSobres ?? 0
     this.pedidosPendientes = storedata.pedidosPendientes ?? 0
   }
@@ -34,22 +35,26 @@ export class Market {
     return this.tipoPuntoDeVenta
   }
 
-  static toJson = (storedata) => {
+  static toJson = (marketData) => {
     return {
-      id: storedata.id,
-      nombre: storedata.nombre,
-      tipoPuntoDeVenta: storedata.tipoPuntoDeVenta,
+      id: marketData.id,
+      nombre: marketData.nombre,
+      tipoPuntoDeVenta: marketData.tipoPuntoDeVenta,
       direccion: {
-        calle: storedata.direccion.split(' ')[0],
-        altura: parseInt(storedata.direccion.split(' ')[1], 10) || null,
-        ubiGeografica: `${storedata.geoX} ${storedata.geoY}`,
+        calle: splitDireccion(marketData.direccion)[0],
+        altura: splitDireccion(marketData.direccion)[1],
+        ubiGeografica: `x: ${marketData.geoX}, y: ${marketData.geoY}`,
       },
-      direccionPlana: storedata.direccion,
-      geoX: storedata.geoX,
-      geoY: storedata.geoY,
-      stockSobres: storedata.stockSobres,
-      pedidosPendientes: storedata.pedidosPendientes,
+      stockSobres: marketData.stock,
+      pedidosPendientes: marketData.pedidosPendientes,
     }
+  }
+
+  splitGeo(geo) {
+    const geos = geo.split(",")
+    const geoX = parseFloat(geos[0].split("x: ")[1])
+    const geoY = parseFloat(geos[1].split("y: ")[1])
+    return [geoX, geoY]
   }
 
   get validAddress() {

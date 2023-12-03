@@ -29,13 +29,21 @@ class MarketService {
       const response = await axios.post(`${REST_SERVER_URL}/punto-de-venta/nuevo`, MarketJSON)
       console.log('Market created successfully', response.data)
 
-    } catch (error) {
-      console.error('Error creating market:', error.message)
+    } catch (err) {
+      HandleError(err) 
     }
   }
 
   update = async (market) => {
-    console.log(market)
+    try {
+      const MarketJSON = Market.toJson(market)
+      console.log('editado', market.id)
+      const response = await axios.put(`${REST_SERVER_URL}/punto-de-venta/editar`, MarketJSON)
+      console.log('Market updated successfully', response.data)
+
+    } catch (err) {
+      HandleError(err) 
+    }
   }
 }
 

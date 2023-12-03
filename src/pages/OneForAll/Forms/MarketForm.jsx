@@ -1,17 +1,12 @@
 import { Box, TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
 import { useOnInit } from 'custom_hooks/hooks'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
 import { InputError } from 'errors/InputError'
 import { Fragment, useState } from 'react'
-
-const BusinessesType = {
-  Kioskos: 'Kioscos',
-  Librerias: 'Librerias',
-  Supermercados: 'Supermercados',
-}
+import { BusinessType } from 'services/constants'
 
 const InputType = {
   TextField: 'TextField',
@@ -19,9 +14,10 @@ const InputType = {
 }
 
 export const MarketForm = ({ headerTitle }) => {
-  const { id } = useParams()
+  const {id} = useParams()
   const [market, setMarket] = useState(new Market())
   const [errors, setErrors] = useState({})
+  const loc = useLocation().pathname
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
@@ -82,7 +78,7 @@ export const MarketForm = ({ headerTitle }) => {
       value: market.tipoPuntoDeVenta,
       className: 'field',
       elementProps: { native: true },
-      options: BusinessesType,
+      options: BusinessType,
     },
   }
 
@@ -102,7 +98,7 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   const generarNuevoMarket = (market) => {
-    const nuevoMarket = Object.assign(new Market(market), market)
+    const nuevoMarket = Object.assign(new Market(), market)
     setMarket(nuevoMarket)
   }
 
@@ -122,7 +118,11 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   const saveData = () => {
-    !market.hasErrors && marketService.create(market) && navigate('/puntos-de-venta')
+    !market.hasErrors &&
+    (loc.endsWith('nuevo') ? 
+      marketService.create(market) : 
+      marketService.update(market))
+    && navigate('/puntos-de-venta') 
   }
 
   return (
@@ -153,7 +153,7 @@ export const MarketForm = ({ headerTitle }) => {
               <TextField
                 key={index}
                 className={props.className}
-                value={props.defaultValue}
+                value={props.value}
                 select
                 SelectProps={{ ...props.elementProps }}
                 onChange={(e) => handleChange(field, e.target.value)}
