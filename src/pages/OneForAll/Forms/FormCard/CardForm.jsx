@@ -28,7 +28,6 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
       setHeaderTitle(headerTitle)
       const { jugadores, levelPrints } = await cardService.getDataCreateCards()
       console.log(jugadores)
-
       setPlayers(jugadores)
       setPrintsLevel(levelPrints.map((level) => level.nombre))
       
@@ -67,52 +66,57 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
   }
 
   return (
-    <div className="figuritas-form">
-      <TextField required label="Nro" type="number" value={card.numero} onChange={(e) => handleChange(e.target.value, 'numero')} />
+    <main className="formPlayer formPlayer__flexContainer">
 
-      <TextField
-        className="figuritas-form__select"
-        required
-        select
-        value={card.nombre}
-        onChange={(e) => {
-          handleChange(e.target.value, 'nombre')
-        }}
-      >
-        {players.map((player) => 
-          <MenuItem key={`${player.nombre} ${player.apellido}`} value={`${player.nombre} ${player.apellido}`}>
-            {`${player.nombre} ${player.apellido}`}
-          </MenuItem>
-        )}
-      </TextField>
+      <div className="figuritas-form">
+        <TextField required label="Nro" type="number" value={card.numero} onChange={(e) => handleChange(e.target.value, 'numero')} />
+      
+      
 
-      <FormControlLabel
-        className="figuritas-form__checkbox"
-        control={<Checkbox checked={card.onFire} onChange={(e) => handleChange(e.target.checked, 'onFire')} />}
-        label="On Fire"
-      />
+        <TextField
+          className="figuritas-form__select"
+          required
+          select
+          value={card.nombre}
+          onChange={(e) => {
+            handleChange(e.target.value, 'nombre')
+          }}
+        >
+          {players.map((player) => 
+            <MenuItem key={`${player.nombre} ${player.apellido}`} value={`${player.nombre} ${player.apellido}`}>
+              {`${player.nombre} ${player.apellido}`}
+            </MenuItem>
+          )}
+        </TextField>
 
-      <TextField
-        className="figuritas-form__select"
-        required
-        select
-        value={card.nivelImpresion}
-        onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
-      >
-        {printsLevel.map((printLevel) => 
-          <MenuItem key={printLevel} value={printLevel}>
-            {printLevel}
-          </MenuItem>
-        )}
-      </TextField>
+        <FormControlLabel
+          className="figuritas-form__checkbox"
+          control={<Checkbox checked={card.onFire} onChange={(e) => handleChange(e.target.checked, 'onFire')} />}
+          label="On Fire"
+        />
 
-      <TextField className="figuritas-form__input" required label="Imagen" type="text" />
+        <TextField
+          className="figuritas-form__select"
+          required
+          select
+          value={card.nivelImpresion}
+          onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
+        >
+          {printsLevel.map((printLevel) => 
+            <MenuItem key={printLevel} value={printLevel}>
+              {printLevel}
+            </MenuItem>
+          )}
+        </TextField>
 
-      <strong>Valoración base {card.baseValoration()}</strong>
-      <strong>Valoración total {card.totalValoration()}</strong>
+        <TextField className="figuritas-form__input" required label="Imagen" type="text" />
 
-      <FormActions leftButtonClick={handleSave} rightButtonClick={handleBack} />
-    </div>
+        <strong>Valoración base {card.baseValoration()}</strong>
+        <strong>Valoración total {card.totalValoration()}</strong>
+
+        <FormActions leftButtonClick={handleSave} rightButtonClick={handleBack} />
+      </div>
+    </main>
   )
 }
 export default CardForm
