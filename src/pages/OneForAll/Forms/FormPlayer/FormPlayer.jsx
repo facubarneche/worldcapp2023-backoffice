@@ -7,6 +7,8 @@ import { nationalTeamService } from 'src/domain/services/nationalTeamService/Nat
 import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
 import { useOnInit } from 'src/hooks/useOnInit'
+import { HandleError } from 'src/utils/HandleError/HandleError'
+import { enqueueSnackbar } from 'notistack'
 
 const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
@@ -27,7 +29,6 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       cotizacion: '',
     }),
   )
-  //TODO: realizar
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const [positions, setPositions] = useState({ posicionesGenericas: [], posiciones: [] })
   const params = useParams()
@@ -70,9 +71,18 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     navigate('/jugadores')
   }
 
-  const sendData = () => {
+  const sendData = async () => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
-    player.isNew ? saveInfoSvFunc(player) : saveInfoSvFunc(player, player.id)
+    try {
+      player.isNew ? await saveInfoSvFunc(player) : await saveInfoSvFunc(player, player.id)
+      navigate('/jugadores')
+      enqueueSnackbar(player.isNew ? 'Jugador creado exitosamente' : 'Cambios guardados con exito', {
+        variant: 'success',
+        anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+      })
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   }
 
   const setRenderPolivalente = () => {
