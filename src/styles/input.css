@@ -53,3 +53,15 @@
   background-color: white;  
   font-size: 1.4em;  
 }
+
+.field__container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.field__error {  
+  color: var(--color-hot);  
+  font-weight: 600;
+  margin-top: 0.3em;
+}

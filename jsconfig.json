@@ -12,7 +12,8 @@
       "models/*": ["./src/domain/models/*"],
       "hooks/*": ["./src/hooks/*"],
       "mocks/*": ["./src/domain/mocks/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "errors/*": ["./src/domain/errors/*"]
     }
   }
 }

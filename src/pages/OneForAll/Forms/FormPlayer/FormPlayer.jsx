@@ -1,6 +1,6 @@
+import './FormPlayer.css'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
-import './FormPlayer.css'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
@@ -10,7 +10,7 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 import { enqueueSnackbar } from 'notistack'
 
-const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
+export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [player, setPlayer] = useState(
@@ -65,7 +65,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
     try {
       player.isNew ? await saveInfoSvFunc(player) : await saveInfoSvFunc(player, player.id)
-      navigate('/jugadores')
+      handleBack()
       enqueueSnackbar(player.isNew ? 'Jugador creado exitosamente' : 'Cambios guardados con exito', {
         variant: 'success',
         anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
@@ -145,7 +145,9 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     {
       element: (
         <FormControlLabel
-          control={<Checkbox checked={!!player['esLider']} onChange={(e) => setPlayerValue('esLider', e.target.checked)} />}
+          control={
+            <Checkbox checked={!!player['esLider']} onChange={(e) => setPlayerValue('esLider', e.target.checked)} />
+          }
           label="Es Lider"
         />
       ),
@@ -154,10 +156,10 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   ]
 
   return (
-    <main className="formPlayer formPlayer__flexContainer">
-      <form className="formPlayer__form">
+    <main className="form-player form-player__container">
+      <form className="form-player__form">
         {inputsData.map((data, index) => (
-          <section className="formPlayer__input-container formPlayer__flexContainer" key={index}>
+          <section className="form-player__container" key={index}>
             {data.element ?? (
               <TextField
                 className="field"
@@ -172,8 +174,7 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
           </section>
         ))}
       </form>
-      <FormActions leftButtonClick={sendData} rightButtonClick={handleBack} />
+      <FormActions handleLeftButtonClick={sendData} handleRightButtonClick={handleBack} />
     </main>
   )
 }
-export default FormPlayer

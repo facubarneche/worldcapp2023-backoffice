@@ -1,15 +1,17 @@
-.formPlayer__flexContainer {
+.form-player__container {
   display: flex;
   flex-direction: column;
 }
-.formPlayer {
+
+.form-player {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   gap: 2rem;
 }
-.formPlayer__form {
+
+.form-player__form {
   display: flex;
   flex-direction: column;
   gap: 2em;

@@ -19,6 +19,7 @@ export default defineConfig({
       custom_hooks: '/src/custom_hooks',
       mocks: '/src/domain/mocks',
       utils: '/src/utils',
+      errors: '/src/domain/errors',
     },
   },
   test: {
