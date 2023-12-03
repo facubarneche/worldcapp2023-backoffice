@@ -35,7 +35,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
 
   useOnInit(() => {
     const setNationalTeams = async () => {
-      const data = await nationalTeamService.getAllNames()
+      const data = await nationalTeamService.getAll()
       setNationalTeamOptions(data)
     }
     const setPositionsPlayer = async () => {

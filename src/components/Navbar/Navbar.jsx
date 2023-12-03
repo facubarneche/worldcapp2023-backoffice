@@ -10,7 +10,7 @@ const navigationButtons = [
   { path: '/figuritas', icon: <Box className="fas fa-id-badge" sx={{ fontSize: iconSize }}/> },
   { path: '/jugadores', icon: <Box className="fas fa-shirt" sx={{ fontSize: iconSize }} /> },
   { path: '/puntos-de-venta', icon: <Box className="fas fa-store" sx={{ fontSize: iconSize }} /> },
-  { path: '/selecciones', icon: <Box className="fas fa-store" sx={{ fontSize: iconSize }} /> },
+  { path: '/selecciones', icon: <Box className="fas fa-flag" sx={{ fontSize: iconSize }} /> },
   { path: '/login', icon: <Box className="fas fa-right-from-bracket" sx={{ fontSize: iconSize }} /> },
 ]
 
