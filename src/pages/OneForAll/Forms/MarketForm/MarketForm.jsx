@@ -14,7 +14,7 @@ const InputType = {
 }
 
 export const MarketForm = ({ headerTitle }) => {
-  const {id} = useParams()
+  const { id } = useParams()
   const [market, setMarket] = useState(new Market())
   const [errors, setErrors] = useState({})
   const loc = useLocation().pathname
@@ -117,12 +117,10 @@ export const MarketForm = ({ headerTitle }) => {
       setErrors((prev) => ({ ...prev, direccion: InputError.VALID_ADDRESS }))
   }
 
-  const saveData = () => {
+  const saveData = async () => {
     !market.hasErrors &&
-    (loc.endsWith('nuevo') ? 
-      marketService.create(market) : 
-      marketService.update(market))
-    && navigate('/puntos-de-venta') 
+      (loc.endsWith('nuevo') ? await marketService.create(market) : await marketService.update(market),
+      navigate('/puntos-de-venta'))
   }
 
   return (
