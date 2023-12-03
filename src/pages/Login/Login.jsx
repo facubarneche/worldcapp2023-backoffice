@@ -25,7 +25,6 @@ export const Login = () => {
 
     try {
       await userService.login(formToJSON(data)).then(() => {
-        console.log('entro')
         setRedirect(true)
       })
     } catch (error) {

@@ -1,95 +1,185 @@
-import { TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import { FormActions } from 'components/FormActions/FormActions'
 import { useOnInit } from 'custom_hooks/hooks'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
-import { useState } from 'react'
+import { InputError } from 'errors/InputError'
+import { Fragment, useState } from 'react'
 import { BusinessType } from 'services/constants'
 
+const InputType = {
+  TextField: 'TextField',
+  Select: 'Select',
+}
+
 export const MarketForm = ({ headerTitle }) => {
-  const { id } = useParams()
-  const [marketData, setMarketData] = useState(new Market())
+  const {id} = useParams()
+  const [market, setMarket] = useState(new Market())
+  const [errors, setErrors] = useState({})
+  const loc = useLocation().pathname
 
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const navigate = useNavigate()
 
+  const fields = {
+    nombre: {
+      name: 'Nombre',
+      type: InputType.TextField,
+      value: market.nombre,
+      className: 'field',
+      elementProps: {},
+      options: {},
+    },
+    direccion: {
+      name: 'Dirección',
+      type: InputType.TextField,
+      value: market.direccion,
+      className: 'field',
+      elementProps: {},
+      options: {},
+    },
+    geoX: {
+      name: 'Coordenada X',
+      type: InputType.TextField,
+      value: market.geoX,
+      className: 'field',
+      elementProps: { type: 'number', step: 0.00001, min: -90, max: 90 },
+      options: {},
+    },
+    geoY: {
+      name: 'Coordenada Y',
+      type: InputType.TextField,
+      value: market.geoY,
+      className: 'field',
+      elementProps: { type: 'number', step: 0.00001, min: -90, max: 90 },
+      options: {},
+    },
+    stock: {
+      name: 'Sobres Disponibles',
+      type: InputType.TextField,
+      value: market.stock,
+      className: 'field',
+      elementProps: { type: 'number', min: 0 },
+      options: {},
+    },
+    pedidosPendientes: {
+      name: 'Pedidos Pendientes',
+      type: InputType.TextField,
+      value: market.pedidosPendientes,
+      className: 'field',
+      elementProps: { type: 'number', min: 0 },
+      options: {},
+    },
+    tipoPuntoDeVenta: {
+      name: 'Pedidos Pendientes',
+      type: InputType.Select,
+      value: market.tipoPuntoDeVenta,
+      className: 'field',
+      elementProps: { native: true },
+      options: BusinessType,
+    },
+  }
+
   useOnInit(() => {
-    setHeaderTitle(headerTitle)    
+    setHeaderTitle(headerTitle)
     id && getCardToEdit()
   })
 
   const getCardToEdit = async () => {
     const card = await marketService.getById(id)
-    setMarketData(card)
+    setMarket(card)
   }
 
   const handleChange = (key, value) => {
-    marketData[key] = value    
-    generarNuevoMarket(marketData)
+    market[key] = value
+    generarNuevoMarket(market)
   }
 
   const generarNuevoMarket = (market) => {
-    const nuevoMarket = Object.assign(new Market(market), market)
-    setMarketData(nuevoMarket)
+    const nuevoMarket = Object.assign(new Market(), market)
+    setMarket(nuevoMarket)
+  }
+
+  const handleClickConfirm = () => {
+    validateFields()
+    saveData()
+  }
+
+  const validateFields = () => {
+    setErrors({})
+    market.hasEmptyData.forEach((prop) => {
+      setErrors((prev) => ({ ...prev, [prop]: InputError.NOT_EMPTY }))
+    })
+    market.direccion !== '' &&
+      !market.validAddress &&
+      setErrors((prev) => ({ ...prev, direccion: InputError.VALID_ADDRESS }))
+  }
+
+  const saveData = () => {
+    !market.hasErrors &&
+    (loc.endsWith('nuevo') ? 
+      marketService.create(market) : 
+      marketService.update(market))
+    && navigate('/puntos-de-venta') 
   }
 
   return (
     <>
-      <TextField className="field" value={marketData.nombre} label="Nombre" onChange={(e) => handleChange('nombre', e.target.value)} />
-      <TextField
-        className="field"
-        value={marketData.direccion}
-        label="Dirección"
-        onChange={(e) => handleChange('direccion', e.target.value)}
-      />
-      <TextField
-        className="field"
-        value={marketData.geoX}
-        inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada X"        
-        onChange={(e) => handleChange('geoX', e.target.value)}
-      />
-      <TextField
-        className="field"
-        value={marketData.geoY}
-        inputProps={{ type: 'number', step: 0.00001, min: -90, max: 90 }}
-        label="Coordenada Y"        
-        onChange={(e) => handleChange('geoY', e.target.value)}
-      />
-      <TextField
-        className="field"
-        value={marketData.stock}
-        inputProps={{ type: 'number', min: 0 }}
-        label="Sobres Disponibles"
-        onChange={(e) => handleChange('stock', e.target.value)}
-      />
-      <TextField
-        className="field"
-        value={marketData.pedidosPendientes}
-        inputProps={{ type: 'number', min: 0 }}
-        label="Pedidos Pendientes"        
-        onChange={(e) => handleChange('pedidosPendientes', e.target.value)}
-      />
-      <TextField className="field" defaultValue={BusinessType.Kioscos} select SelectProps={{ native: true }} onChange={(e) => handleChange('tipoPuntoDeVenta', e.target.value)}>
-        {Object.entries(BusinessType).map(([key, value]) => 
-          <option key={key} value={value}>
-            {value}
-          </option>
-        )}
-      </TextField>
+      {Object.entries(fields).map(([field, props], index) => 
+        <Fragment key={index}>
+          {props.type === InputType.TextField ? 
+            <Box key={index} className="field__container">
+              <TextField
+                key={index}
+                className={props.className}
+                inputProps={{ ...props.elementProps }}
+                value={props.value}
+                label={props.name}
+                error={!!errors[field]}
+                onChange={(e) => handleChange(field, e.target.value)}
+                data-testid={
+                  index === 0
+                    ? `${props.className}-first`
+                    : index === fields.length - 1
+                      ? `${props.className}-last`
+                      : `${props.className}-${index}`
+                }
+              />
+              <span className="field__error">{errors[field]}</span>
+            </Box>
+            : props.type === InputType.Select ? 
+              <TextField
+                key={index}
+                className={props.className}
+                value={props.value}
+                select
+                SelectProps={{ ...props.elementProps }}
+                onChange={(e) => handleChange(field, e.target.value)}
+                data-testid={
+                  index === 0
+                    ? `${props.className}-first`
+                    : index === Object.keys(fields).length - 1
+                      ? `${props.className}-last`
+                      : `${props.className}-${index}`
+                }
+              >
+                {Object.entries(props.options).map(([clave, value]) => 
+                  <option key={clave} value={value}>
+                    {value}
+                  </option>
+                )}
+              </TextField>
+              : 
+              <></>
+          }
+        </Fragment>
+      )}
       <FormActions
-        leftButtonClick={() => {
-          marketService.create(marketData)
-        }}
-        rightButtonClick={() => {          
-          //TODO: Handle clear of marketData
+        handleLeftButtonClick={handleClickConfirm}
+        handleRightButtonClick={() => {
           navigate('/puntos-de-venta')
-        }}
-        rightButtonText="Volver"
-        rightButtonProps={{
-          variant: 'outlined',
         }}
       />
     </>

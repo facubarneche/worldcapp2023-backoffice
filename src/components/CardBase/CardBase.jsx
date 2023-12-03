@@ -7,11 +7,11 @@ import { ElementType, BusinessType } from 'services/constants'
 export const CardBase = ({ element, contentComponent, onEditClick, onDelete }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const marketIcon = () => {    
-    return element.tipo === BusinessType.Kioscos
+    return element.tipo === BusinessType.Kiosco
       ? 'fa-store'
-      : element.tipo === BusinessType.Librerias
+      : element.tipo === BusinessType.Libreria
         ? 'fa-book'
-        : element.tipo === BusinessType.Supermercados 
+        : element.tipo === BusinessType.Supermercado
           ? 'fa-basket-shopping'
           : element.tipo === ElementType.Figuritas
             ? 'fa-id-badge' 

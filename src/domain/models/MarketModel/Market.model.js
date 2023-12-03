@@ -1,13 +1,15 @@
-import { BusinessType } from "services/constants"
+import { BusinessType } from 'services/constants'
+import { splitDireccion } from 'src/utils/serializers'
+import { ValidateInputs } from 'utils/Validators/ValidateInputs'
 
 export class Market {
   constructor(storedata = {}) {
     this.id = storedata.id ?? -1
     this.nombre = storedata.nombre ?? ''
-    this.tipoPuntoVenta = storedata.tipoPuntoDeVenta ?? BusinessType.Kioscos
-    this.direccion = storedata.direccionPlana ?? ''
-    this.geoX = storedata.geoX ?? 0
-    this.geoY = storedata.geoY ?? 0
+    this.tipoPuntoDeVenta = storedata.tipoPuntoDeVenta ?? BusinessType.Kiosco
+    this.direccion = storedata.direccion ? `${storedata.direccion.calle} ${storedata.direccion.altura}` : ''
+    this.geoX = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[0] : 0.0
+    this.geoY = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[1] : 0.0
     this.stock = storedata.stockSobres ?? 0
     this.pedidosPendientes = storedata.pedidosPendientes ?? 0
   }
@@ -26,8 +28,48 @@ export class Market {
   }
 
   get footer() {
-    return 'Tipo ' + this.tipo
+    return 'Tipo ' + this.tipoPuntoDeVenta
   }
-  
-  get tipo() {return this.tipoPuntoVenta}
+
+  get tipo() {
+    return this.tipoPuntoDeVenta
+  }
+
+  static toJson = (marketData) => {
+    return {
+      id: marketData.id,
+      nombre: marketData.nombre,
+      tipoPuntoDeVenta: marketData.tipoPuntoDeVenta,
+      direccion: {
+        calle: splitDireccion(marketData.direccion)[0],
+        altura: splitDireccion(marketData.direccion)[1],
+        ubiGeografica: `x: ${marketData.geoX}, y: ${marketData.geoY}`,
+      },
+      stockSobres: marketData.stock,
+      pedidosPendientes: marketData.pedidosPendientes,
+    }
+  }
+
+  splitGeo(geo) {
+    const geos = geo.split(",")
+    const geoX = parseFloat(geos[0].split("x: ")[1])
+    const geoY = parseFloat(geos[1].split("y: ")[1])
+    return [geoX, geoY]
+  }
+
+  get validAddress() {
+    return ValidateInputs.isAddress(this.direccion)
+  }
+
+  emptyData(prop) {
+    return ValidateInputs.isEmpty(prop)
+  }
+
+  get hasEmptyData() {
+    return Object.keys(this).map((prop) => this.emptyData(this[prop]) && prop).filter( Boolean )
+  }
+
+  get hasErrors() {
+    return this.hasEmptyData.length !== 0 || !this.validAddress
+  }
 }
