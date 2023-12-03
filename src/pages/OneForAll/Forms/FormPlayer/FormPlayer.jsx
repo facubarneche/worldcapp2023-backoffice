@@ -8,7 +8,7 @@ import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
 import { useOnInit } from 'src/custom_hooks/hooks'
 
-const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
+export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [player, setPlayer] = useState(
@@ -176,4 +176,3 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     </main>
   )
 }
-export default FormPlayer
