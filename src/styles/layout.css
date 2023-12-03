@@ -6,4 +6,5 @@
   gap: 2rem;
   padding: 2rem 4rem;
   min-height: calc(100vh - 14rem);  
+  width: 100%;
 }

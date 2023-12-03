@@ -6,3 +6,10 @@ export const formToJSON = (data) => {
   })
   return formData
 }
+
+export const splitDireccion = (direccion) => {
+  var partes = direccion.split(/\s+/)
+  var altura = partes.pop()
+  var nombreCalle = partes.join(' ')
+  return [nombreCalle, altura]
+}

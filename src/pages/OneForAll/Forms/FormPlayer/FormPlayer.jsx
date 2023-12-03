@@ -1,6 +1,6 @@
+import './FormPlayer.css'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
-import './FormPlayer.css'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
@@ -8,7 +8,7 @@ import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
 import { useOnInit } from 'src/custom_hooks/hooks'
 
-const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
+export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [player, setPlayer] = useState(
@@ -73,25 +73,26 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const sendData = () => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
     player.isNew ? saveInfoSvFunc(player) : saveInfoSvFunc(player, player.id)
+    handleBack()
   }
 
   const setRenderPolivalente = () => {
     return player.isPolivalente
       ? {
-          textLabel: 'Posiciones',
-          key: 'posiciones',
-          props: {
-            select: true,
-            SelectProps: {
-              multiple: true,
-            },
+        textLabel: 'Posiciones',
+        key: 'posiciones',
+        props: {
+          select: true,
+          SelectProps: {
+            multiple: true,
           },
-          children: positions.posicionesGenericas.map((position) => (
-            <MenuItem key={position} value={position}>
-              {position}
-            </MenuItem>
-          )),
-        }
+        },
+        children: positions.posicionesGenericas.map((position) => 
+          <MenuItem key={position} value={position}>
+            {position}
+          </MenuItem>
+        ),
+      }
       : { element: <></> }
   }
 
@@ -114,11 +115,11 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: nationalTeamOptions.map((nationalTeam) => (
+      children: nationalTeamOptions.map((nationalTeam) => 
         <MenuItem key={nationalTeam} value={nationalTeam}>
           {nationalTeam}
         </MenuItem>
-      )),
+      ),
     },
     {
       textLabel: 'Año de debut en la seleccion',
@@ -133,32 +134,32 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: positions.posiciones.map((position) => (
+      children: positions.posiciones.map((position) => 
         <MenuItem key={position} value={position}>
           {position}
         </MenuItem>
-      )),
+      ),
     },
     setRenderPolivalente(),
     { element: <hr /> },
 
     {
-      element: (
+      element: 
         <FormControlLabel
           control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
           label="Es Lider"
         />
-      ),
+      ,
     },
     { textLabel: 'Cotizacion', key: 'cotizacion', props: { type: 'number' } },
   ]
 
   return (
-    <main className="formPlayer formPlayer__flexContainer">
-      <form className="formPlayer__form">
-        {inputsData.map((data, index) => (
-          <section className="formPlayer__input-container formPlayer__flexContainer" key={index}>
-            {data.element ?? (
+    <main className="form-player form-player__container">
+      <form className="form-player__form">
+        {inputsData.map((data, index) => 
+          <section className="form-player__container" key={index}>
+            {data.element ?? 
               <TextField
                 className="field"
                 label={data.textLabel}
@@ -168,12 +169,11 @@ const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
               >
                 {data.children}
               </TextField>
-            )}
+            }
           </section>
-        ))}
+        )}
       </form>
-      <FormActions leftButtonClick={sendData} rightButtonClick={handleBack} />
+      <FormActions handleLeftButtonClick={sendData} handleRightButtonClick={handleBack} />
     </main>
   )
 }
-export default FormPlayer
