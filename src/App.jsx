@@ -21,7 +21,7 @@ import { cardService } from 'services/CardService/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { playerService } from 'services/PlayerService/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
-import { Teams } from './pages/Teams/Teams'
+import { nationalTeamService } from './domain/services/nationalTeamService/NationalTeamService'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,7 +55,9 @@ const router = createBrowserRouter(
           ></Route>
           <Route path="puntos-de-venta/nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
           <Route path="puntos-de-venta/:id/editar" element={<MarketForm headerTitle={'Editar punto de venta'} />} />
-          <Route path="selecciones" element={<Teams />} />
+          <Route path="selecciones" 
+            element={<OneForAll key="One_For_All-4" service={nationalTeamService} />}
+          />
         </Route>
         <Route path="/error" element={<Error />}></Route>
         <Route path="*" element={<Error />}></Route>

@@ -9,7 +9,7 @@ import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
-export const OneForAll = ({ contentComponent, service }) => {
+export const OneForAll = ({ service, contentComponent = null }) => {
   // @ts-ignore
   const [setHeaderTitle] = useOutletContext()
   const [elements, setElements] = useState([])
@@ -50,7 +50,7 @@ export const OneForAll = ({ contentComponent, service }) => {
         <CardBase
           key={index}
           element={element}
-          contentComponent={contentComponent(element.content)}
+          contentComponent={contentComponent ? contentComponent(element.content) : null}
           onEditClick={redirect}
           onDelete={handleDelete}
         />
