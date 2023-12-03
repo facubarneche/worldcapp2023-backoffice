@@ -34,8 +34,8 @@ const router = createBrowserRouter(
             path="figuritas"
             element={<OneForAll key="One_For_All-1" service={cardService} contentComponent={CustomCardContent} />}
           ></Route>
-          <Route path="figuritas/nuevo" element={<CardForm headerTitle={'Nueva figurita'} />}></Route>
-          <Route path="figuritas/:id/editar" element={<CardForm headerTitle={'Editar una figurita'} />} />
+          <Route path="figuritas/nuevo" element={<CardForm headerTitle={'Nueva figurita'} saveFunc={cardService.create} />}></Route>
+          <Route path="figuritas/:id/editar" element={<CardForm headerTitle={'Editar una figurita'} saveFunc={cardService.update} />} />
           <Route
             path="jugadores"
             element={<OneForAll key="One_For_All-2" service={playerService} contentComponent={CustomPlayerContent} />}
