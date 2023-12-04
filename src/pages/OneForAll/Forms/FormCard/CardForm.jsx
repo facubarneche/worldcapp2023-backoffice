@@ -3,34 +3,28 @@ import { useOnInit } from 'custom_hooks/hooks'
 import { cardService } from 'services/CardService/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'models/CardModel/Card.model'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
-import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
+import { Box, Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
 import { FormActions } from 'src/components/FormActions/FormActions'
 
 export const CardForm = ({ headerTitle, saveFunc }) => {
   // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+  const { setTitle } = useOutletContext()
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
   const params = useParams()
 
-  const [card, setCard] = useState(new Card({ numero: '', nombre: '', onFire: false, nivelImpresion: '' }))
-
-
-  useEffect(() => {
-    console.log(card)
-  })
+  const [card, setCard] = useState(new Card())
 
   useOnInit(async () => {
     try {
-      setHeaderTitle(headerTitle)
+      setTitle(headerTitle)
       const { jugadores, levelPrints } = await cardService.getDataCreateCards()
-      console.log(jugadores)
       setPlayers(jugadores)
       setPrintsLevel(levelPrints.map((level) => level.nombre))
-      
+
       const setCardInfo = async (id) => {
         const response = await cardService.getById(id)
         setCard(new Card({ ...response.JSONCreateModifyCard, id: id }))
@@ -41,8 +35,7 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
       }
       setPlayers(jugadores)
       setPrintsLevel(levelPrints.map((level) => level.nombre))
-      setHeaderTitle(headerTitle)
-      
+      setTitle(headerTitle)
     } catch (error) {
       HandleError(error, navigate)
     }
@@ -66,58 +59,66 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
   }
 
   return (
-    <main className="formPlayer formPlayer__flexContainer">
+    <>
+      <TextField
+        className="field"
+        label="Número de Figurita"
+        inputProps={{ type: 'number', min: 0 }}
+        value={card.numero}
+        onChange={(e) => handleChange(e.target.value, 'numero')}
+        data-testid="figurita-numero"
+      />
 
-      <div className="figuritas-form">
-        <TextField required label="Nro" type="number" value={card.numero} onChange={(e) => handleChange(e.target.value, 'numero')} />
-      
-      
+      <TextField
+        select
+        className="field"
+        value={card.nombre}
+        onChange={(e) => {
+          handleChange(e.target.value, 'nombre')
+        }}
+        data-testid="figurita-nombre"
+      >
+        {players.map((player) => 
+          <MenuItem
+            className="field__option"
+            key={`${player.nombre} ${player.apellido}`}
+            value={`${player.nombre} ${player.apellido}`}
+          >
+            {`${player.nombre} ${player.apellido}`}
+          </MenuItem>
+        )}
+      </TextField>
 
-        <TextField
-          className="figuritas-form__select"
-          required
-          select
-          value={card.nombre}
-          onChange={(e) => {
-            handleChange(e.target.value, 'nombre')
-          }}
-        >
-          {players.map((player) => 
-            <MenuItem key={`${player.nombre} ${player.apellido}`} value={`${player.nombre} ${player.apellido}`}>
-              {`${player.nombre} ${player.apellido}`}
-            </MenuItem>
-          )}
-        </TextField>
+      <FormControlLabel
+        className="checkbox"
+        control={<Checkbox checked={card.onFire} onChange={(e) => handleChange(e.target.checked, 'onFire')} />}
+        label="On Fire"
+        data-testid="figurita-onfire"
+      />
 
-        <FormControlLabel
-          className="figuritas-form__checkbox"
-          control={<Checkbox checked={card.onFire} onChange={(e) => handleChange(e.target.checked, 'onFire')} />}
-          label="On Fire"
-        />
+      <TextField
+        className="field"
+        select
+        value={card.nivelImpresion}
+        onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
+        data-testid="figurita-impresion"
+      >
+        {printsLevel.map((printLevel) => 
+          <MenuItem className="field__option" key={printLevel} value={printLevel}>
+            {printLevel}
+          </MenuItem>
+        )}
+      </TextField>
 
-        <TextField
-          className="figuritas-form__select"
-          required
-          select
-          value={card.nivelImpresion}
-          onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
-        >
-          {printsLevel.map((printLevel) => 
-            <MenuItem key={printLevel} value={printLevel}>
-              {printLevel}
-            </MenuItem>
-          )}
-        </TextField>
+      <TextField className="field" inputProps={{ type: 'url' }} label="Imagen Jugador" data-testid="figurita-imagen" />
 
-        <TextField className="figuritas-form__input" required label="Imagen" type="text" />
+      <Box className='text__container'>
+        <Typography className='text text--strong text--uppercase text--2col'>Valoración base: {parseFloat(card.baseValoration.toFixed(2))}</Typography>
+        <Typography className='text text--strong text--uppercase text--2col'>Valoración total: {parseFloat(card.totalValoration.toFixed(2))}</Typography>
+      </Box>
 
-        <strong>Valoración base {card.baseValoration()}</strong>
-        <strong>Valoración total {card.totalValoration()}</strong>
-
-        <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={handleBack} />
-      </div>
-    </main>
+      <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={handleBack} />
+    </>
   )
 }
 export default CardForm
-

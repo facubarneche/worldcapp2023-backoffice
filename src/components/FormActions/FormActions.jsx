@@ -11,19 +11,18 @@ export const FormActions = ({
 }) => { 
 
   return (
-    <footer className="step-footer">
+    <footer className="form__actions">
       <Button
-        variant="contained"
-        size="large"
+        className='button button--halfwidth'
+        variant="contained"        
         type="submit"
         {...leftButtonProps}
         onClick={handleLeftButtonClick}
       >
         {leftButtonText}
       </Button>
-      <Button
-        size="large"
-        variant="outlined"
+      <Button        
+        className='button button--halfwidth button--outlined'
         {...rightButtonProps}
         onClick={handleRightButtonClick}
       >

@@ -20,7 +20,7 @@ export const MarketForm = ({ headerTitle }) => {
   const loc = useLocation().pathname
 
   // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+  const {setTitle} = useOutletContext()
   const navigate = useNavigate()
 
   const fields = {
@@ -83,7 +83,7 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   useOnInit(() => {
-    setHeaderTitle(headerTitle)
+    setTitle(headerTitle)
     id && getCardToEdit()
   })
 
