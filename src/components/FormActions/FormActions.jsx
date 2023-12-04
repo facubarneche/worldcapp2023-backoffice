@@ -3,26 +3,25 @@ import './FormActions.css'
 
 export const FormActions = ({
   leftButtonText = 'Confirmar',
-  rightButtonText = 'Cancelar',  
+  rightButtonText = 'Cancelar',
   leftButtonProps = {},
   rightButtonProps = {},
-  handleLeftButtonClick = () =>{},
-  handleRightButtonClick = () => {},  
-}) => { 
-
+  handleLeftButtonClick = () => {},
+  handleRightButtonClick = () => {},
+}) => {
   return (
     <footer className="form__actions">
       <Button
-        className='button button--halfwidth'
-        variant="contained"        
+        className="button button--halfwidth"
+        variant="contained"
         type="submit"
         {...leftButtonProps}
         onClick={handleLeftButtonClick}
       >
         {leftButtonText}
       </Button>
-      <Button        
-        className='button button--halfwidth button--outlined'
+      <Button
+        className="button button--halfwidth button--outlined"
         {...rightButtonProps}
         onClick={handleRightButtonClick}
       >

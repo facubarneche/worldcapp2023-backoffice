@@ -1,18 +1,18 @@
 export class Player {
   constructor(playerdata) {
     this.id = playerdata.id
-    this.nombre = playerdata.nombre
-    this.apellido = playerdata.apellido
-    this.fechaNacimiento = playerdata.fechaNacimiento
-    this.altura = playerdata.altura
-    this.peso = playerdata.peso
-    this.nroCamiseta = playerdata.nroCamiseta
-    this.seleccion = playerdata.seleccion
-    this.debut = playerdata.debut
-    this.posicion = playerdata.posicion
-    this.posiciones = playerdata.posiciones
-    this.esLider = playerdata.esLider
-    this.cotizacion = playerdata.cotizacion
+    this.nombre = playerdata.nombre ?? ''
+    this.apellido = playerdata.apellido ?? ''
+    this.fechaNacimiento = playerdata.fechaNacimiento ?? 'mm/dd/yyyy'
+    this.altura = playerdata.altura ?? ''
+    this.peso = playerdata.peso ?? ''
+    this.nroCamiseta = playerdata.nroCamiseta ?? ''
+    this.seleccion = playerdata.seleccion ?? ''
+    this.debut = playerdata.debut ?? ''
+    this.posicion = playerdata.posicion ?? ''
+    this.posiciones = playerdata.posiciones ?? []
+    this.esLider = playerdata.esLider ?? false
+    this.cotizacion = playerdata.cotizacion ?? ''
   }
 
   static fromJson = (playerdata) => new Player(playerdata)
@@ -30,7 +30,7 @@ export class Player {
       posicion: this.posicion,
       posiciones: this.posiciones,
       esLider: this.esLider,
-      cotizacion: this.cotizacion 
+      cotizacion: this.cotizacion,
     }
   }
 
@@ -69,8 +69,33 @@ export class Player {
   get isNew() {
     return this.id === undefined
   }
-  
+
   isOnlyText(text) {
-    return /^[a-zA-Z]+$/.test(text)
+    return !/^[a-zA-Z]*$/.test(text)
+  }
+
+  validateNroCamiseta(value) {
+    return value < 0 || value > 100
+  }
+
+  isNegative(value) {
+    return value < 0
+  }
+
+  get isNotComplete() {
+    return (
+      !this.nombre ||
+      !this.apellido ||
+      this.fechaNacimiento === 'mm/dd/yyyy' ||
+      !this.altura ||
+      !this.cotizacion ||
+      !this.peso ||
+      !this.nroCamiseta ||
+      !this.seleccion ||
+      !this.debut ||
+      !this.posicion ||
+      (this.isPolivalente && !this.posiciones.length) ||
+      !this.cotizacion
+    )
   }
 }
