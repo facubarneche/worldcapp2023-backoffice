@@ -1,7 +1,7 @@
 import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
 import { formToJSON } from 'axios'
 import { useState } from 'react'
-import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { userService } from 'services/UserService/UserService'
 import { DEBUG_MODE } from 'services/constants'
 import { LogoComponent, LogoImageComponent } from 'components/LogoComponent/LogoComponent'
@@ -11,12 +11,6 @@ import { HandleError } from 'utils/HandleError/HandleError'
 export const Login = () => {
   const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false)
-  //@ts-ignore
-  const [setFoterContent] = useOutletContext()
-
-  useOnInit(() => {
-    setFoterContent(<LogoImageComponent />)
-  })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -61,6 +55,7 @@ export const Login = () => {
           Ingresar
         </Button>
       </Box>
+      <LogoImageComponent />
     </Container>
   )
 }

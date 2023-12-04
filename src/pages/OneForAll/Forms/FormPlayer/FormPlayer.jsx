@@ -8,9 +8,7 @@ import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
 import { useOnInit } from 'src/custom_hooks/hooks'
 
-export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
-  // @ts-ignore
-  const {setTitle} = useOutletContext()
+export const FormPlayer = ({ saveInfoSvFunc }) => {
   const [player, setPlayer] = useState(
     new Player({
       nombre: '',
@@ -34,7 +32,6 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const navigate = useNavigate()
 
   useOnInit(() => {
-    setTitle(headerTitle)
     const setNationalTeams = async () => {
       const data = await nationalTeamService.getAllNames()
       setNationalTeamOptions(data)
@@ -49,7 +46,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
 
     if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
-    setPositionsPlayer()    
+    setPositionsPlayer()
   })
 
   const setPlayerValue = (key, value) => {
@@ -79,20 +76,20 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const setRenderPolivalente = () => {
     return player.isPolivalente
       ? {
-        textLabel: 'Posiciones',
-        key: 'posiciones',
-        props: {
-          select: true,
-          SelectProps: {
-            multiple: true,
+          textLabel: 'Posiciones',
+          key: 'posiciones',
+          props: {
+            select: true,
+            SelectProps: {
+              multiple: true,
+            },
           },
-        },
-        children: positions.posicionesGenericas.map((position) => 
-          <MenuItem key={position} value={position}>
-            {position}
-          </MenuItem>
-        ),
-      }
+          children: positions.posicionesGenericas.map((position) => (
+            <MenuItem key={position} value={position}>
+              {position}
+            </MenuItem>
+          )),
+        }
       : { element: <></> }
   }
 
@@ -115,11 +112,11 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: nationalTeamOptions.map((nationalTeam) => 
+      children: nationalTeamOptions.map((nationalTeam) => (
         <MenuItem key={nationalTeam} value={nationalTeam}>
           {nationalTeam}
         </MenuItem>
-      ),
+      )),
     },
     {
       textLabel: 'Año de debut en la seleccion',
@@ -134,22 +131,22 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: positions.posiciones.map((position) => 
+      children: positions.posiciones.map((position) => (
         <MenuItem key={position} value={position}>
           {position}
         </MenuItem>
-      ),
+      )),
     },
     setRenderPolivalente(),
     { element: <hr /> },
 
     {
-      element: 
+      element: (
         <FormControlLabel
           control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
           label="Es Lider"
         />
-      ,
+      ),
     },
     { textLabel: 'Cotizacion', key: 'cotizacion', props: { type: 'number' } },
   ]
@@ -157,9 +154,9 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   return (
     <main className="form-player form-player__container">
       <form className="form-player__form">
-        {inputsData.map((data, index) => 
+        {inputsData.map((data, index) => (
           <section className="form-player__container" key={index}>
-            {data.element ?? 
+            {data.element ?? (
               <TextField
                 className="field"
                 label={data.textLabel}
@@ -169,9 +166,9 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
               >
                 {data.children}
               </TextField>
-            }
+            )}
           </section>
-        )}
+        ))}
       </form>
       <FormActions handleLeftButtonClick={sendData} handleRightButtonClick={handleBack} />
     </main>

@@ -5,13 +5,10 @@ import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
-import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
 export const OneForAll = ({ contentComponent, service }) => {
-  // @ts-ignore
-  const {setTitle} = useOutletContext()
   const [elements, setElements] = useState([])
   const navigate = useNavigate()
   const loc = useLocation().pathname
@@ -26,7 +23,6 @@ export const OneForAll = ({ contentComponent, service }) => {
   }
 
   useOnInit(() => {
-    setTitle(GetWordFromRoute(loc))
     getAll()
   })
 
@@ -46,7 +42,7 @@ export const OneForAll = ({ contentComponent, service }) => {
   return (
     <>
       <Searchbar getFilterCards={getAll} />
-      {elements.map((element, index) => 
+      {elements.map((element, index) => (
         <CardBase
           key={index}
           element={element}
@@ -54,8 +50,11 @@ export const OneForAll = ({ contentComponent, service }) => {
           onEditClick={redirect}
           onDelete={handleDelete}
         />
-      )}
-      <Button className="button button--circle button--icon button--icon-large button--float" onClick={() => redirect(-1)}>
+      ))}
+      <Button
+        className="button button--circle button--icon button--icon-large button--float"
+        onClick={() => redirect(-1)}
+      >
         +
       </Button>
     </>

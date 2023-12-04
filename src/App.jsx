@@ -42,27 +42,45 @@ const router = createBrowserRouter(
       ></Route>
       <Route
         path="figuritas/:id/editar"
-        element={<Layout content={<CardForm saveFunc={cardService.update} />} headerTitle="Nueva figurita" />}
+        element={<Layout content={<CardForm saveFunc={cardService.update} />} headerTitle="Modificar figurita" />}
       />
       <Route
         path="jugadores"
-        element={<OneForAll key="One_For_All-2" service={playerService} contentComponent={CustomPlayerContent} />}
+        element={
+          <Layout
+            content={<OneForAll service={playerService} contentComponent={CustomPlayerContent} />}
+            headerTitle="Jugadores"
+          />
+        }
       ></Route>
       <Route
         path="jugadores/nuevo"
-        element={<FormPlayer headerTitle={'Nuevo jugador'} saveInfoSvFunc={playerService.create} />}
+        element={<Layout content={<FormPlayer saveInfoSvFunc={playerService.create} />} headerTitle="Nuevo jugador" />}
       ></Route>
       <Route
         path="jugadores/:id/editar"
-        element={<FormPlayer headerTitle={'Editar un jugador'} saveInfoSvFunc={playerService.update} />}
+        element={
+          <Layout content={<FormPlayer saveInfoSvFunc={playerService.update} />} headerTitle="Editar un jugador" />
+        }
       />
       <Route
         path="puntos-de-venta"
-        element={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
+        element={
+          <Layout
+            content={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
+            headerTitle="Puntos de venta"
+          />
+        }
       ></Route>
-      <Route path="puntos-de-venta/nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
-      <Route path="puntos-de-venta/:id/editar" element={<MarketForm headerTitle={'Editar punto de venta'} />} />
-      <Route path="selecciones" element={<Teams />}></Route>
+      <Route
+        path="puntos-de-venta/nuevo"
+        element={<Layout content={<MarketForm />} headerTitle="Nuevo punto de venta" />}
+      ></Route>
+      <Route
+        path="puntos-de-venta/:id/editar"
+        element={<Layout content={<MarketForm />} headerTitle="Editar punto de venta" />}
+      />
+      <Route path="selecciones" element={<Layout content={<Teams />} headerTitle="Selecciones" />}></Route>
       <Route path="/error" element={<Error />}></Route>
       <Route path="*" element={<Error />}></Route>
     </Route>,

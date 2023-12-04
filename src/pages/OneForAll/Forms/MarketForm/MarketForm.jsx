@@ -6,21 +6,24 @@ import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
 import { Fragment, useState } from 'react'
 import { BusinessType } from 'services/constants'
-import { Validator, IsEmpty, IsNotAddress, IsNegative, IsNotInRange } from 'src/domain/models/Validations/InputValidation'
+import {
+  Validator,
+  IsEmpty,
+  IsNotAddress,
+  IsNegative,
+  IsNotInRange,
+} from 'src/domain/models/Validations/InputValidation'
 
 const InputType = {
   TextField: 'TextField',
   Select: 'Select',
 }
 
-export const MarketForm = ({ headerTitle }) => {
+export const MarketForm = () => {
   const { id } = useParams()
   const [market, setMarket] = useState(new Market())
   const [errors, setErrors] = useState({})
   const loc = useLocation().pathname
-
-  // @ts-ignore
-  const {setTitle} = useOutletContext()
   const navigate = useNavigate()
 
   const fields = {
@@ -83,7 +86,6 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   useOnInit(() => {
-    setTitle(headerTitle)
     id && getCardToEdit()
   })
 
@@ -127,9 +129,9 @@ export const MarketForm = ({ headerTitle }) => {
 
   return (
     <>
-      {Object.entries(fields).map(([field, props], index) => 
+      {Object.entries(fields).map(([field, props], index) => (
         <Fragment key={index}>
-          {props.type === InputType.TextField ? 
+          {props.type === InputType.TextField ? (
             <Box key={index} className="field__container">
               <TextField
                 key={index}
@@ -143,39 +145,39 @@ export const MarketForm = ({ headerTitle }) => {
                   index === 0
                     ? `${props.className}-first`
                     : index === fields.length - 1
-                      ? `${props.className}-last`
-                      : `${props.className}-${index}`
+                    ? `${props.className}-last`
+                    : `${props.className}-${index}`
                 }
               />
               <span className="field__error">{errors[field]}</span>
             </Box>
-            : props.type === InputType.Select ? 
-              <TextField
-                key={index}
-                className={props.className}
-                value={props.value}
-                select
-                SelectProps={{ ...props.elementProps }}
-                onChange={(e) => handleChange(field, e.target.value)}
-                data-testid={
-                  index === 0
-                    ? `${props.className}-first`
-                    : index === Object.keys(fields).length - 1
-                      ? `${props.className}-last`
-                      : `${props.className}-${index}`
-                }
-              >
-                {Object.entries(props.options).map(([clave, value]) => 
-                  <option key={clave} value={value}>
-                    {value}
-                  </option>
-                )}
-              </TextField>
-              : 
-              <></>
-          }
+          ) : props.type === InputType.Select ? (
+            <TextField
+              key={index}
+              className={props.className}
+              value={props.value}
+              select
+              SelectProps={{ ...props.elementProps }}
+              onChange={(e) => handleChange(field, e.target.value)}
+              data-testid={
+                index === 0
+                  ? `${props.className}-first`
+                  : index === Object.keys(fields).length - 1
+                  ? `${props.className}-last`
+                  : `${props.className}-${index}`
+              }
+            >
+              {Object.entries(props.options).map(([clave, value]) => (
+                <option key={clave} value={value}>
+                  {value}
+                </option>
+              ))}
+            </TextField>
+          ) : (
+            <></>
+          )}
         </Fragment>
-      )}
+      ))}
       <FormActions
         handleLeftButtonClick={handleClickConfirm}
         handleRightButtonClick={() => {
