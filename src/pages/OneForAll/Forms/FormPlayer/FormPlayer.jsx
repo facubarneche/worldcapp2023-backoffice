@@ -1,31 +1,26 @@
 import './FormPlayer.css'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
-import { FormActions } from 'src/components/FormActions/FormActions'
+import { useNavigate, useParams } from 'react-router-dom'
+import { FormActions } from 'components/FormActions/FormActions'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
-import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
-import { playerService } from 'src/domain/services/PlayerService/PlayerService'
-import { Player } from 'src/domain/models/PlayerModel/Player.model'
-import { useOnInit } from 'src/custom_hooks/hooks'
+import { nationalTeamService } from 'src/domain/services/NationalTeamService/NationalTeamService'
+import { playerService } from 'services/PlayerService/PlayerService'
+import { Player } from 'models/PlayerModel/Player.model'
+import { useOnInit } from 'hooks/useOnInit'
+import { HandleError } from 'utils/HandleError/HandleError'
+import { enqueueSnackbar } from 'notistack'
 
-export const FormPlayer = ({ saveInfoSvFunc }) => {
-  const [player, setPlayer] = useState(
-    new Player({
-      nombre: '',
-      apellido: '',
-      fechaNacimiento: 'mm/dd/yyyy',
-      altura: '',
-      peso: '',
-      nroCamiseta: '',
-      seleccion: '',
-      debut: '',
-      posicion: '',
-      posiciones: [],
-      esLider: '',
-      cotizacion: '',
-    }),
-  )
-  //TODO: realizar
+export const FormPlayer = () => {
+  const [player, setPlayer] = useState(new Player({}))
+  const [playerErrors, setPlayerErrors] = useState({
+    nombre: '',
+    apellido: '',
+    altura: '',
+    peso: '',
+    debut: '',
+    nroCamiseta: '',
+    cotizacion: '',
+  })
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const [positions, setPositions] = useState({ posicionesGenericas: [], posiciones: [] })
   const params = useParams()
@@ -44,7 +39,7 @@ export const FormPlayer = ({ saveInfoSvFunc }) => {
       setPlayer(new Player({ ...response.JSONCreateModifyPlayer, id: id }))
     }
 
-    if (params.id != undefined) setPlayerInfo(params.id)
+    if (params.id !== undefined) setPlayerInfo(params.id)
     setNationalTeams()
     setPositionsPlayer()
   })
@@ -53,76 +48,119 @@ export const FormPlayer = ({ saveInfoSvFunc }) => {
     setPlayer((prev) => new Player({ id: player.id, ...prev.JSONCreateModifyPlayer, [key]: value }))
   }
 
-  const handleChecked = (e, key) => {
-    const value = e.target.checked
+  const handleChange = (key, value, objectValidation) => {
     setPlayerValue(key, value)
-  }
-
-  const handleChange = (e, key) => {
-    const value = e.target.value
-    setPlayerValue(key, value)
+    if (objectValidation) textFieldValidation(value, key, objectValidation)
   }
 
   const handleBack = () => {
     navigate('/jugadores')
   }
 
-  const sendData = () => {
+  const sendData = async () => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
-    player.isNew ? saveInfoSvFunc(player) : saveInfoSvFunc(player, player.id)
-    handleBack()
+    try {
+      player.isNew ? await playerService.create(player) : await playerService.update(player, player.id)
+      handleBack()
+      enqueueSnackbar(player.isNew ? 'Jugador creado exitosamente' : 'Cambios guardados con exito', {
+        variant: 'success',
+        anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+      })
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   }
+
+  const textFieldValidation = (value, key, { conditionFunction, message }) => {
+    setPlayerErrors({
+      ...playerErrors,
+      [key]: conditionFunction(value) ? message : '',
+    })
+  }
+
+  const hasErrors = Object.values(playerErrors).some((error) => !!error)
 
   const setRenderPolivalente = () => {
     return player.isPolivalente
       ? {
-          textLabel: 'Posiciones',
-          key: 'posiciones',
-          props: {
-            select: true,
-            SelectProps: {
-              multiple: true,
-            },
+        textLabel: 'Posiciones',
+        key: 'posiciones',
+        props: {
+          select: true,
+          SelectProps: {
+            multiple: true,
           },
-          children: positions.posicionesGenericas.map((position) => (
-            <MenuItem key={position} value={position}>
-              {position}
-            </MenuItem>
-          )),
-        }
+        },
+        children: positions.posicionesGenericas.map((position) => 
+          <MenuItem key={position} value={position}>
+            {position}
+          </MenuItem>
+        ),
+      }
       : { element: <></> }
   }
 
   const inputsData = [
-    { textLabel: 'Nombre', key: 'nombre', props: {} },
-    { textLabel: 'Apellido', key: 'apellido', props: {} },
+    {
+      textLabel: 'Nombre',
+      key: 'nombre',
+      objectValidation: { conditionFunction: player.isOnlyText, message: 'El nombre debe contener solo texto' },
+    },
+    {
+      textLabel: 'Apellido',
+      key: 'apellido',
+      objectValidation: { conditionFunction: player.isOnlyText, message: 'El apellido debe contener solo texto' },
+    },
     { element: <hr /> },
     {
       textLabel: 'Fecha de nacimineto',
       key: 'fechaNacimiento',
       props: { type: 'date' },
     },
-    { textLabel: 'Altura', key: 'altura', props: { type: 'number' } },
-    { textLabel: 'Peso', key: 'peso', props: { type: 'number' } },
+    {
+      textLabel: 'Altura',
+      key: 'altura',
+      props: { type: 'number' },
+      objectValidation: { conditionFunction: player.isNegative, message: 'La altura debe ser positiva' },
+    },
+    {
+      textLabel: 'Peso',
+      key: 'peso',
+      props: { type: 'number' },
+
+      objectValidation: { conditionFunction: player.isNegative, message: 'El peso debe ser positiva' },
+    },
     { element: <hr /> },
-    { textLabel: 'Nro Camiseta', key: 'nroCamiseta', props: { type: 'number' } },
+    {
+      textLabel: 'Nro Camiseta',
+      key: 'nroCamiseta',
+      props: { type: 'number' },
+      objectValidation: {
+        conditionFunction: player.validateNroCamiseta,
+        message: 'El numero de camiseta debe estar entre 0 y 100',
+      },
+    },
     {
       textLabel: 'Seleccion',
       key: 'seleccion',
       props: {
         select: true,
       },
-      children: nationalTeamOptions.map((nationalTeam) => (
+      children: nationalTeamOptions.map((nationalTeam) => 
         <MenuItem key={nationalTeam} value={nationalTeam}>
           {nationalTeam}
         </MenuItem>
-      )),
+      ),
     },
     {
       textLabel: 'Año de debut en la seleccion',
       key: 'debut',
       props: {
         type: 'number',
+      },
+      objectValidation: {
+        conditionFunction: player.isAInvalidYear,
+        message: 'Ingrese un año entreo 1300 y el año actual',
       },
     },
     {
@@ -131,46 +169,63 @@ export const FormPlayer = ({ saveInfoSvFunc }) => {
       props: {
         select: true,
       },
-      children: positions.posiciones.map((position) => (
+      children: positions.posiciones.map((position) => 
         <MenuItem key={position} value={position}>
           {position}
         </MenuItem>
-      )),
+      ),
     },
     setRenderPolivalente(),
     { element: <hr /> },
 
     {
-      element: (
+      element: 
         <FormControlLabel
-          control={<Checkbox checked={!!player['esLider']} onChange={(e) => handleChecked(e, 'esLider')} />}
+          control={
+            <Checkbox checked={!!player['esLider']} onChange={(e) => handleChange('esLider', e.target.checked)} />
+          }
           label="Es Lider"
         />
-      ),
+      ,
     },
-    { textLabel: 'Cotizacion', key: 'cotizacion', props: { type: 'number' } },
+    {
+      textLabel: 'Cotizacion',
+      key: 'cotizacion',
+      props: { type: 'number' },
+      objectValidation: { conditionFunction: player.isNegative, message: 'La cotizacion debe ser positiva' },
+    },
   ]
 
   return (
     <main className="form-player form-player__container">
       <form className="form-player__form">
-        {inputsData.map((data, index) => (
+        {inputsData.map((data, index) => 
           <section className="form-player__container" key={index}>
-            {data.element ?? (
+            {data.element ?? 
               <TextField
-                className="field"
                 label={data.textLabel}
+                error={!!playerErrors[data.key]}
+                helperText={!!playerErrors[data.key] && playerErrors[data.key]}
                 value={player[data.key]}
-                onChange={(e) => handleChange(e, data.key)}
+                onChange={(e) => handleChange(data.key, e.target.value, data.objectValidation)}
                 {...data.props}
+                className={'field ' + data.className}
+                InputProps={{
+                  className: 'inputField',
+                  ...data.InputProps,
+                }}
               >
                 {data.children}
               </TextField>
-            )}
+            }
           </section>
-        ))}
+        )}
       </form>
-      <FormActions handleLeftButtonClick={sendData} handleRightButtonClick={handleBack} />
+      <FormActions
+        handleLeftButtonClick={sendData}
+        handleRightButtonClick={handleBack}
+        leftButtonProps={{ disabled: player.isNotComplete || hasErrors }}
+      />
     </main>
   )
 }

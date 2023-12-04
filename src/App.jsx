@@ -53,15 +53,10 @@ const router = createBrowserRouter(
           />
         }
       ></Route>
-      <Route
-        path="jugadores/nuevo"
-        element={<Layout content={<FormPlayer saveInfoSvFunc={playerService.create} />} headerTitle="Nuevo jugador" />}
-      ></Route>
+      <Route path="jugadores/nuevo" element={<Layout content={<FormPlayer />} headerTitle="Nuevo jugador" />}></Route>
       <Route
         path="jugadores/:id/editar"
-        element={
-          <Layout content={<FormPlayer saveInfoSvFunc={playerService.update} />} headerTitle="Editar un jugador" />
-        }
+        element={<Layout content={<FormPlayer />} headerTitle="Editar un jugador" />}
       />
       <Route
         path="puntos-de-venta"
