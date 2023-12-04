@@ -29,6 +29,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       cotizacion: '',
     }),
   )
+  const [playerErrors, setPlayerErrors] = useState({})
   const [nationalTeamOptions, setNationalTeamOptions] = useState([])
   const [positions, setPositions] = useState({ posicionesGenericas: [], posiciones: [] })
   const params = useParams()
@@ -57,6 +58,11 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     setPlayer((prev) => new Player({ id: player.id, ...prev.JSONCreateModifyPlayer, [key]: value }))
   }
 
+  const handleChange = (key, value) => {
+    setPlayerValue(key, value)
+    inputValidations(value, key)
+  }
+
   const handleBack = () => {
     navigate('/jugadores')
   }
@@ -73,6 +79,13 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     } catch (error) {
       HandleError(error, navigate)
     }
+  }
+
+  const inputValidations = (value, key) => {
+    setPlayerErrors({
+      ...playerErrors,
+      [key]: !player.isOnlyText(value) ? 'El campo debe contener solo texto' : '',
+    })
   }
 
   const setRenderPolivalente = () => {
@@ -96,7 +109,11 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   }
 
   const inputsData = [
-    { textLabel: 'Nombre', key: 'nombre', props: {} },
+    {
+      textLabel: 'Nombre',
+      key: 'nombre',
+      props: {},
+    },
     { textLabel: 'Apellido', key: 'apellido', props: {} },
     { element: <hr /> },
     {
@@ -104,7 +121,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       key: 'fechaNacimiento',
       props: { type: 'date' },
     },
-    { textLabel: 'Altura', key: 'altura', props: { type: 'number' } },
+    { textLabel: 'Altura', key: 'altura', props: { type: 'number', inputProps: { step: 0.01, min: 0, max: 2.5 } } },
     { textLabel: 'Peso', key: 'peso', props: { type: 'number' } },
     { element: <hr /> },
     { textLabel: 'Nro Camiseta', key: 'nroCamiseta', props: { type: 'number' } },
@@ -146,7 +163,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
       element: (
         <FormControlLabel
           control={
-            <Checkbox checked={!!player['esLider']} onChange={(e) => setPlayerValue('esLider', e.target.checked)} />
+            <Checkbox checked={!!player['esLider']} onChange={(e) => handleChange('esLider', e.target.checked)} />
           }
           label="Es Lider"
         />
@@ -162,11 +179,17 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
           <section className="form-player__container" key={index}>
             {data.element ?? (
               <TextField
-                className="field"
                 label={data.textLabel}
+                error={!!playerErrors[data.key]}
+                helperText={!!playerErrors[data.key] && playerErrors[data.key]}
                 value={player[data.key]}
-                onChange={(e) => setPlayerValue(data.key, e.target.value)}
+                onChange={(e) => handleChange(data.key, e.target.value)}
                 {...data.props}
+                className={'field ' + data.className}
+                InputProps={{
+                  className: 'inputField',
+                  ...data.InputProps,
+                }}
               >
                 {data.children}
               </TextField>

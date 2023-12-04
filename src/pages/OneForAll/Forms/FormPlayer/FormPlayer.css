@@ -16,3 +16,11 @@
   flex-direction: column;
   gap: 2em;
 }
+
+.form-player__form .field {
+  box-shadow: none;
+}
+
+.inputField {
+  box-shadow: var(--box-shadow);
+}

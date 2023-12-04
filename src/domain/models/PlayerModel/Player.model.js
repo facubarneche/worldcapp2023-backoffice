@@ -69,4 +69,8 @@ export class Player {
   get isNew() {
     return this.id === undefined
   }
+  
+  isOnlyText(text) {
+    return /^[a-zA-Z]+$/.test(text)
+  }
 }
