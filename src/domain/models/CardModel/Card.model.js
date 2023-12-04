@@ -7,10 +7,19 @@ export class Card {
     this.nivelImpresion = data.nivelImpresion
     this.nombre = data.nombre
     this.apellido = data.apellido
-    this.valoracion = data.valoracion
+    this.valoracionJugador = data.valoracion
   }
 
   static fromJson = (cardata) => new Card(cardata)
+
+  get JSONCreateModifyCard() {
+    return {
+      numero: this.numero,
+      nombre:`${this.nombre} ${this.apellido}`,
+      onFire: this.onFire,
+      nivelImpresion: this.nivelImpresion
+    }
+  }
 
   get title() {
     return this.nombre + ' ' + this.apellido
@@ -30,7 +39,7 @@ export class Card {
 
   get tipo() {return 'Figuritas'}
 
-  totalValoration = () => this.valoracion + this.baseValoration()
+  totalValoration = () => this.valoracionJugador + this.baseValoration()
 
   baseValoration = () => BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
 
@@ -38,5 +47,9 @@ export class Card {
 
   evenMultiplier = () => this.numero % 2 == 0 ? 1.1 : 1.0
 
-  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'bajo' ? 1.0 : 0.85
+  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'baja' ? 1.0 : 0.85
+
+  get isNew() {
+    return this.id === undefined
+  }
 }
