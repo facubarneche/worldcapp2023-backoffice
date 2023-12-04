@@ -1,23 +1,7 @@
-import { Box, Button, Modal, TextField, Typography } from '@mui/material'
+import { Box, Modal, TextField } from '@mui/material'
 // import { Team } from 'src/domain/models/TeamModel/Team.model'
 import './TeamsModal.css'
 import { FormActions } from 'src/components/FormActions/FormActions'
-
-//TODO: Luego mover o pasar a css
-const style = {
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-  gap: 3
-}
 
 //TODO: mover y reutilizar
 // const InputType = {
@@ -71,13 +55,13 @@ const TeamsModal = ({ onClose }) => {
   
   return (
     <>
-      <Modal className='teams-modal'
+      <Modal
         open={true}
         onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className='teams-modal'>
           <TextField required label="Nombre" type="text"/>
           <TextField
             className="figuritas-form__select"
