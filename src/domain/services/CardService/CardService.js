@@ -9,23 +9,25 @@ class CardService {
   }
 
   getById = async (id) => {
-    console.log(id)
+    const figuritasJSON = await axios.get(`${REST_SERVER_URL}/figurita/${id}`)
+    return Card.fromJson(figuritasJSON.data)
   }
 
-  update = async (card) => {
-    console.log(card)
+  update = async (card , id) => {
+    await axios.patch(`${REST_SERVER_URL}/figurita/modificar/${id}`, card.JSONCreateModifyCard)
   }
 
   delete = async (id) => {
     try {
-      console.log(id)
+      const response$ = await axios.delete(`${REST_SERVER_URL}/figurita/eliminar/${id}`)
+      console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
-      console.log(err)
+      console.error('Error al eliminar el elemento')      
     }
   }
 
   create = async (card) => {
-    console.log(card)
+    await axios.post(`${REST_SERVER_URL}/figurita/crear`,card.JSONCreateModifyCard)
   }
 
   getDataCreateCards = async () => (await axios.get(`${REST_SERVER_URL}/figuritas/data-create-figurita`)).data
