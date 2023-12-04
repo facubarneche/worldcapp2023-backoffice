@@ -2,7 +2,7 @@ import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromE
 
 // Import Pages
 import { Login } from 'pages/Login/Login'
-import { Home } from 'pages/Home/Home'
+import { Dashboard } from 'src/pages/Dashboard/Dashboard'
 
 // Import Styles
 import './App.css'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route index element={<Navigate to="login" />} />
       <Route path="login" element={<Login />}></Route>
-      <Route path="home" element={<Layout content={<Home />} headerTitle="dashboard" />}></Route>
+      <Route path="dashboard" element={<Layout content={<Dashboard />} headerTitle="dashboard" />}></Route>
       <Route
         path="figuritas"
         element={

@@ -1,4 +1,4 @@
-import { InputError } from 'src/domain/errors/InputError'
+import { InputError } from 'errors/InputError'
 
 export class Validator {
   constructor(validators = []) {
