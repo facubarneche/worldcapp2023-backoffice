@@ -1,19 +1,10 @@
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FormActions } from 'components/FormActions/FormActions'
-import { useOnInit } from 'custom_hooks/hooks'
 
-export const CardForm = ({ headerTitle }) => {
-  // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+export const CardForm = () => {
   const navigate = useNavigate()
 
-  useOnInit(() => {
-    setHeaderTitle(headerTitle)
-  })
-
-  const handleClickConfirm = () => {
-
-  }
+  const handleClickConfirm = () => {}
 
   return (
     <>
