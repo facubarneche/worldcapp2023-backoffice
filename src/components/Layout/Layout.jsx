@@ -6,7 +6,7 @@ export const Layout = ({ content, headerTitle = 'Sin título' }) => {
   return (
     <main className="layout">
       <header className="layout__header">
-        <Typography className="layout__header-title" variant="h2">
+        <Typography data-testid="header-title" className="layout__header-title" variant="h2">
           {headerTitle}
         </Typography>
       </header>

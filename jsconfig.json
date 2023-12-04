@@ -13,7 +13,7 @@
       "hooks/*": ["./src/hooks/*"],
       "mocks/*": ["./src/domain/mocks/*"],
       "utils/*": ["./src/utils/*"],
-      "errors/*": ["./src/domain/errors/*"]
+      "errors/*": ["./src/domain/errors/*"]      
     }
   }
 }

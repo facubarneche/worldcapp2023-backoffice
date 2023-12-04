@@ -20,6 +20,7 @@ export default defineConfig({
       mocks: '/src/domain/mocks',
       utils: '/src/utils',
       errors: '/src/domain/errors',
+      hooks: '/src/hooks',
     },
   },
   test: {

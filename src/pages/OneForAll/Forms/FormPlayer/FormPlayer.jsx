@@ -1,13 +1,13 @@
 import './FormPlayer.css'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FormActions } from 'src/components/FormActions/FormActions'
+import { FormActions } from 'components/FormActions/FormActions'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
-import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
-import { playerService } from 'src/domain/services/PlayerService/PlayerService'
-import { Player } from 'src/domain/models/PlayerModel/Player.model'
-import { useOnInit } from 'src/hooks/useOnInit'
-import { HandleError } from 'src/utils/HandleError/HandleError'
+import { nationalTeamService } from 'src/domain/services/ationalTeamService/NationalTeamService'
+import { playerService } from 'services/PlayerService/PlayerService'
+import { Player } from 'models/PlayerModel/Player.model'
+import { useOnInit } from 'hooks/useOnInit'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { enqueueSnackbar } from 'notistack'
 
 export const FormPlayer = () => {
@@ -83,20 +83,20 @@ export const FormPlayer = () => {
   const setRenderPolivalente = () => {
     return player.isPolivalente
       ? {
-          textLabel: 'Posiciones',
-          key: 'posiciones',
-          props: {
-            select: true,
-            SelectProps: {
-              multiple: true,
-            },
+        textLabel: 'Posiciones',
+        key: 'posiciones',
+        props: {
+          select: true,
+          SelectProps: {
+            multiple: true,
           },
-          children: positions.posicionesGenericas.map((position) => (
-            <MenuItem key={position} value={position}>
-              {position}
-            </MenuItem>
-          )),
-        }
+        },
+        children: positions.posicionesGenericas.map((position) => 
+          <MenuItem key={position} value={position}>
+            {position}
+          </MenuItem>
+        ),
+      }
       : { element: <></> }
   }
 
@@ -146,11 +146,11 @@ export const FormPlayer = () => {
       props: {
         select: true,
       },
-      children: nationalTeamOptions.map((nationalTeam) => (
+      children: nationalTeamOptions.map((nationalTeam) => 
         <MenuItem key={nationalTeam} value={nationalTeam}>
           {nationalTeam}
         </MenuItem>
-      )),
+      ),
     },
     {
       textLabel: 'Año de debut en la seleccion',
@@ -169,24 +169,24 @@ export const FormPlayer = () => {
       props: {
         select: true,
       },
-      children: positions.posiciones.map((position) => (
+      children: positions.posiciones.map((position) => 
         <MenuItem key={position} value={position}>
           {position}
         </MenuItem>
-      )),
+      ),
     },
     setRenderPolivalente(),
     { element: <hr /> },
 
     {
-      element: (
+      element: 
         <FormControlLabel
           control={
             <Checkbox checked={!!player['esLider']} onChange={(e) => handleChange('esLider', e.target.checked)} />
           }
           label="Es Lider"
         />
-      ),
+      ,
     },
     {
       textLabel: 'Cotizacion',
@@ -199,9 +199,9 @@ export const FormPlayer = () => {
   return (
     <main className="form-player form-player__container">
       <form className="form-player__form">
-        {inputsData.map((data, index) => (
+        {inputsData.map((data, index) => 
           <section className="form-player__container" key={index}>
-            {data.element ?? (
+            {data.element ?? 
               <TextField
                 label={data.textLabel}
                 error={!!playerErrors[data.key]}
@@ -217,9 +217,9 @@ export const FormPlayer = () => {
               >
                 {data.children}
               </TextField>
-            )}
+            }
           </section>
-        ))}
+        )}
       </form>
       <FormActions
         handleLeftButtonClick={sendData}
