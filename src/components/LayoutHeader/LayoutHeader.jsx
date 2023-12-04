@@ -6,23 +6,23 @@ import { useOnInit } from 'custom_hooks/hooks'
 import { NavBar } from 'components/Navbar/Navbar'
 
 export const LayoutHeader = () => {
-  const [headerTitle, setHeaderTitle] = useState('hola')
+  const [title, setTitle] = useState('sin título')  
   // @ts-ignore
-  const [setFoterContent] = useOutletContext()
+  const [setFooterContent] = useOutletContext() || []
 
   useOnInit(() => {
-    setFoterContent(<NavBar />)
+    setFooterContent(<NavBar />)
   })
 
   return (
     <>
-      <header className="layout-header">
+      <header data-testid="dashboard_header" className="layout-header">
         <Typography className="layout-header__title" variant="h2">
-          {headerTitle}
+          {title}
         </Typography>
       </header>
       <article className="layout__content">
-        <Outlet context={[setHeaderTitle]} />
+        <Outlet context={{setTitle}} />
       </article>
     </>
   )

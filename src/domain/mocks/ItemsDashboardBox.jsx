@@ -12,7 +12,7 @@ export const itemsDashboardBoxMock = [
     icon: iconsDashboardBox['Figuritas Faltantes']
   },
   {
-    name: 'Puntos de Ventas',
+    name: 'Puntos de Venta',
     quantity: 20,
     icon: iconsDashboardBox['Puntos de Ventas']
   },
