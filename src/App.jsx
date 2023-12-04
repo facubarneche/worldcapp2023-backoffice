@@ -2,16 +2,13 @@ import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromE
 
 // Import Pages
 import { Login } from 'pages/Login/Login'
-import { Home } from 'pages/Home/Home'
-import { LayoutFooter } from 'components/LayoutFooter/LayoutFooter'
-import { LayoutHeader } from 'components/LayoutHeader/LayoutHeader'
+import { Dashboard } from 'src/pages/Dashboard/Dashboard'
 
 // Import Styles
 import './App.css'
 import { Error } from 'pages/Error/Error'
 import { SnackbarProvider } from 'notistack'
-import { FormPlayer} from 'pages/OneForAll/Forms/FormPlayer/FormPlayer'
-import { CardForm } from 'pages/OneForAll/Forms/CardForm'
+import { FormPlayer } from 'pages/OneForAll/Forms/FormPlayer/FormPlayer'
 import { MarketForm } from 'pages/OneForAll/Forms/MarketForm/MarketForm'
 // import { Teams } from 'pages/Teams/Teams'
 import { OneForAll } from 'pages/OneForAll/OneForAll'
@@ -21,47 +18,75 @@ import { cardService } from 'services/CardService/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { playerService } from 'services/PlayerService/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
-import { nationalTeamService } from './domain/services/nationalTeamService/NationalTeamService'
+import { nationalTeamService } from './domain/services/NationalTeamService/NationalTeamService'
+import { Layout } from './components/Layout/Layout'
+import CardForm from './pages/OneForAll/Forms/FormCard/CardForm'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<LayoutFooter />}>
-      <Route path="/">
-        <Route index element={<Navigate to="login" />} />
-        <Route path="login" element={<Login />}></Route>
-        <Route element={<LayoutHeader />}>
-          <Route path="home" element={<Home />}></Route>
-          <Route
-            path="figuritas"
-            element={<OneForAll key="One_For_All-1" service={cardService} contentComponent={CustomCardContent} />}
-          ></Route>
-          <Route path="figuritas/nuevo" element={<CardForm headerTitle={'Nueva figurita'} />}></Route>
-          <Route path="figuritas/:id/editar" element={<CardForm headerTitle={'Editar una figurita'} />} />
-          <Route
-            path="jugadores"
-            element={<OneForAll key="One_For_All-2" service={playerService} contentComponent={CustomPlayerContent} />}
-          ></Route>
-          <Route
-            path="jugadores/nuevo"
-            element={<FormPlayer headerTitle={'Nuevo jugador'} saveInfoSvFunc={playerService.create} />}
-          ></Route>
-          <Route
-            path="jugadores/:id/editar"
-            element={<FormPlayer headerTitle={'Editar un jugador'} saveInfoSvFunc={playerService.update} />}
+    <Route path="/">
+      <Route index element={<Navigate to="login" />} />
+      <Route path="login" element={<Login />} />
+      <Route path="dashboard" element={<Layout content={<Dashboard />} headerTitle="dashboard" />} />
+      <Route
+        path="figuritas"
+        element={
+          <Layout
+            content={<OneForAll service={cardService} contentComponent={CustomCardContent} />}
+            headerTitle="Figuritas"
           />
-          <Route
-            path="puntos-de-venta"
-            element={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
-          ></Route>
-          <Route path="puntos-de-venta/nuevo" element={<MarketForm headerTitle={'Nuevo punto de venta'} />}></Route>
-          <Route path="puntos-de-venta/:id/editar" element={<MarketForm headerTitle={'Editar punto de venta'} />} />
-          <Route path="selecciones" 
-            element={<OneForAll key="One_For_All-4" service={nationalTeamService} />}
+        }
+      />
+      <Route
+        path="figuritas/nuevo"
+        element={<Layout content={<CardForm saveFunc={cardService.create} />} headerTitle="Nueva figurita" />}
+      />
+      <Route
+        path="figuritas/:id/editar"
+        element={<Layout content={<CardForm saveFunc={cardService.update} />} headerTitle="Modificar figurita" />}
+      />
+      <Route
+        path="jugadores"
+        element={
+          <Layout
+            content={<OneForAll service={playerService} contentComponent={CustomPlayerContent} />}
+            headerTitle="Jugadores"
           />
-        </Route>
-        <Route path="/error" element={<Error />}></Route>
-        <Route path="*" element={<Error />}></Route>
-      </Route>
+        }
+      />
+      <Route path="jugadores/nuevo" element={<Layout content={<FormPlayer />} headerTitle="Nuevo jugador" />}></Route>
+      <Route
+        path="jugadores/:id/editar"
+        element={<Layout content={<FormPlayer />} headerTitle="Editar un jugador" />}
+      />
+      <Route
+        path="puntos-de-venta"
+        element={
+          <Layout
+            content={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
+            headerTitle="Puntos de venta"
+          />
+        }
+      />
+      <Route
+        path="puntos-de-venta/nuevo"
+        element={<Layout content={<MarketForm />} headerTitle="Nuevo punto de venta" />}
+      />
+      <Route
+        path="puntos-de-venta/:id/editar"
+        element={<Layout content={<MarketForm />} headerTitle="Editar punto de venta" />}
+      />
+      <Route
+        path="selecciones"
+        element={
+          <Layout
+            content={<OneForAll key="One_For_All-4" service={nationalTeamService} />}
+            headerTitle="Selecciones"
+          />
+        }
+      />
+      <Route path="/error" element={<Error />} />
+      <Route path="*" element={<Error />} />
     </Route>,
   ),
 )

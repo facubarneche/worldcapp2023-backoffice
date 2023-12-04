@@ -33,15 +33,34 @@
   box-shadow: var(--box-shadow);
 }
 
+.checkbox * {
+  font-family: var(--typeface-primary);
+  font-size: 1.4em;
+}
+
+.checkbox.MuiFormControlLabel-root {
+  width: 100%;  
+  margin: 0;
+}
+
 .field * {
   font-family: inherit;
 }
 
-.field input {
+.field .MuiInputBase-root select {
   font-size: 1.4em;
 }
 
-.field select {
+.field .MuiInputBase-root input {
+  font-size: 1.4em;
+}
+
+.field .MuiSelect-select {
+  font-size: 1.4em;
+  line-height: 1.4em;
+}
+
+.field__option {
   font-size: 1.4em;
 }
 

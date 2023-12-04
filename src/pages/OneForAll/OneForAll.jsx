@@ -1,21 +1,18 @@
 import 'src/styles/button.css'
-import { useOnInit } from 'custom_hooks/hooks'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
 import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
-import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
+import { useOnInit } from 'src/hooks/useOnInit'
+
 import TeamsModal from './modals/TeamsModal'
-import { render } from '@testing-library/react'
 
 const notNavigable = ["/selecciones"]
 
 export const OneForAll = ({ service, contentComponent = null }) => {
-  // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
   const [elements, setElements] = useState([])
   const navigate = useNavigate()
   const loc = useLocation().pathname
@@ -30,7 +27,6 @@ export const OneForAll = ({ service, contentComponent = null }) => {
   }
 
   useOnInit(() => {
-    setHeaderTitle(GetWordFromRoute(loc))
     getAll()
   })
 
@@ -38,7 +34,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
     if(isNavigable(loc)){
       id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
     }else{
-      render(<TeamsModal />)
+      <TeamsModal />
     }
   }
 
@@ -65,7 +61,10 @@ export const OneForAll = ({ service, contentComponent = null }) => {
           onDelete={handleDelete}
         />
       )}
-      <Button className="button button--circle button--icon button--large button--float" onClick={() => redirect(-1)}>
+      <Button
+        className="button button--circle button--icon button--icon-large button--float"
+        onClick={() => redirect(-1)}
+      >
         +
       </Button>
     </>

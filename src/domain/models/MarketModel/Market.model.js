@@ -1,6 +1,5 @@
 import { BusinessType } from 'services/constants'
-import { splitDireccion } from 'src/utils/serializers'
-import { ValidateInputs } from 'utils/Validators/ValidateInputs'
+import { splitDireccion } from 'utils/serializers'
 
 export class Market {
   constructor(storedata = {}) {
@@ -11,7 +10,7 @@ export class Market {
     this.geoX = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[0] : 0.0
     this.geoY = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[1] : 0.0
     this.stock = storedata.stockSobres ?? 0
-    this.pedidosPendientes = storedata.pedidosPendientes ?? 0
+    this.pedidosPendientes = storedata.pedidosPendientes ?? 0    
   }
 
   static fromJson = (storedata) => new Market(storedata)
@@ -51,25 +50,9 @@ export class Market {
   }
 
   splitGeo(geo) {
-    const geos = geo.split(",")
-    const geoX = parseFloat(geos[0].split("x: ")[1])
-    const geoY = parseFloat(geos[1].split("y: ")[1])
+    const geos = geo.split(',')
+    const geoX = parseFloat(geos[0].split('x: ')[1])
+    const geoY = parseFloat(geos[1].split('y: ')[1])
     return [geoX, geoY]
-  }
-
-  get validAddress() {
-    return ValidateInputs.isAddress(this.direccion)
-  }
-
-  emptyData(prop) {
-    return ValidateInputs.isEmpty(prop)
-  }
-
-  get hasEmptyData() {
-    return Object.keys(this).map((prop) => this.emptyData(this[prop]) && prop).filter( Boolean )
-  }
-
-  get hasErrors() {
-    return this.hasEmptyData.length !== 0 || !this.validAddress
-  }
+  } 
 }
