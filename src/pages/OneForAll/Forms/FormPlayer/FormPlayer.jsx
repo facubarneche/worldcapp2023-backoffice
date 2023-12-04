@@ -1,5 +1,5 @@
 import './FormPlayer.css'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
@@ -10,7 +10,7 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 import { enqueueSnackbar } from 'notistack'
 
-export const FormPlayer = ({ saveInfoSvFunc }) => {
+export const FormPlayer = () => {
   const [player, setPlayer] = useState(
     new Player({
       nombre: '',
@@ -67,7 +67,7 @@ export const FormPlayer = ({ saveInfoSvFunc }) => {
   const sendData = async () => {
     if (!player.isPolivalente) setPlayerValue('posiciones', [])
     try {
-      player.isNew ? await saveInfoSvFunc(player) : await saveInfoSvFunc(player, player.id)
+      player.isNew ? await playerService.create(player) : await playerService.update(player, player.id)
       handleBack()
       enqueueSnackbar(player.isNew ? 'Jugador creado exitosamente' : 'Cambios guardados con exito', {
         variant: 'success',
