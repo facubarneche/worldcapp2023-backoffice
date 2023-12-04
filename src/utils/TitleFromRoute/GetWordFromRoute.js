@@ -1,1 +1,0 @@
-export const GetWordFromRoute = (route) => route.replace(/\/([-_a-zA-Z]+)/g, (_, match) => match.replace(/[-_]/g, ' '))

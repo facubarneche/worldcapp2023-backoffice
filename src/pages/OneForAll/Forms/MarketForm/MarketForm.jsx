@@ -4,23 +4,26 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { useLocation, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Market } from 'models/MarketModel/Market.model'
 import { marketService } from 'services/MarketService/MarketService'
-import { InputError } from 'errors/InputError'
 import { Fragment, useState } from 'react'
 import { BusinessType } from 'services/constants'
+import {
+  Validator,
+  IsEmpty,
+  IsNotAddress,
+  IsNegative,
+  IsNotInRange,
+} from 'src/domain/models/Validations/InputValidation'
 
 const InputType = {
   TextField: 'TextField',
   Select: 'Select',
 }
 
-export const MarketForm = ({ headerTitle }) => {
+export const MarketForm = () => {
   const { id } = useParams()
   const [market, setMarket] = useState(new Market())
   const [errors, setErrors] = useState({})
   const loc = useLocation().pathname
-
-  // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
   const navigate = useNavigate()
 
   const fields = {
@@ -83,7 +86,6 @@ export const MarketForm = ({ headerTitle }) => {
   }
 
   useOnInit(() => {
-    setHeaderTitle(headerTitle)
     id && getCardToEdit()
   })
 
@@ -104,23 +106,25 @@ export const MarketForm = ({ headerTitle }) => {
 
   const handleClickConfirm = () => {
     validateFields()
-    saveData()
   }
 
   const validateFields = () => {
     setErrors({})
-    market.hasEmptyData.forEach((prop) => {
-      setErrors((prev) => ({ ...prev, [prop]: InputError.NOT_EMPTY }))
-    })
-    market.direccion !== '' &&
-      !market.validAddress &&
-      setErrors((prev) => ({ ...prev, direccion: InputError.VALID_ADDRESS }))
+    const validator = new Validator([
+      new IsEmpty(market),
+      new IsNotAddress({ direccion: market.direccion }),
+      new IsNegative({ stock: market['stock'], pedidosPendientes: market['pedidosPendientes'] }),
+      new IsNotInRange({ geoX: market['geoX'], geoY: market['geoY'] }, -100, 100),
+    ])
+
+    validator.runValidations()
+    setErrors((prev) => ({ ...prev, ...validator.getErrors() }))
+    !validator.hasErrors() && saveData()
   }
 
   const saveData = async () => {
-    !market.hasErrors &&
-      (loc.endsWith('nuevo') ? await marketService.create(market) : await marketService.update(market),
-      navigate('/puntos-de-venta'))
+    loc.endsWith('nuevo') ? await marketService.create(market) : await marketService.update(market)
+    navigate('/puntos-de-venta')
   }
 
   return (

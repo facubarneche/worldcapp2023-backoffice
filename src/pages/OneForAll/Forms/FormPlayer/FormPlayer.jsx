@@ -10,9 +10,7 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 import { enqueueSnackbar } from 'notistack'
 
-export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
-  // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+export const FormPlayer = ({ saveInfoSvFunc }) => {
   const [player, setPlayer] = useState(
     new Player({
       nombre: '',
@@ -51,7 +49,6 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
     if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
     setPositionsPlayer()
-    setHeaderTitle(headerTitle)
   })
 
   const setPlayerValue = (key, value) => {
