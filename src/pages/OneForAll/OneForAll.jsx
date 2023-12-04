@@ -11,7 +11,7 @@ import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
 
 export const OneForAll = ({ contentComponent, service }) => {
   // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+  const {setTitle} = useOutletContext()
   const [elements, setElements] = useState([])
   const navigate = useNavigate()
   const loc = useLocation().pathname
@@ -26,7 +26,7 @@ export const OneForAll = ({ contentComponent, service }) => {
   }
 
   useOnInit(() => {
-    setHeaderTitle(GetWordFromRoute(loc))
+    setTitle(GetWordFromRoute(loc))
     getAll()
   })
 
