@@ -1,15 +1,18 @@
-import "./DashboardCard.css"
-import { Box } from "@mui/material"
+import { GentTestId } from 'src/utils/GenTestId/GenTestId'
+import './DashboardCard.css'
+import { Box } from '@mui/material'
 
 export const DashboardCard = ({ itemBox }) => {
   return (
-    <Box className='dashboard-box'>
-      <section data-testid='itembox-icon' className="dashboard-box__icon">
-        {itemBox.icon}
-      </section>
-      <section className="dashboard-box__info">
-        <div data-testid='itembox-quantity' className="dashboard-box__info-number">{itemBox.quantity}</div>
-        <div data-testid='itembox-name' className="dashboard-box__info-desc">{itemBox.name}</div>
+    <Box data-testid={`${GentTestId.generate(itemBox.name)}box`} className="dashboard">
+      {itemBox.icon}
+      <section className="dashboard__info">
+        <div data-testid={`${itemBox.name}-number`} className="dashboard__number">
+          {itemBox.quantity}
+        </div>
+        <div data-testid={`${itemBox.name}-description`} className="dashboard__desc">
+          {itemBox.name}
+        </div>
       </section>
     </Box>
   )

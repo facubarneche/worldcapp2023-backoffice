@@ -3,10 +3,10 @@ import { useOnInit } from "custom_hooks/hooks"
 
 export const Teams = () => {
   // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+  const {setTitle} = useOutletContext()
   
   useOnInit(() => {
-    setHeaderTitle('Selecciones')
+    setTitle('Selecciones')
   })
 
   return (
