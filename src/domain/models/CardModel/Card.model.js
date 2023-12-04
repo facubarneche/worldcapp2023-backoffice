@@ -1,13 +1,15 @@
+import { PrintType } from "services/constants"
+
 export const BASE_VALUE = 100.0
 export class Card {
-  constructor(data) {
-    this.id = data.id
-    this.numero = data.numero
-    this.onFire = data.onFire
-    this.nivelImpresion = data.nivelImpresion
-    this.nombre = data.nombre
-    this.apellido = data.apellido
-    this.valoracionJugador = data.valoracion
+  constructor(data = {}) {
+    this.id = data.id ?? -1
+    this.numero = data.numero ?? ''
+    this.onFire = data.onFire ?? false
+    this.nivelImpresion = data.nivelImpresion ?? PrintType.alta
+    this.nombre = data.nombre ?? ''
+    this.apellido = data.apellido ?? ''
+    this.valoracionJugador = data.valoracion ?? 0
   }
 
   static fromJson = (cardata) => new Card(cardata)
@@ -34,20 +36,20 @@ export class Card {
   }
 
   get footer() {
-    return 'Valoración: ' + this.totalValoration()
-  }
+    return 'Valoración: ' + this.totalValoration
+  }  
 
   get tipo() {return 'Figuritas'}
 
-  totalValoration = () => this.valoracionJugador + this.baseValoration()
+  get totalValoration() {return this.valoracionJugador + this.baseValoration}
 
-  baseValoration = () => BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
+  get baseValoration() {return BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()}
 
   onFireMultiplier = () => this.onFire ? 1.2 : 1.0
 
   evenMultiplier = () => this.numero % 2 == 0 ? 1.1 : 1.0
 
-  printMultiplier = () => this.nivelImpresion.toLowerCase() === 'baja' ? 1.0 : 0.85
+  printMultiplier = () => this.nivelImpresion.toLowerCase() === PrintType.baja ? 1.0 : 0.85
 
   get isNew() {
     return this.id === undefined

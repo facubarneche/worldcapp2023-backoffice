@@ -10,7 +10,7 @@ import { useOnInit } from 'src/custom_hooks/hooks'
 
 export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   // @ts-ignore
-  const [setHeaderTitle] = useOutletContext()
+  const {setTitle} = useOutletContext()
   const [player, setPlayer] = useState(
     new Player({
       nombre: '',
@@ -34,6 +34,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
   const navigate = useNavigate()
 
   useOnInit(() => {
+    setTitle(headerTitle)
     const setNationalTeams = async () => {
       const data = await nationalTeamService.getAllNames()
       setNationalTeamOptions(data)
@@ -48,8 +49,7 @@ export const FormPlayer = ({ headerTitle, saveInfoSvFunc }) => {
 
     if (params.id != undefined) setPlayerInfo(params.id)
     setNationalTeams()
-    setPositionsPlayer()
-    setHeaderTitle(headerTitle)
+    setPositionsPlayer()    
   })
 
   const setPlayerValue = (key, value) => {

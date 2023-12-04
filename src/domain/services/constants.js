@@ -13,3 +13,9 @@ export const ElementType = {
   Jugadores: 'Jugadores',
   Figuritas: 'Figuritas',
 }
+
+export const PrintType = {
+  baja: 'baja',
+  media: 'media',
+  alta: 'alta',
+}
