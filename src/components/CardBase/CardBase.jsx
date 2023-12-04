@@ -7,7 +7,6 @@ import { ElementType, BusinessType } from 'services/constants'
 export const CardBase = ({ element, contentComponent, onEditClick, onDelete }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const marketIcon = () => {
-    console.log(element.tipo)
     return element.tipo === BusinessType.Kiosco
       ? 'fa-store'
       : element.tipo === BusinessType.Libreria
@@ -40,7 +39,9 @@ export const CardBase = ({ element, contentComponent, onEditClick, onDelete }) =
           </Box>
         </Box>
         {contentComponent}
-        <Typography className="card-base__footer card-base__text card-base__text--upper">{element.footer}</Typography>
+        {
+          element.footer && <Typography className="card-base__footer card-base__text card-base__text--upper">{element.footer}</Typography>
+        }
       </Card>
 
       <CustomDialog
