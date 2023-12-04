@@ -8,6 +8,10 @@ import { useState } from 'react'
 import { useNavigate, useOutletContext, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { GetWordFromRoute } from 'utils/TitleFromRoute/GetWordFromRoute'
+import TeamsModal from './modals/TeamsModal'
+import { render } from '@testing-library/react'
+
+const notNavigable = ["/selecciones"]
 
 export const OneForAll = ({ service, contentComponent = null }) => {
   // @ts-ignore
@@ -31,8 +35,14 @@ export const OneForAll = ({ service, contentComponent = null }) => {
   })
 
   const redirect = (id = -1) => {
-    id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
+    if(isNavigable(loc)){
+      id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
+    }else{
+      render(<TeamsModal />)
+    }
   }
+
+  const isNavigable = (loc) => !notNavigable.includes(loc)
 
   const handleDelete = async (id) => {
     try {
