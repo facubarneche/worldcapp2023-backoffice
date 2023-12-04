@@ -113,8 +113,8 @@ export const CardForm = ({ headerTitle, saveFunc }) => {
       <TextField className="field" inputProps={{ type: 'url' }} label="Imagen Jugador" data-testid="figurita-imagen" />
 
       <Box className='text__container'>
-        <Typography className='text text--strong text--uppercase'>Valoración base: {parseFloat(card.baseValoration.toFixed(2))}</Typography>
-        <Typography className='text text--strong text--uppercase'>Valoración total: {parseFloat(card.totalValoration.toFixed(2))}</Typography>
+        <Typography className='text text--strong text--uppercase text--2col'>Valoración base: {parseFloat(card.baseValoration.toFixed(2))}</Typography>
+        <Typography className='text text--strong text--uppercase text--2col'>Valoración total: {parseFloat(card.totalValoration.toFixed(2))}</Typography>
       </Box>
 
       <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={handleBack} />
