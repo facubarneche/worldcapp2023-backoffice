@@ -7,13 +7,13 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { useOnInit } from 'src/hooks/useOnInit'
-
 import TeamsModal from './modals/TeamsModal'
 
 const notNavigable = ["/selecciones"]
 
 export const OneForAll = ({ service, contentComponent = null }) => {
   const [elements, setElements] = useState([])
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
   const loc = useLocation().pathname
 
@@ -34,7 +34,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
     if(isNavigable(loc)){
       id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
     }else{
-      <TeamsModal />
+      setShowModal(true)
     }
   }
 
@@ -48,6 +48,8 @@ export const OneForAll = ({ service, contentComponent = null }) => {
       HandleError(e, navigate)
     }
   }
+
+  const handleModalClose = () => setShowModal(false)
 
   return (
     <>
@@ -67,6 +69,9 @@ export const OneForAll = ({ service, contentComponent = null }) => {
       >
         +
       </Button>
+      {
+        showModal && <TeamsModal onClose={handleModalClose}/>
+      }
     </>
   )
 }

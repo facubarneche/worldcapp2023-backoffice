@@ -1,9 +1,12 @@
 import { Box, Button, Modal, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
-import { Team } from 'src/domain/models/TeamModel/Team.model'
+// import { Team } from 'src/domain/models/TeamModel/Team.model'
+import './TeamsModal.css'
+import { FormActions } from 'src/components/FormActions/FormActions'
 
 //TODO: Luego mover o pasar a css
 const style = {
+  display: 'flex',
+  flexDirection: 'column',
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -13,17 +16,17 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  gap: 3
 }
 
 //TODO: mover y reutilizar
-const InputType = {
-  TextField: 'TextField',
-  Select: 'Select',
-}
+// const InputType = {
+//   TextField: 'TextField',
+//   Select: 'Select',
+// }
 
-const TeamsModal = () => {
-  const handleClose = () => false
-  const [team, setTeam] = useState(new Team())
+const TeamsModal = ({ onClose }) => {
+  // const [team, setTeam] = useState(new Team())
 
   //   const fields = {
   //     nombre: {
@@ -59,18 +62,23 @@ const TeamsModal = () => {
   //       options: {},
   //     }
   //   }
+
+
+  const handleSave = () => {
+    // card.isNew ? saveFunc(card) : saveFunc(card, card.id)
+    onClose()
+  }
   
   return (
     <>
-      <Button>Open modal</Button>
-      <Modal
+      <Modal className='teams-modal'
         open={true}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextField required label="Nombre" type="text" value={""} />
+          <TextField required label="Nombre" type="text"/>
           <TextField
             className="figuritas-form__select"
             required
@@ -81,8 +89,9 @@ const TeamsModal = () => {
             <option>lele</option>
             <option>lolo</option>
           </TextField>
-          <TextField required label="Copas del mundo" type="number" value={0} />
-          <TextField required label="Copas confederacion" type="number" value={0} />
+          <TextField required label="Copas del mundo" type="number" />
+          <TextField required label="Copas confederacion" type="number" />
+          <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={onClose} />
         </Box>
       </Modal>
     </>
