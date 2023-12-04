@@ -2,7 +2,7 @@ import './FormPlayer.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { nationalTeamService } from 'src/domain/services/nationalTeamService/NationalTeamService'
 import { playerService } from 'src/domain/services/PlayerService/PlayerService'
 import { Player } from 'src/domain/models/PlayerModel/Player.model'
@@ -17,6 +17,7 @@ export const FormPlayer = () => {
     apellido: '',
     altura: '',
     peso: '',
+    debut: '',
     nroCamiseta: '',
     cotizacion: '',
   })
@@ -41,11 +42,6 @@ export const FormPlayer = () => {
     if (params.id !== undefined) setPlayerInfo(params.id)
     setNationalTeams()
     setPositionsPlayer()
-  })
-
-  useEffect(() => {
-    console.log(playerErrors)
-    console.log(player.isNotComplete)
   })
 
   const setPlayerValue = (key, value) => {
@@ -162,6 +158,10 @@ export const FormPlayer = () => {
       props: {
         type: 'number',
       },
+      objectValidation: {
+        conditionFunction: player.isAInvalidYear,
+        message: 'Ingrese un año entreo 1300 y el año actual',
+      },
     },
     {
       textLabel: 'Posicion',
@@ -220,7 +220,7 @@ export const FormPlayer = () => {
             )}
           </section>
         ))}
-      </form>g
+      </form>
       <FormActions
         handleLeftButtonClick={sendData}
         handleRightButtonClick={handleBack}

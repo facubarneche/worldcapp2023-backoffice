@@ -8,7 +8,7 @@ export class Player {
     this.peso = playerdata.peso ?? ''
     this.nroCamiseta = playerdata.nroCamiseta ?? ''
     this.seleccion = playerdata.seleccion ?? ''
-    this.debut = playerdata.debut ?? ''
+    this.debut = playerdata.debut ?? 'mm/dd/yyyy'
     this.posicion = playerdata.posicion ?? ''
     this.posiciones = playerdata.posiciones ?? []
     this.esLider = playerdata.esLider ?? false
@@ -80,6 +80,11 @@ export class Player {
 
   isNegative(value) {
     return value < 0
+  }
+
+  isAInvalidYear(value) {
+    console.log(new Date().getFullYear())
+    return value < 1300 || value > new Date().getFullYear()
   }
 
   get isNotComplete() {
