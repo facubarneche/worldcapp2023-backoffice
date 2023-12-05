@@ -42,7 +42,7 @@ export const TeamsModal = ({ onClose, action }) => {
     }
   }
 
-  const handleTitle = () => (action.newEntity ? 'Nueva' : 'Editar')
+  const handleTitle = () => action.newEntity ? 'Nueva' : 'Editar'
 
   return (
     <>
@@ -69,9 +69,9 @@ export const TeamsModal = ({ onClose, action }) => {
             value={team.confederacion}
             onChange={(e) => handleChange('confederacion', e.target.value)}
           >
-            {confederaciones.map((confederacion) => (
+            {confederaciones.map((confederacion) => 
               <option key={confederacion}>{confederacion}</option>
-            ))}
+            )}
           </TextField>
           <TextField
             data-testid="input-copasDelMundo"

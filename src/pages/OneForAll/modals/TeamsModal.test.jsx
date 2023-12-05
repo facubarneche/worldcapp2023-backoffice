@@ -1,7 +1,7 @@
 import { render, screen, act } from '@testing-library/react'
 import { TeamsModal } from 'pages/OneForAll/modals/TeamsModal'
 import { vi } from 'vitest'
-
+import { BrowserRouter as Router } from 'react-router-dom'
 import { nationalTeamMock } from 'mocks/NationalTeamMock'
 import { nationalTeamService } from 'services/NationalTeam/NationalTeamService'
 import { confederationsMock } from 'mocks/ConfederationsMock'
@@ -18,7 +18,13 @@ describe('TeamsModal Tests', () => {
   const action = { showModal: true, newEntity: true, id: -1 }
 
   beforeEach(async () => {
-    await act(async () => render(<TeamsModal onClose={onCloseMock} action={action} />))
+    await act(async () =>
+      render(
+        <Router>
+          <TeamsModal onClose={onCloseMock} action={action} />
+        </Router>,
+      ),
+    )
   })
 
   afterEach(() => {

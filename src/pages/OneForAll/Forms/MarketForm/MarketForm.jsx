@@ -132,9 +132,9 @@ export const MarketForm = () => {
 
   return (
     <>
-      {Object.entries(fields).map(([field, props], index) => (
+      {Object.entries(fields).map(([field, props], index) => 
         <Fragment key={index}>
-          {props.type === InputType.TextField ? (
+          {props.type === InputType.TextField ? 
             <Box key={index} className="field__container">
               <TextField
                 key={index}
@@ -148,39 +148,39 @@ export const MarketForm = () => {
                   index === 0
                     ? `${props.className}-first`
                     : index === fields.length - 1
-                    ? `${props.className}-last`
-                    : `${props.className}-${index}`
+                      ? `${props.className}-last`
+                      : `${props.className}-${index}`
                 }
               />
               <span className="field__error">{errors[field]}</span>
             </Box>
-          ) : props.type === InputType.Select ? (
-            <TextField
-              key={index}
-              className={props.className}
-              value={props.value}
-              select
-              SelectProps={{ ...props.elementProps }}
-              onChange={(e) => handleChange(field, e.target.value)}
-              data-testid={
-                index === 0
-                  ? `${props.className}-first`
-                  : index === Object.keys(fields).length - 1
-                  ? `${props.className}-last`
-                  : `${props.className}-${index}`
-              }
-            >
-              {Object.entries(props.options).map(([clave, value]) => (
-                <option key={clave} value={value}>
-                  {value}
-                </option>
-              ))}
-            </TextField>
-          ) : (
-            <></>
-          )}
+            : props.type === InputType.Select ? 
+              <TextField
+                key={index}
+                className={props.className}
+                value={props.value}
+                select
+                SelectProps={{ ...props.elementProps }}
+                onChange={(e) => handleChange(field, e.target.value)}
+                data-testid={
+                  index === 0
+                    ? `${props.className}-first`
+                    : index === Object.keys(fields).length - 1
+                      ? `${props.className}-last`
+                      : `${props.className}-${index}`
+                }
+              >
+                {Object.entries(props.options).map(([clave, value]) => 
+                  <option key={clave} value={value}>
+                    {value}
+                  </option>
+                )}
+              </TextField>
+              : 
+              <></>
+          }
         </Fragment>
-      ))}
+      )}
       <FormActions
         handleLeftButtonClick={handleClickConfirm}
         handleRightButtonClick={() => {
