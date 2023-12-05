@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         path="figuritas"
         element={
           <Layout
-            content={<OneForAll key={0} service={cardService} contentComponent={CustomCardContent} />}
+            content={<OneForAll service={cardService} contentComponent={CustomCardContent} />}
             headerTitle="Figuritas"
           />
         }
@@ -49,7 +49,7 @@ const router = createBrowserRouter(
         path="jugadores"
         element={
           <Layout
-            content={<OneForAll key={1} service={playerService} contentComponent={CustomPlayerContent} />}
+            content={<OneForAll service={playerService} contentComponent={CustomPlayerContent} />}
             headerTitle="Jugadores"
           />
         }
@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         path="puntos-de-venta"
         element={
           <Layout
-            content={<OneForAll key={2} service={marketService} contentComponent={CustomMarketContent} />}
+            content={<OneForAll service={marketService} contentComponent={CustomMarketContent} />}
             headerTitle="Puntos de venta"
           />
         }
@@ -80,7 +80,7 @@ const router = createBrowserRouter(
         path="selecciones"
         element={
           <Layout
-            content={<OneForAll key="One_For_All-4" service={nationalTeamService} />}
+            content={<OneForAll service={nationalTeamService} />}
             headerTitle="Selecciones"
           />
         }

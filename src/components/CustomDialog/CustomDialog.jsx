@@ -10,19 +10,19 @@ export const CustomDialog = ({ props, isOpen, onClose, onConfirm }) => {
       </DialogContent>
       <DialogActions>
         <Button
-          className="c-dialog__button c-dialog__button--secondary"
-          onClick={onClose}
-          data-testid="modal-cancel-button"
-        >
-          Cancelar
-        </Button>
-        <Button
           className="c-dialog__button c-dialog__button--primary"
           onClick={onConfirm}
           autoFocus
           data-testid="modal-confirm-button"
         >
           Confirmar
+        </Button>
+        <Button
+          className="c-dialog__button c-dialog__button--secondary"
+          onClick={onClose}
+          data-testid="modal-cancel-button"
+        >
+          Cancelar
         </Button>
       </DialogActions>
     </Dialog>

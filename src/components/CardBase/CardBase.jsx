@@ -24,11 +24,11 @@ export const CardBase = ({ element, contentComponent, onEditClick, onDelete, tes
     setDeleteDialogOpen(false)
     onDelete(id)
   }
-
+  
   return (
     <>
-      <Card className="card-base" data-testid={testid}>
-        <Box className="card-base__header">
+      <Card className={contentComponent ? 'card-base' : 'card-base card-base--nocontent'} data-testid={testid}>
+        <Box className={contentComponent ? 'card-base__header' : 'card-base__header card-base__header--noshadow'}>
           <Box className="card-base__title">
             <i
               className={`card-base__icon card-base__icon--large fas ${marketIcon()}`}
