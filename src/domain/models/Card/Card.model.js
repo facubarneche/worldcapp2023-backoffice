@@ -7,8 +7,7 @@ export class Card {
     this.numero = data.numero ?? ''
     this.onFire = data.onFire ?? false
     this.nivelImpresion = data.nivelImpresion ?? ''
-    this.nombre = data.nombre ?? ''
-    this.apellido = data.apellido ?? ''
+    this.nombreApellido = data.nombreApellido ?? ''
     this.valoracionJugador = data.valoracion ?? 0
   }
 
@@ -17,14 +16,14 @@ export class Card {
   get JSONCreateModifyCard() {
     return {
       numero: this.numero,
-      nombre: `${this.nombre} ${this.apellido}`,
+      nombre: this.nombreApellido,
       onFire: this.onFire,
       nivelImpresion: this.nivelImpresion,
     }
   }
 
   get title() {
-    return this.nombre + ' ' + this.apellido
+    return this.nombreApellido
   }
 
   get content() {

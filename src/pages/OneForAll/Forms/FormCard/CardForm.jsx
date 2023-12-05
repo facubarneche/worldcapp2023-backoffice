@@ -3,7 +3,7 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { cardService } from 'src/domain/services/Card/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Card } from 'src/domain/models/Card/Card.model'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
 import { FormActions } from 'src/components/FormActions/FormActions'
@@ -14,7 +14,7 @@ export const CardForm = ({ saveFunc }) => {
   const navigate = useNavigate()
   const params = useParams()
 
-  const [card, setCard] = useState(new Card({}))
+  const [card, setCard] = useState(new Card())
 
   useOnInit(async () => {
     try {
@@ -35,6 +35,10 @@ export const CardForm = ({ saveFunc }) => {
     } catch (error) {
       HandleError(error, navigate)
     }
+  })
+
+  useEffect(() => {
+    console.log(card)
   })
 
   const setCardValue = (key, value) => {
@@ -69,9 +73,9 @@ export const CardForm = ({ saveFunc }) => {
         select
         className="field"
         label="Jugador"
-        value={card.nombre}
+        value={card.nombreApellido}
         onChange={(e) => {
-          handleChange(e.target.value, 'nombre')
+          handleChange(e.target.value, 'nombreApellido')
         }}
         data-testid="figurita-nombre"
       >
