@@ -46,7 +46,7 @@ const TeamsModal = ({ onClose, action }) => {
         
         <Box className='teams-modal'>
           <Typography align='center' sx={{ fontSize: 32 }}>{`${handleTitle()} Selección`}</Typography>
-          <TextField required label="Nombre" type="text" value={team.nombre} onChange={(e) => handleChange('nombre', e.target.value)}/>
+          <TextField data-testid="input-pais" required label="Nombre" type="text" value={team.nombre} onChange={(e) => handleChange('nombre', e.target.value)}/>
           <TextField
             required
             select
@@ -60,7 +60,7 @@ const TeamsModal = ({ onClose, action }) => {
               )
             }
           </TextField>
-          <TextField required label="Copas del mundo" type="number" value={team.copasDelMundo} onChange={(e) => handleChange('copasDelMundo', e.target.value)} />
+          <TextField data-testid="input-copasDelMundo" required label="Copas del mundo" type="number" value={team.copasDelMundo} onChange={(e) => handleChange('copasDelMundo', e.target.value)} />
           <TextField required label="Copas confederacion" type="number" value={team.copasConfederacion} onChange={(e) => handleChange('copasConfederacion', e.target.value)}/>
           <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={onClose} />
         </Box>
