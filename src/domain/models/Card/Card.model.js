@@ -3,7 +3,7 @@ import { PrintType } from 'src/domain/constants'
 export const BASE_VALUE = 100.0
 export class Card {
   constructor(data = {}) {
-    this.id = data.id ?? -1
+    this.id = data.id
     this.numero = data.numero ?? ''
     this.onFire = data.onFire ?? false
     this.nivelImpresion = data.nivelImpresion ?? ''
