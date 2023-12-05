@@ -1,5 +1,4 @@
 import 'src/styles/button.css'
-import { useOnInit } from 'custom_hooks/hooks'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
 import { CustomSearch } from 'models/CustomSearch/CustomSearch'
@@ -7,6 +6,7 @@ import { CardBase } from 'components/CardBase/CardBase'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@mui/material'
+import { useOnInit } from 'src/hooks/useOnInit'
 
 export const OneForAll = ({ contentComponent, service }) => {
   const [elements, setElements] = useState([])

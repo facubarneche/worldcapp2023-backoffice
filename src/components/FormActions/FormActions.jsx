@@ -3,13 +3,12 @@ import './FormActions.css'
 
 export const FormActions = ({
   leftButtonText = 'Confirmar',
-  rightButtonText = 'Cancelar',  
+  rightButtonText = 'Cancelar',
   leftButtonProps = {},
   rightButtonProps = {},
-  handleLeftButtonClick = () =>{},
-  handleRightButtonClick = () => {},  
-}) => { 
-
+  handleLeftButtonClick = () => {},
+  handleRightButtonClick = () => {},
+}) => {
   return (
     <footer className="form__actions">
       <Button
