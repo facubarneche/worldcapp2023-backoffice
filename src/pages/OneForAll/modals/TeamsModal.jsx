@@ -6,19 +6,6 @@ import { nationalTeamService } from 'src/domain/services/NationalTeamService/Nat
 import { useState } from 'react'
 import { Team } from 'src/domain/models/TeamModel/Team.model'
 
-//TODO: mover y reutilizar
-// const InputType = {
-//   TextField: 'TextField',
-//   Select: 'Select',
-// }
-// useOnInit(() => {
-//   id && getCardToEdit()
-// })
-
-// const getCardToEdit = async () => {
-//   const card = await marketService.getById(id)
-//   setMarket(card)
-// }
 const TeamsModal = ({ onClose, action }) => {
   const [team, setTeam] = useState(new Team())
   const [confederaciones, setConfederaciones] = useState([])
@@ -34,49 +21,12 @@ const TeamsModal = ({ onClose, action }) => {
   const handleChange = (key, value) => {
     team[key] = value
     generarNuevoTeam(team)
-    console.log(team)
   }
 
   const generarNuevoTeam = (team) => {
     const nuevoteam = Object.assign(new Team(), team)
     setTeam(nuevoteam)
   }
-
-  //   const fields = {
-  //     nombre: {
-  //       name: 'Nombre',
-  //       type: InputType.TextField,
-  //       value: team.nombre,
-  //       className: 'field',
-  //       elementProps: {},
-  //       options: {},
-  //     },
-  //     confederacion: {
-  //       name: 'Pedidos Pendientes',
-  //       type: InputType.Select,
-  //       value: team.tipoPuntoDeVenta,
-  //       className: 'field',
-  //       elementProps: { native: true },
-  //       options: ['CONMEBOL', 'UEFA'], //TODO: traer del back las confederaciones
-  //     },
-  //     copasDelMundo: {
-  //       name: 'Pedidos Pendientes',
-  //       type: InputType.TextField,
-  //       value: team.pedidosPendientes,
-  //       className: 'field',
-  //       elementProps: { type: 'number', min: 0 },
-  //       options: {},
-  //     },
-  //     copasConfederacion: {
-  //       name: 'Pedidos Pendientes',
-  //       type: InputType.TextField,
-  //       value: team.pedidosPendientes,
-  //       className: 'field',
-  //       elementProps: { type: 'number', min: 0 },
-  //       options: {},
-  //     }
-  //   }
-
 
   const handleSave = async () => {
     action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
