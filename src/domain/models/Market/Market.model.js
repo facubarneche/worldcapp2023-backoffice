@@ -1,4 +1,4 @@
-import { BusinessType } from 'services/constants'
+import { BusinessType } from 'src/domain/constants'
 import { splitDireccion } from 'utils/serializers'
 
 export class Market {
@@ -10,7 +10,7 @@ export class Market {
     this.geoX = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[0] : 0.0
     this.geoY = storedata.direccion ? this.splitGeo(storedata.direccion.ubiGeografica)[1] : 0.0
     this.stock = storedata.stockSobres ?? 0
-    this.pedidosPendientes = storedata.pedidosPendientes ?? 0    
+    this.pedidosPendientes = storedata.pedidosPendientes ?? 0
   }
 
   static fromJson = (storedata) => new Market(storedata)
@@ -54,5 +54,5 @@ export class Market {
     const geoX = parseFloat(geos[0].split('x: ')[1])
     const geoY = parseFloat(geos[1].split('y: ')[1])
     return [geoX, geoY]
-  } 
+  }
 }

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { REST_SERVER_URL } from '../constants'
-import { Market } from 'models/MarketModel/Market.model'
+import { REST_SERVER_URL } from '../../constants'
+import { Market } from 'src/domain/models/Market/Market.model'
 import { HandleError } from 'src/utils/HandleError/HandleError'
 
 class MarketService {
@@ -15,11 +15,11 @@ class MarketService {
   }
 
   delete = async (id) => {
-    try {      
+    try {
       const response$ = await axios.delete(`${REST_SERVER_URL}/punto-de-venta/${id}/eliminar`)
       console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
-      HandleError(err)      
+      HandleError(err)
     }
   }
 
@@ -28,9 +28,8 @@ class MarketService {
       const MarketJSON = Market.toJson(market)
       const response = await axios.post(`${REST_SERVER_URL}/punto-de-venta/nuevo`, MarketJSON)
       console.log('Market created successfully', response.data)
-
     } catch (err) {
-      HandleError(err) 
+      HandleError(err)
     }
   }
 
@@ -40,9 +39,8 @@ class MarketService {
       console.log('editado', market.id)
       const response = await axios.put(`${REST_SERVER_URL}/punto-de-venta/editar`, MarketJSON)
       console.log('Market updated successfully', response.data)
-
     } catch (err) {
-      HandleError(err) 
+      HandleError(err)
     }
   }
 }

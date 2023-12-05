@@ -1,14 +1,14 @@
 import './FormPlayer.css'
-import { useNavigate, useParams } from 'react-router-dom'
 import { FormActions } from 'components/FormActions/FormActions'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
-import { useState } from 'react'
-import { nationalTeamService } from 'src/domain/services/NationalTeamService/NationalTeamService'
-import { playerService } from 'services/PlayerService/PlayerService'
-import { Player } from 'models/PlayerModel/Player.model'
+import { nationalTeamService } from 'src/domain/services/NationalTeam/NationalTeamService'
+import { playerService } from 'src/domain/services/Player/PlayerService'
+import { Player } from 'src/domain/models/Player/Player.model'
 import { useOnInit } from 'hooks/useOnInit'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { enqueueSnackbar } from 'notistack'
+import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const FormPlayer = () => {
   const [player, setPlayer] = useState(new Player({}))

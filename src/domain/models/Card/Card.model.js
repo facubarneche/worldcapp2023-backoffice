@@ -1,4 +1,4 @@
-import { PrintType } from "services/constants"
+import { PrintType } from 'src/domain/constants'
 
 export const BASE_VALUE = 100.0
 export class Card {
@@ -17,9 +17,9 @@ export class Card {
   get JSONCreateModifyCard() {
     return {
       numero: this.numero,
-      nombre:`${this.nombre} ${this.apellido}`,
+      nombre: `${this.nombre} ${this.apellido}`,
       onFire: this.onFire,
-      nivelImpresion: this.nivelImpresion
+      nivelImpresion: this.nivelImpresion,
     }
   }
 
@@ -37,13 +37,19 @@ export class Card {
 
   get footer() {
     return 'Valoración: ' + this.totalValoration
-  }  
+  }
 
-  get tipo() {return 'Figuritas'}
+  get tipo() {
+    return 'Figuritas'
+  }
 
-  get totalValoration() {return this.valoracionJugador + this.baseValoration}
+  get totalValoration() {
+    return this.valoracionJugador + this.baseValoration
+  }
 
-  get baseValoration() {return BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()}
+  get baseValoration() {
+    return BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
+  }
 
   onFireMultiplier = () => this.onFire ? 1.2 : 1.0
 

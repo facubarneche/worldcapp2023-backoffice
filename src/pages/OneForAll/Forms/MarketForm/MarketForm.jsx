@@ -1,17 +1,10 @@
-
 import { FormActions } from 'components/FormActions/FormActions'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Market } from 'models/MarketModel/Market.model'
-import { marketService } from 'services/MarketService/MarketService'
+import { Market } from 'models/Market/Market.model'
+import { marketService } from 'services/Market/MarketService'
 import { Fragment, useState } from 'react'
-import { BusinessType } from 'services/constants'
-import {
-  Validator,
-  IsEmpty,
-  IsNotAddress,
-  IsNegative,
-  IsNotInRange,
-} from 'models/Validations/InputValidation'
+import { BusinessType } from 'domain/constants'
+import { Validator, IsEmpty, IsNotAddress, IsNegative, IsNotInRange } from 'models/Validations/InputValidation'
 import { useOnInit } from 'hooks/useOnInit'
 import { Box, TextField } from '@mui/material'
 
