@@ -7,6 +7,8 @@ import { BusinessType } from 'domain/constants'
 import { Validator, IsEmpty, IsNotAddress, IsNegative, IsNotInRange } from 'models/Validations/InputValidation'
 import { useOnInit } from 'hooks/useOnInit'
 import { Box, TextField } from '@mui/material'
+import { enqueueSnackbar } from 'notistack'
+import { HandleError } from 'src/utils/HandleError/HandleError'
 
 const InputType = {
   TextField: 'TextField',
@@ -117,15 +119,22 @@ export const MarketForm = () => {
   }
 
   const saveData = async () => {
-    loc.endsWith('nuevo') ? await marketService.create(market) : await marketService.update(market)
-    navigate('/puntos-de-venta')
+    try {
+      loc.endsWith('nuevo') ? await marketService.create(market) : await marketService.update(market)
+      navigate('/puntos-de-venta')
+      enqueueSnackbar(`Punto de venta ${loc.endsWith('nuevo') ? 'creado' : 'modificado'} con exito`, {
+        variant: 'success',
+      })
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   }
 
   return (
     <>
-      {Object.entries(fields).map(([field, props], index) => 
+      {Object.entries(fields).map(([field, props], index) => (
         <Fragment key={index}>
-          {props.type === InputType.TextField ? 
+          {props.type === InputType.TextField ? (
             <Box key={index} className="field__container">
               <TextField
                 key={index}
@@ -139,39 +148,39 @@ export const MarketForm = () => {
                   index === 0
                     ? `${props.className}-first`
                     : index === fields.length - 1
-                      ? `${props.className}-last`
-                      : `${props.className}-${index}`
+                    ? `${props.className}-last`
+                    : `${props.className}-${index}`
                 }
               />
               <span className="field__error">{errors[field]}</span>
             </Box>
-            : props.type === InputType.Select ? 
-              <TextField
-                key={index}
-                className={props.className}
-                value={props.value}
-                select
-                SelectProps={{ ...props.elementProps }}
-                onChange={(e) => handleChange(field, e.target.value)}
-                data-testid={
-                  index === 0
-                    ? `${props.className}-first`
-                    : index === Object.keys(fields).length - 1
-                      ? `${props.className}-last`
-                      : `${props.className}-${index}`
-                }
-              >
-                {Object.entries(props.options).map(([clave, value]) => 
-                  <option key={clave} value={value}>
-                    {value}
-                  </option>
-                )}
-              </TextField>
-              : 
-              <></>
-          }
+          ) : props.type === InputType.Select ? (
+            <TextField
+              key={index}
+              className={props.className}
+              value={props.value}
+              select
+              SelectProps={{ ...props.elementProps }}
+              onChange={(e) => handleChange(field, e.target.value)}
+              data-testid={
+                index === 0
+                  ? `${props.className}-first`
+                  : index === Object.keys(fields).length - 1
+                  ? `${props.className}-last`
+                  : `${props.className}-${index}`
+              }
+            >
+              {Object.entries(props.options).map(([clave, value]) => (
+                <option key={clave} value={value}>
+                  {value}
+                </option>
+              ))}
+            </TextField>
+          ) : (
+            <></>
+          )}
         </Fragment>
-      )}
+      ))}
       <FormActions
         handleLeftButtonClick={handleClickConfirm}
         handleRightButtonClick={() => {

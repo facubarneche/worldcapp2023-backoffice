@@ -5,10 +5,14 @@ import { useOnInit } from 'src/hooks/useOnInit'
 import { nationalTeamService } from 'src/domain/services/NationalTeam/NationalTeamService'
 import { useState } from 'react'
 import { Team } from 'src/domain/models/TeamModel/Team.model'
+import { HandleError } from 'src/utils/HandleError/HandleError'
+import { useNavigate } from 'react-router-dom'
+import { enqueueSnackbar } from 'notistack'
 
 export const TeamsModal = ({ onClose, action }) => {
   const [team, setTeam] = useState(new Team())
   const [confederaciones, setConfederaciones] = useState([])
+  const navigate = useNavigate()
 
   useOnInit(async () => {
     const data = await nationalTeamService.getConfederaciones()
@@ -29,11 +33,16 @@ export const TeamsModal = ({ onClose, action }) => {
   }
 
   const handleSave = async () => {
-    action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
-    onClose({ refresh: true })
+    try {
+      action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
+      enqueueSnackbar(`Seleccion ${action.newEntity ? 'creada' : 'modificada'} con exito`, { variant: 'success' })
+      onClose({ refresh: true })
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   }
 
-  const handleTitle = () => action.newEntity ? 'Nueva' : 'Editar'
+  const handleTitle = () => (action.newEntity ? 'Nueva' : 'Editar')
 
   return (
     <>
@@ -60,9 +69,9 @@ export const TeamsModal = ({ onClose, action }) => {
             value={team.confederacion}
             onChange={(e) => handleChange('confederacion', e.target.value)}
           >
-            {confederaciones.map((confederacion) => 
+            {confederaciones.map((confederacion) => (
               <option key={confederacion}>{confederacion}</option>
-            )}
+            ))}
           </TextField>
           <TextField
             data-testid="input-copasDelMundo"
