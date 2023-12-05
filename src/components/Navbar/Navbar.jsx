@@ -6,7 +6,7 @@ import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material'
 const iconSize = 30
 
 const navigationButtons = [
-  { path: '/home', icon: <Box className="fas fa-house-chimney" sx={{ fontSize: iconSize }}/> },
+  { path: '/dashboard', icon: <Box className="fas fa-house-chimney" sx={{ fontSize: iconSize }}/> },
   { path: '/figuritas', icon: <Box className="fas fa-id-badge" sx={{ fontSize: iconSize }}/> },
   { path: '/jugadores', icon: <Box className="fas fa-shirt" sx={{ fontSize: iconSize }} /> },
   { path: '/puntos-de-venta', icon: <Box className="fas fa-store" sx={{ fontSize: iconSize }} /> },

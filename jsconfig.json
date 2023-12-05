@@ -4,36 +4,16 @@
     "checkJs": true,
     "jsx": "react-jsx",
     "paths": {
-      "src/*": [
-        "./src/*"
-      ],
-      "components/*": [
-        "./src/components/*"
-      ],
-      "assets/*": [
-        "./src/assets/*"
-      ],
-      "pages/*": [
-        "./src/pages/*"
-      ],
-      "services/*": [
-        "./src/domain/services/*"
-      ],
-      "models/*": [
-        "./src/domain/models/*"
-      ],
-      "custom_hooks/*": [
-        "./src/custom_hooks/*"
-      ],
-      "mocks/*": [
-        "./src/domain/mocks/*"
-      ],
-      "utils/*": [
-        "./src/utils/*"
-      ],
-      "errors/*": [
-        "./src/domain/errors/*"
-      ]
+      "src/*": ["./src/*"],
+      "components/*": ["./src/components/*"],
+      "assets/*": ["./src/assets/*"],
+      "pages/*": ["./src/pages/*"],
+      "services/*": ["./src/domain/services/*"],
+      "models/*": ["./src/domain/models/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "mocks/*": ["./src/domain/mocks/*"],
+      "utils/*": ["./src/utils/*"],
+      "errors/*": ["./src/domain/errors/*"]      
     }
   }
 }

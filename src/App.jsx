@@ -2,7 +2,7 @@ import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromE
 
 // Import Pages
 import { Login } from 'pages/Login/Login'
-import { Home } from 'pages/Home/Home'
+import { Dashboard } from 'src/pages/Dashboard/Dashboard'
 
 // Import Styles
 import './App.css'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route index element={<Navigate to="login" />} />
       <Route path="login" element={<Login />}></Route>
-      <Route path="home" element={<Layout content={<Home />} headerTitle="dashboard" />}></Route>
+      <Route path="dashboard" element={<Layout content={<Dashboard />} headerTitle="dashboard" />}></Route>
       <Route
         path="figuritas"
         element={
@@ -53,15 +53,10 @@ const router = createBrowserRouter(
           />
         }
       ></Route>
-      <Route
-        path="jugadores/nuevo"
-        element={<Layout content={<FormPlayer saveInfoSvFunc={playerService.create} />} headerTitle="Nuevo jugador" />}
-      ></Route>
+      <Route path="jugadores/nuevo" element={<Layout content={<FormPlayer />} headerTitle="Nuevo jugador" />}></Route>
       <Route
         path="jugadores/:id/editar"
-        element={
-          <Layout content={<FormPlayer saveInfoSvFunc={playerService.update} />} headerTitle="Editar un jugador" />
-        }
+        element={<Layout content={<FormPlayer />} headerTitle="Editar un jugador" />}
       />
       <Route
         path="puntos-de-venta"
