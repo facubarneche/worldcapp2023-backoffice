@@ -1,10 +1,18 @@
-.navbar {
-  background-color: transparent;
+.navbar {    
   width: 100%;
+  display: flex;  
+  justify-content: space-evenly;
+  background-color: transparent;  
 }
 
-.navbar-buttons{
-  color: var(--color-tertiary-lighter);
+.navbar-buttons{      
+  color: var(--color-tertiary-lighter); 
+  min-width: 0;
+  max-width: 4em;  
+}
+
+.navbar__icon {
+  font-size: 2.5em;    
 }
 
 .navbar-buttons.Mui-selected {

@@ -18,7 +18,7 @@ import { cardService } from 'src/domain/services/Card/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
 import { playerService } from 'src/domain/services/Player/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
-import { nationalTeamService } from './domain/services/NationalTeamService/NationalTeamService'
+import { nationalTeamService } from './domain/services/NationalTeam/NationalTeamService'
 import { Layout } from './components/Layout/Layout'
 import CardForm from './pages/OneForAll/Forms/FormCard/CardForm'
 
@@ -78,12 +78,7 @@ const router = createBrowserRouter(
       />
       <Route
         path="selecciones"
-        element={
-          <Layout
-            content={<OneForAll service={nationalTeamService} />}
-            headerTitle="Selecciones"
-          />
-        }
+        element={<Layout content={<OneForAll service={nationalTeamService} />} headerTitle="Selecciones" />}
       />
       <Route path="/error" element={<Error />} />
       <Route path="*" element={<Error />} />
