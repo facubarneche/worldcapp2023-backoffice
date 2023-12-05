@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react'
-import { TeamsModal } from './TeamsModal'
+import { TeamsModal } from 'pages/OneForAll/modals/TeamsModal'
 import { vi } from 'vitest'
 
 import { nationalTeamMock } from 'mocks/NationalTeamMock'

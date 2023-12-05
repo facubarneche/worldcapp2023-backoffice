@@ -8,7 +8,7 @@ import { useOnInit } from 'hooks/useOnInit'
 import { GentTestId } from 'utils/GenTestId/GenTestId'
 import { useState } from 'react'
 import { Button } from '@mui/material'
-import TeamsModal from './modals/TeamsModal'
+import { TeamsModal } from 'pages/OneForAll/modals/TeamsModal'
 
 const notNavigable = ["/selecciones"]
 

@@ -12,15 +12,15 @@ import { FormPlayer } from 'pages/OneForAll/Forms/FormPlayer/FormPlayer'
 import { MarketForm } from 'pages/OneForAll/Forms/MarketForm/MarketForm'
 // import { Teams } from 'pages/Teams/Teams'
 import { OneForAll } from 'pages/OneForAll/OneForAll'
-import { marketService } from 'src/domain/services/Market/MarketService'
+import { marketService } from 'services/Market/MarketService'
 import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
-import { cardService } from 'src/domain/services/Card/CardService'
+import { cardService } from 'services/Card/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
-import { playerService } from 'src/domain/services/Player/PlayerService'
+import { playerService } from 'services/Player/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
-import { nationalTeamService } from './domain/services/NationalTeam/NationalTeamService'
-import { Layout } from './components/Layout/Layout'
-import CardForm from './pages/OneForAll/Forms/FormCard/CardForm'
+import { nationalTeamService } from 'services/NationalTeam/NationalTeamService'
+import { Layout } from 'components/Layout/Layout'
+import { CardForm } from 'pages/OneForAll/Forms/CardForm/CardForm'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         path="figuritas"
         element={
           <Layout
-            content={<OneForAll service={cardService} contentComponent={CustomCardContent} />}
+            content={<OneForAll key={0} service={cardService} contentComponent={CustomCardContent} />}
             headerTitle="Figuritas"
           />
         }
@@ -49,7 +49,7 @@ const router = createBrowserRouter(
         path="jugadores"
         element={
           <Layout
-            content={<OneForAll service={playerService} contentComponent={CustomPlayerContent} />}
+            content={<OneForAll key={1} service={playerService} contentComponent={CustomPlayerContent} />}
             headerTitle="Jugadores"
           />
         }
@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         path="puntos-de-venta"
         element={
           <Layout
-            content={<OneForAll service={marketService} contentComponent={CustomMarketContent} />}
+            content={<OneForAll key={2} service={marketService} contentComponent={CustomMarketContent} />}
             headerTitle="Puntos de venta"
           />
         }
@@ -78,7 +78,7 @@ const router = createBrowserRouter(
       />
       <Route
         path="selecciones"
-        element={<Layout content={<OneForAll service={nationalTeamService} />} headerTitle="Selecciones" />}
+        element={<Layout content={<OneForAll key={3} service={nationalTeamService} />} headerTitle="Selecciones" />}
       />
       <Route path="/error" element={<Error />} />
       <Route path="*" element={<Error />} />
