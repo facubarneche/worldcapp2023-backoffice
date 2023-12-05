@@ -121,4 +121,3 @@ export const CardForm = ({ saveFunc }) => {
     </>
   )
 }
-export default CardForm

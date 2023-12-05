@@ -14,19 +14,21 @@ export const CardBase = ({ element, contentComponent, onEditClick, onDelete, tes
         : element.tipo === BusinessType.Supermercado
           ? 'fa-basket-shopping'
           : element.tipo === ElementType.Figuritas
-            ? 'fa-id-badge'
-            : 'fa-futbol'
+            ? 'fa-id-badge' 
+            : element.tipo === ElementType.Jugadores
+              ? 'fa-futbol'
+              : 'fa-flag'
   }
 
   const handleConfirm = (id) => {
     setDeleteDialogOpen(false)
     onDelete(id)
   }
-
+  
   return (
     <>
-      <Card className="card-base" data-testid={testid}>
-        <Box className="card-base__header">
+      <Card className={contentComponent ? 'card-base' : 'card-base card-base--nocontent'} data-testid={testid}>
+        <Box className={contentComponent ? 'card-base__header' : 'card-base__header card-base__header--noshadow'}>
           <Box className="card-base__title">
             <i
               className={`card-base__icon card-base__icon--large fas ${marketIcon()}`}

@@ -8,9 +8,13 @@ import { useOnInit } from 'hooks/useOnInit'
 import { GentTestId } from 'utils/GenTestId/GenTestId'
 import { useState } from 'react'
 import { Button } from '@mui/material'
+import { TeamsModal } from 'pages/OneForAll/modals/TeamsModal'
 
-export const OneForAll = ({ contentComponent, service }) => {
+const notNavigable = ["/selecciones"]
+
+export const OneForAll = ({ service, contentComponent = null }) => {
   const [elements, setElements] = useState([])
+  const [modalAction, setModalAction] = useState({ showModal: false, newEntity: true, id: -1 })
   const navigate = useNavigate()
   const loc = useLocation().pathname
 
@@ -28,8 +32,13 @@ export const OneForAll = ({ contentComponent, service }) => {
   })
 
   const redirect = (id = -1) => {
-    id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
+    if(isNavigable()){
+      id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
+    }
+    id === -1 ? setModalAction({showModal: true, newEntity: true, id: -1}) : setModalAction({showModal: true, newEntity: false, id})
   }
+
+  const isNavigable = () => !notNavigable.includes(loc)
 
   const handleDelete = async (id) => {
     try {
@@ -40,6 +49,11 @@ export const OneForAll = ({ contentComponent, service }) => {
     }
   }
 
+  const handleModalClose = ({refresh = false}) => {
+    setModalAction({ ...modalAction, showModal: false })
+    refresh && getAll()
+  }
+
   return (
     <>
       <Searchbar getFilterCards={getAll} />
@@ -47,7 +61,7 @@ export const OneForAll = ({ contentComponent, service }) => {
         <CardBase
           key={index}
           element={element}
-          contentComponent={contentComponent(element.content)}
+          contentComponent={contentComponent ? contentComponent(element.content) : null}
           onEditClick={redirect}
           onDelete={handleDelete}
           testid={GentTestId.generate('card', index, elements.length)}
@@ -59,6 +73,9 @@ export const OneForAll = ({ contentComponent, service }) => {
       >
         +
       </Button>
+      {
+        modalAction.showModal && <TeamsModal onClose={handleModalClose} action={modalAction} />
+      }
     </>
   )
 }
