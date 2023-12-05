@@ -11,14 +11,24 @@ import { Team } from 'src/domain/models/TeamModel/Team.model'
 //   TextField: 'TextField',
 //   Select: 'Select',
 // }
+// useOnInit(() => {
+//   id && getCardToEdit()
+// })
 
-const TeamsModal = ({ onClose }) => {
+// const getCardToEdit = async () => {
+//   const card = await marketService.getById(id)
+//   setMarket(card)
+// }
+const TeamsModal = ({ onClose, action }) => {
   const [team, setTeam] = useState(new Team())
   const [confederaciones, setConfederaciones] = useState([])
 
   useOnInit(async()=>{
     const data = await nationalTeamService.getConfederaciones()
     setConfederaciones(data)
+    if(action.id !== -1){
+      setTeam(await nationalTeamService.getById(action.id))
+    }
   })
 
   const handleChange = (key, value) => {
@@ -68,8 +78,7 @@ const TeamsModal = ({ onClose }) => {
 
 
   const handleSave = async () => {
-    // card.isNew ? saveFunc(card) : saveFunc(card, card.id)
-    await nationalTeamService.create(team)
+    action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
     onClose()
   }
   
@@ -82,11 +91,12 @@ const TeamsModal = ({ onClose }) => {
         aria-describedby="modal-modal-description"
       >
         <Box className='teams-modal'>
-          <TextField required label="Nombre" type="text" onChange={(e) => handleChange('nombre', e.target.value)}/>
+          <TextField required label="Nombre" type="text" value={team.nombre} onChange={(e) => handleChange('nombre', e.target.value)}/>
           <TextField
             required
             select
             SelectProps={{ native: true }}
+            value={team.confederacion}
             onChange={(e) => handleChange('confederacion', e.target.value)}
           >
             <option>Confederación</option>
@@ -96,8 +106,8 @@ const TeamsModal = ({ onClose }) => {
               )
             }
           </TextField>
-          <TextField required label="Copas del mundo" type="number" onChange={(e) => handleChange('copasDelMundo', e.target.value)} />
-          <TextField required label="Copas confederacion" type="number" onChange={(e) => handleChange('copasConfederacion', e.target.value)}/>
+          <TextField required label="Copas del mundo" type="number" value={team.copasDelMundo} onChange={(e) => handleChange('copasDelMundo', e.target.value)} />
+          <TextField required label="Copas confederacion" type="number" value={team.copasConfederacion} onChange={(e) => handleChange('copasConfederacion', e.target.value)}/>
           <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={onClose} />
         </Box>
       </Modal>

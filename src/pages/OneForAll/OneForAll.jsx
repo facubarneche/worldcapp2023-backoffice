@@ -13,7 +13,7 @@ const notNavigable = ["/selecciones"]
 
 export const OneForAll = ({ service, contentComponent = null }) => {
   const [elements, setElements] = useState([])
-  const [showModal, setShowModal] = useState(false)
+  const [modalAction, setModalAction] = useState({ showModal: false, newEntity: true, id: -1 })
   const navigate = useNavigate()
   const loc = useLocation().pathname
 
@@ -31,14 +31,13 @@ export const OneForAll = ({ service, contentComponent = null }) => {
   })
 
   const redirect = (id = -1) => {
-    if(isNavigable(loc)){
+    if(isNavigable()){
       id === -1 ? navigate(`${loc}/nuevo`) : navigate(`${loc}/${id}/editar`)
-    }else{
-      setShowModal(true)
     }
+    id === -1 ? setModalAction({showModal: true, newEntity: true, id: -1}) : setModalAction({showModal: true, newEntity: false, id})
   }
 
-  const isNavigable = (loc) => !notNavigable.includes(loc)
+  const isNavigable = () => !notNavigable.includes(loc)
 
   const handleDelete = async (id) => {
     try {
@@ -50,7 +49,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
   }
 
   const handleModalClose = () => {
-    setShowModal(false)
+    setModalAction({ ...modalAction, showModal: false })
     //TODO: Recargar solo cuando se crea o edita una seleccion
     getAll()
   }
@@ -74,7 +73,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
         +
       </Button>
       {
-        showModal && <TeamsModal onClose={handleModalClose}/>
+        modalAction.showModal && <TeamsModal onClose={handleModalClose} action={modalAction}/>
       }
     </>
   )

@@ -4,6 +4,7 @@ export class Team {
     this.nombre = teamData.pais ?? ''
     this.confederacion = teamData.confederacion ?? ''
     this.copasDelMundo = teamData.copasDelMundo ?? ''
+    this.copasConfederacion = teamData.copasConfederacion ?? ''
   }
 
   static fromJson = (teamData) => new Team(teamData)
