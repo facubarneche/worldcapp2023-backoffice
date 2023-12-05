@@ -1,4 +1,4 @@
-import { Box, Modal, TextField } from '@mui/material'
+import { Box, Modal, TextField, Typography } from '@mui/material'
 import './TeamsModal.css'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/hooks/useOnInit'
@@ -32,6 +32,8 @@ const TeamsModal = ({ onClose, action }) => {
     action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
     onClose({ refresh: true })
   }
+
+  const handleTitle = () => action.newEntity ? 'Nueva' : 'Editar'
   
   return (
     <>
@@ -41,7 +43,9 @@ const TeamsModal = ({ onClose, action }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        
         <Box className='teams-modal'>
+          <Typography align='center' sx={{ fontSize: 32 }}>{`${handleTitle()} Selección`}</Typography>
           <TextField required label="Nombre" type="text" value={team.nombre} onChange={(e) => handleChange('nombre', e.target.value)}/>
           <TextField
             required

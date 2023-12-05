@@ -74,7 +74,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
         +
       </Button>
       {
-        modalAction.showModal && <TeamsModal onClose={handleModalClose} action={modalAction}/>
+        modalAction.showModal && <TeamsModal onClose={handleModalClose} action={modalAction} />
       }
     </>
   )
