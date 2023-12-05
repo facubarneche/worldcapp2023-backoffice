@@ -28,10 +28,11 @@ export const NavBar = () => {
   }, [location.pathname])
 
   return (
-    <BottomNavigation className="navbar" component="nav" value={value} onChange={handleChange}>
+    <BottomNavigation className="navbar" component="nav" data-testid="navbar" value={value} onChange={handleChange}>
       {navigationButtons.map((route, index) => 
-        <BottomNavigationAction className="navbar-buttons" key={index} value={route.path} icon={route.icon} />
+        <BottomNavigationAction data-testid="figuritas-button" className="navbar-buttons" key={index} value={route.path} icon={route.icon} />
       )}
     </BottomNavigation>
   )
 }
+
