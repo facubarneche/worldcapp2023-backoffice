@@ -1,10 +1,9 @@
-import axios from "axios"
-import { REST_SERVER_URL } from "../constants"
+import axios from 'axios'
+import { REST_SERVER_URL } from 'domain/constants'
+
 
 class NationalTeamService {
-
-
-  async getAllNames(){
+  async getAllNames() {
     return (await axios.get(`${REST_SERVER_URL}/selecciones/pais`)).data
   }
 }

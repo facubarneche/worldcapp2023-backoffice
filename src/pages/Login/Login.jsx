@@ -1,12 +1,12 @@
 import './Login.css'
 import { Box, TextField, Button, InputLabel } from '@mui/material'
+import { userService } from 'services/User/UserService'
+import { DEBUG_MODE } from 'domain/constants'
+import { LogoComponent, LogoFooterComponent } from 'components/LogoComponent/LogoComponent'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { formToJSON } from 'axios'
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { userService } from 'services/UserService/UserService'
-import { DEBUG_MODE } from 'services/constants'
-import { LogoComponent, LogoFooterComponent } from 'components/LogoComponent/LogoComponent'
-import { HandleError } from 'utils/HandleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -40,7 +40,7 @@ export const Login = () => {
   }
 
   return (
-    <div className='layout__content layout__content--login'>
+    <div className="layout__content layout__content--login">
       <LogoComponent />
       <Box component="form" onSubmit={handleSubmit} noValidate className="login-form__actions">
         <InputLabel className="field__label" htmlFor="userName">

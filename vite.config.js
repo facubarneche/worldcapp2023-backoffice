@@ -21,6 +21,7 @@ export default defineConfig({
       utils: '/src/utils',
       errors: '/src/domain/errors',
       hooks: '/src/hooks',
+      domain: '/src/domain'
     },
   },
   test: {

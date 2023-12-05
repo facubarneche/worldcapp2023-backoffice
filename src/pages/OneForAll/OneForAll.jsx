@@ -1,12 +1,13 @@
 import 'src/styles/button.css'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
-import { CustomSearch } from 'models/CustomSearch/CustomSearch'
+import { CustomSearch } from 'models/CustomSearch/CustomSearch.model'
 import { CardBase } from 'components/CardBase/CardBase'
-import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useOnInit } from 'hooks/useOnInit'
+import { GentTestId } from 'utils/GenTestId/GenTestId'
+import { useState } from 'react'
 import { Button } from '@mui/material'
-import { useOnInit } from 'src/hooks/useOnInit'
 
 export const OneForAll = ({ contentComponent, service }) => {
   const [elements, setElements] = useState([])
@@ -49,6 +50,7 @@ export const OneForAll = ({ contentComponent, service }) => {
           contentComponent={contentComponent(element.content)}
           onEditClick={redirect}
           onDelete={handleDelete}
+          testid={GentTestId.generate('card', index, elements.length)}
         />
       )}
       <Button

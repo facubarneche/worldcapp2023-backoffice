@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { REST_SERVER_URL } from '../constants'
-import { Player } from 'models/PlayerModel/Player.model'
+import { REST_SERVER_URL } from '../../constants'
+import { Player } from 'src/domain/models/Player/Player.model'
 
 class PlayerService {
   getAll = async (search) => {

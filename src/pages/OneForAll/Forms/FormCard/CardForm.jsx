@@ -1,8 +1,8 @@
 import './CardForm.css'
 import { useOnInit } from 'src/hooks/useOnInit'
-import { cardService } from 'services/CardService/CardService'
+import { cardService } from 'src/domain/services/Card/CardService'
 import { HandleError } from 'utils/HandleError/HandleError'
-import { Card } from 'models/CardModel/Card.model'
+import { Card } from 'src/domain/models/Card/Card.model'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
@@ -74,7 +74,7 @@ export const CardForm = ({ saveFunc }) => {
         }}
         data-testid="figurita-nombre"
       >
-        {players.map((player) => (
+        {players.map((player) => 
           <MenuItem
             className="field__option"
             key={`${player.nombre} ${player.apellido}`}
@@ -82,7 +82,7 @@ export const CardForm = ({ saveFunc }) => {
           >
             {`${player.nombre} ${player.apellido}`}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <FormControlLabel
@@ -99,11 +99,11 @@ export const CardForm = ({ saveFunc }) => {
         onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
         data-testid="figurita-impresion"
       >
-        {printsLevel.map((printLevel) => (
+        {printsLevel.map((printLevel) => 
           <MenuItem className="field__option" key={printLevel} value={printLevel}>
             {printLevel}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <TextField className="field" inputProps={{ type: 'url' }} label="Imagen Jugador" data-testid="figurita-imagen" />
