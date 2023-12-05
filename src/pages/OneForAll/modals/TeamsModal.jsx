@@ -79,7 +79,7 @@ const TeamsModal = ({ onClose, action }) => {
 
   const handleSave = async () => {
     action.newEntity ? await nationalTeamService.create(team) : await nationalTeamService.update(team, action.id)
-    onClose()
+    onClose({ refresh: true })
   }
   
   return (

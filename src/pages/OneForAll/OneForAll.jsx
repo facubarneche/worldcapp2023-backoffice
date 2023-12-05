@@ -48,10 +48,9 @@ export const OneForAll = ({ service, contentComponent = null }) => {
     }
   }
 
-  const handleModalClose = () => {
+  const handleModalClose = ({refresh = false}) => {
     setModalAction({ ...modalAction, showModal: false })
-    //TODO: Recargar solo cuando se crea o edita una seleccion
-    getAll()
+    refresh && getAll()
   }
 
   return (
