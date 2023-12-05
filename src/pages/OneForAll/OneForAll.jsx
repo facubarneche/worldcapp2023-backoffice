@@ -42,7 +42,7 @@ export const OneForAll = ({ contentComponent, service }) => {
   return (
     <>
       <Searchbar getFilterCards={getAll} />
-      {elements.map((element, index) => (
+      {elements.map((element, index) => 
         <CardBase
           key={index}
           element={element}
@@ -50,7 +50,7 @@ export const OneForAll = ({ contentComponent, service }) => {
           onEditClick={redirect}
           onDelete={handleDelete}
         />
-      ))}
+      )}
       <Button
         className="button button--circle button--icon button--icon-large button--float"
         onClick={() => redirect(-1)}
