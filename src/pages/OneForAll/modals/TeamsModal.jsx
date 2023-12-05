@@ -34,6 +34,7 @@ const TeamsModal = ({ onClose, action }) => {
   const handleChange = (key, value) => {
     team[key] = value
     generarNuevoTeam(team)
+    console.log(team)
   }
 
   const generarNuevoTeam = (team) => {
@@ -99,7 +100,6 @@ const TeamsModal = ({ onClose, action }) => {
             value={team.confederacion}
             onChange={(e) => handleChange('confederacion', e.target.value)}
           >
-            <option>Confederación</option>
             {
               confederaciones.map( confederacion =>
                 <option key={confederacion}>{confederacion}</option>

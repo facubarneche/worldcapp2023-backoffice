@@ -2,7 +2,7 @@ export class Team {
   constructor(teamData = {}) {
     this.id = teamData.id ?? -1
     this.nombre = teamData.pais ?? ''
-    this.confederacion = teamData.confederacion ?? ''
+    this.confederacion = teamData.confederacion ?? 'AFC'
     this.copasDelMundo = teamData.copasDelMundo ?? ''
     this.copasConfederacion = teamData.copasConfederacion ?? ''
   }
