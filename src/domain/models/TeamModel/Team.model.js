@@ -16,7 +16,8 @@ export class Team {
     return {
       id: teamData.id,
       pais: teamData.nombre,
-      copasConfederacion: teamData.confederacion,
+      confederacion: teamData.confederacion,
+      copasConfederacion: teamData.copasConfederacion,
       copasDelMundo: teamData.copasDelMundo
     }
   }

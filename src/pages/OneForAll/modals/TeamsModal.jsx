@@ -1,10 +1,10 @@
 import { Box, Modal, TextField } from '@mui/material'
-// import { Team } from 'src/domain/models/TeamModel/Team.model'
 import './TeamsModal.css'
 import { FormActions } from 'src/components/FormActions/FormActions'
 import { useOnInit } from 'src/hooks/useOnInit'
 import { nationalTeamService } from 'src/domain/services/NationalTeamService/NationalTeamService'
 import { useState } from 'react'
+import { Team } from 'src/domain/models/TeamModel/Team.model'
 
 //TODO: mover y reutilizar
 // const InputType = {
@@ -13,13 +13,23 @@ import { useState } from 'react'
 // }
 
 const TeamsModal = ({ onClose }) => {
-  // const [team, setTeam] = useState(new Team())
+  const [team, setTeam] = useState(new Team())
   const [confederaciones, setConfederaciones] = useState([])
 
   useOnInit(async()=>{
     const data = await nationalTeamService.getConfederaciones()
     setConfederaciones(data)
   })
+
+  const handleChange = (key, value) => {
+    team[key] = value
+    generarNuevoTeam(team)
+  }
+
+  const generarNuevoTeam = (team) => {
+    const nuevoteam = Object.assign(new Team(), team)
+    setTeam(nuevoteam)
+  }
 
   //   const fields = {
   //     nombre: {
@@ -57,8 +67,9 @@ const TeamsModal = ({ onClose }) => {
   //   }
 
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // card.isNew ? saveFunc(card) : saveFunc(card, card.id)
+    await nationalTeamService.create(team)
     onClose()
   }
   
@@ -71,21 +82,22 @@ const TeamsModal = ({ onClose }) => {
         aria-describedby="modal-modal-description"
       >
         <Box className='teams-modal'>
-          <TextField required label="Nombre" type="text"/>
+          <TextField required label="Nombre" type="text" onChange={(e) => handleChange('nombre', e.target.value)}/>
           <TextField
-            className="figuritas-form__select"
             required
             select
             SelectProps={{ native: true }}
+            onChange={(e) => handleChange('confederacion', e.target.value)}
           >
+            <option>Confederación</option>
             {
               confederaciones.map( confederacion =>
                 <option key={confederacion}>{confederacion}</option>
               )
             }
           </TextField>
-          <TextField required label="Copas del mundo" type="number" />
-          <TextField required label="Copas confederacion" type="number" />
+          <TextField required label="Copas del mundo" type="number" onChange={(e) => handleChange('copasDelMundo', e.target.value)} />
+          <TextField required label="Copas confederacion" type="number" onChange={(e) => handleChange('copasConfederacion', e.target.value)}/>
           <FormActions handleLeftButtonClick={handleSave} handleRightButtonClick={onClose} />
         </Box>
       </Modal>

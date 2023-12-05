@@ -49,7 +49,11 @@ export const OneForAll = ({ service, contentComponent = null }) => {
     }
   }
 
-  const handleModalClose = () => setShowModal(false)
+  const handleModalClose = () => {
+    setShowModal(false)
+    //TODO: Recargar solo cuando se crea o edita una seleccion
+    getAll()
+  }
 
   return (
     <>

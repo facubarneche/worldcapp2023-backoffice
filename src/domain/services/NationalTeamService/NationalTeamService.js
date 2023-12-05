@@ -28,10 +28,11 @@ class NationalTeamService {
     }
   }
 
-  create = async (market) => {
+  create = async (team) => {
     try {
-      const TeamJSON = Team.toJson(market)
-      await axios.post(`${REST_SERVER_URL}/selecciones/crear`, TeamJSON)
+      const teamJSON = Team.toJson(team)
+      console.log(teamJSON)
+      await axios.post(`${REST_SERVER_URL}/selecciones/crear`, teamJSON)
     } catch (err) {
       HandleError(err) 
     }
