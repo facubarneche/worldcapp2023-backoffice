@@ -57,7 +57,7 @@ export const CardBase = ({ element, contentComponent, onEditClick, onDelete, tes
       </Card>
 
       <CustomDialog
-        props={{ title: 'Confirmar eliminación', message: '¿Confirma desea borrar el punto de venta?' }}
+        props={{ title: 'Confirmar eliminación', message: 'Esta acción es irreversible. ¿Deseas continuar?' }}
         isOpen={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
         onConfirm={() => handleConfirm(element.id)}
