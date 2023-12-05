@@ -16,7 +16,7 @@ export class Card {
   get JSONCreateModifyCard() {
     return {
       numero: this.numero,
-      nombre: this.nombreApellido,
+      nombreApellido: this.nombreApellido,
       onFire: this.onFire,
       nivelImpresion: this.nivelImpresion,
     }

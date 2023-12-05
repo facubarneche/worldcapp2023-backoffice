@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Checkbox, FormControlLabel, MenuItem, TextField, Typography } from '@mui/material'
 import { FormActions } from 'src/components/FormActions/FormActions'
+import { enqueueSnackbar } from 'notistack'
 
-export const CardForm = ({ saveFunc }) => {
+export const CardForm = () => {
   const [players, setPlayers] = useState([])
   const [printsLevel, setPrintsLevel] = useState([])
   const navigate = useNavigate()
@@ -53,9 +54,14 @@ export const CardForm = ({ saveFunc }) => {
     setCard(new Card({ ...card.JSONCreateModifyCard, [key]: value }))
     setCardValue(key, value)
   }
-  const handleSave = () => {
-    card.isNew ? saveFunc(card) : saveFunc(card, card.id)
-    handleBack()
+  const handleSave = async () => {
+    try {
+      card.isNew ? await cardService.create(card) : await cardService.update(card, card.id)
+      handleBack()
+      enqueueSnackbar(`Figurita ${card.isNew ? 'creada' : 'modificada'} con exito`, { variant: 'success' })
+    } catch (error) {
+      HandleError(error, navigate)
+    }
   }
 
   return (
