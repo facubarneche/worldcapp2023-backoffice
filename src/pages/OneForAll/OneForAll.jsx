@@ -1,12 +1,13 @@
 import 'src/styles/button.css'
 import { HandleError } from 'utils/HandleError/HandleError'
 import { Searchbar } from 'components/Searchbar/Searchbar'
-import { CustomSearch } from 'models/CustomSearch/CustomSearch'
+import { CustomSearch } from 'models/CustomSearch/CustomSearch.model'
 import { CardBase } from 'components/CardBase/CardBase'
-import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useOnInit } from 'hooks/useOnInit'
+import { GentTestId } from 'utils/GenTestId/GenTestId'
+import { useState } from 'react'
 import { Button } from '@mui/material'
-import { useOnInit } from 'src/hooks/useOnInit'
 import TeamsModal from './modals/TeamsModal'
 
 const notNavigable = ["/selecciones"]
@@ -63,6 +64,7 @@ export const OneForAll = ({ service, contentComponent = null }) => {
           contentComponent={contentComponent ? contentComponent(element.content) : null}
           onEditClick={redirect}
           onDelete={handleDelete}
+          testid={GentTestId.generate('card', index, elements.length)}
         />
       )}
       <Button

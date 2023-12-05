@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { REST_SERVER_URL, USER_KEY_STORAGE } from '../constants'
+import { REST_SERVER_URL, USER_KEY_STORAGE } from '../../constants'
 
 const UserService = () => {
   const login = async (props) => {

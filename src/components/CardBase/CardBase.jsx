@@ -2,9 +2,9 @@ import './CardBase.css'
 import { Box, Card, Typography } from '@mui/material'
 import { CustomDialog } from '../CustomDialog/CustomDialog'
 import { useState } from 'react'
-import { ElementType, BusinessType } from 'services/constants'
+import { ElementType, BusinessType } from 'domain/constants'
 
-export const CardBase = ({ element, contentComponent, onEditClick, onDelete }) => {
+export const CardBase = ({ element, contentComponent, onEditClick, onDelete, testid }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const marketIcon = () => {
     return element.tipo === BusinessType.Kiosco
@@ -27,21 +27,33 @@ export const CardBase = ({ element, contentComponent, onEditClick, onDelete }) =
 
   return (
     <>
-      <Card className="card-base">
+      <Card className="card-base" data-testid={testid}>
         <Box className="card-base__header">
           <Box className="card-base__title">
-            <i className={`card-base__icon card-base__icon--large fas ${marketIcon()}`}/>
-            <Typography className="card-base__text card-base__text--title">{element.title}</Typography>
+            <i
+              className={`card-base__icon card-base__icon--large fas ${marketIcon()}`}
+              data-testid={`${testid}-icon`}
+            />
+            <Typography className="card-base__text card-base__text--title" data-testid={`${testid}-title`}>
+              {element.title}
+            </Typography>
           </Box>
           <Box className="card-base__actions">
-            <i className="card-base__icon fas fa-trash-arrow-up fa--hot"onClick={() => setDeleteDialogOpen(true)}/>            
-            <i className="card-base__icon fas fa-pen"onClick={() => onEditClick(element.id)}/>            
+            <i
+              className="card-base__icon fas fa-trash-arrow-up fa--hot"
+              onClick={() => setDeleteDialogOpen(true)}
+              data-testid={`${testid}-delete`}
+            />
+            <i className="card-base__icon fas fa-pen" onClick={() => onEditClick(element.id)} />
           </Box>
         </Box>
         {contentComponent}
-        {
-          element.footer && <Typography className="card-base__footer card-base__text card-base__text--upper">{element.footer}</Typography>
-        }
+        <Typography
+          className="card-base__footer card-base__text card-base__text--upper"
+          data-testid={`${testid}-footer`}
+        >
+          {element.footer}
+        </Typography>
       </Card>
 
       <CustomDialog

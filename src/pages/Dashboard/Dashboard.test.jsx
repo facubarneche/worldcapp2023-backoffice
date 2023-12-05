@@ -1,40 +1,22 @@
-import { render, screen } from '@testing-library/react'
+import { Dashboard } from 'pages/Dashboard/Dashboard'
+import { Layout } from 'components/Layout/Layout'
+import { dashboardService } from 'services/Dashboard/DashboardService'
+import { dashboardServiceGetAllMock } from 'mocks/DashboardServiceMock'
+import { beforeEach, vi } from 'vitest'
+import { render, screen, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { Dashboard } from 'pages/Dashboard/Dashboard'
-import { beforeEach, vi } from 'vitest'
-import { Layout } from 'components/Layout/Layout'
-import axios from 'axios'
-
-vi.mock('ruta/a/dashboardService', () => {
-  return {
-    getStaticsDashboard: vi.fn().mockResolvedValue({
-      // Aquí puedes poner los datos que quieres que devuelva tu mock
-    }),
-  }
-})
+vi.spyOn(dashboardService, 'getAll').mockResolvedValue(dashboardServiceGetAllMock)
 
 describe('Dashboard Test', () => {
-  let spyGetAxios
-
-  beforeEach(() => {
-    vi.mock('axios')
-    spyGetAxios = vi.spyOn(axios, 'get')
-
-    spyGetAxios.mockResolvedValueOnce({
-      data: [
-        {
-          quantity: 30,
-          name: 'Figuritas Ofrecidas',
-        },
-      ],
-    })
-
-    render(
-      <Router>
-        <Layout content={<Dashboard />} headerTitle="dashboard" />
-      </Router>,
-    )    
+  beforeEach(async () => {
+    await act(async () =>
+      render(
+        <Router>
+          <Layout content={<Dashboard />} headerTitle="dashboard" />
+        </Router>,
+      ),
+    )
   })
 
   afterEach(() => {
@@ -53,7 +35,6 @@ describe('Dashboard Test', () => {
 
   it('Se muestra correctamente el icono en la card del dashboard', async () => {
     const iconElement = await screen.findByTestId('figuritas-ofrecidas-icon')
-    console.log(iconElement.classList)
     expect(iconElement.classList.contains('fa-id-badge')).toBe(true)
   })
 
@@ -65,5 +46,5 @@ describe('Dashboard Test', () => {
   it('Se muestra correctamente la descripción en la card del dashboard', async () => {
     const textElement = await screen.findByTestId('figuritas-ofrecidas-description')
     expect(textElement.textContent).toBe('Figuritas Ofrecidas')
-  })  
+  })
 })

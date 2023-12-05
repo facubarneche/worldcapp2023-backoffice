@@ -3,13 +3,21 @@
   background-color: var(--color-tertiary);
 }
 
-.button--halfwidth{
+.button--primary {
   font-size: 1.4em;
   font-family: var(--primary-font);
-  background-color: var(--color-primary);
+  background-color: var(--color-primary);  
   height: 5.3rem;
-  min-width: 45%;
   letter-spacing: 0.2em;
+}
+
+.button--login {  
+  height: 4em;
+  margin-top: 2em;  
+}
+
+.button--halfwidth{  
+  min-width: 45%;  
 }
 
 .button--outlined{

@@ -1,11 +1,12 @@
-import { Container, Box, TextField, Button, InputLabel } from '@mui/material'
+import './Login.css'
+import { Box, TextField, Button, InputLabel } from '@mui/material'
+import { userService } from 'services/User/UserService'
+import { DEBUG_MODE } from 'domain/constants'
+import { LogoComponent, LogoFooterComponent } from 'components/LogoComponent/LogoComponent'
+import { HandleError } from 'utils/HandleError/HandleError'
 import { formToJSON } from 'axios'
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { userService } from 'services/UserService/UserService'
-import { DEBUG_MODE } from 'services/constants'
-import { LogoComponent, LogoImageComponent } from 'components/LogoComponent/LogoComponent'
-import { HandleError } from 'utils/HandleError/HandleError'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -39,22 +40,22 @@ export const Login = () => {
   }
 
   return (
-    <Container component="main" className="login-form">
+    <div className="layout__content layout__content--login">
       <LogoComponent />
       <Box component="form" onSubmit={handleSubmit} noValidate className="login-form__actions">
-        <InputLabel className="input__label" htmlFor="userName">
+        <InputLabel className="field__label" htmlFor="userName">
           Usuario
         </InputLabel>
-        <TextField className="input" margin="normal" fullWidth id="userName" name="userName" autoFocus required />
-        <InputLabel className="input__label" htmlFor="password">
+        <TextField className="field" fullWidth id="userName" name="userName" autoFocus required />
+        <InputLabel className="field__label" htmlFor="password">
           Contraseña
         </InputLabel>
-        <TextField className="input" margin="normal" fullWidth id="password" name="password" type="password" />
-        <Button type="submit" fullWidth variant="contained" className="login__button">
+        <TextField className="field field--white" fullWidth id="password" name="password" type="password" />
+        <Button className="button button--primary button--login" type="submit" fullWidth variant="contained">
           Ingresar
         </Button>
       </Box>
-      <LogoImageComponent />
-    </Container>
+      <LogoFooterComponent />
+    </div>
   )
 }

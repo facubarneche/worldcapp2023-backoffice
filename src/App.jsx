@@ -12,11 +12,11 @@ import { FormPlayer } from 'pages/OneForAll/Forms/FormPlayer/FormPlayer'
 import { MarketForm } from 'pages/OneForAll/Forms/MarketForm/MarketForm'
 // import { Teams } from 'pages/Teams/Teams'
 import { OneForAll } from 'pages/OneForAll/OneForAll'
-import { marketService } from 'services/MarketService/MarketService'
+import { marketService } from 'src/domain/services/Market/MarketService'
 import { CustomMarketContent } from 'components/CustomContent/CustomMarketContent'
-import { cardService } from 'services/CardService/CardService'
+import { cardService } from 'src/domain/services/Card/CardService'
 import { CustomCardContent } from 'components/CustomContent/CustomCardContent'
-import { playerService } from 'services/PlayerService/PlayerService'
+import { playerService } from 'src/domain/services/Player/PlayerService'
 import { CustomPlayerContent } from 'components/CustomContent/CustomPlayerContent'
 import { nationalTeamService } from './domain/services/NationalTeamService/NationalTeamService'
 import { Layout } from './components/Layout/Layout'
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         path="figuritas"
         element={
           <Layout
-            content={<OneForAll service={cardService} contentComponent={CustomCardContent} />}
+            content={<OneForAll key={0} service={cardService} contentComponent={CustomCardContent} />}
             headerTitle="Figuritas"
           />
         }
@@ -49,7 +49,7 @@ const router = createBrowserRouter(
         path="jugadores"
         element={
           <Layout
-            content={<OneForAll service={playerService} contentComponent={CustomPlayerContent} />}
+            content={<OneForAll key={1} service={playerService} contentComponent={CustomPlayerContent} />}
             headerTitle="Jugadores"
           />
         }
@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         path="puntos-de-venta"
         element={
           <Layout
-            content={<OneForAll key="One_For_All-3" service={marketService} contentComponent={CustomMarketContent} />}
+            content={<OneForAll key={2} service={marketService} contentComponent={CustomMarketContent} />}
             headerTitle="Puntos de venta"
           />
         }

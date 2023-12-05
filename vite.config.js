@@ -21,14 +21,16 @@ export default defineConfig({
       utils: '/src/utils',
       errors: '/src/domain/errors',
       hooks: '/src/hooks',
+      domain: '/src/domain'
     },
   },
   test: {
     globals: true,
     setupFiles: ['./setupTests.js'], // es importante definirlo en un archivo aparte para que se ejecute en otro contexto
     environment: 'jsdom',
-    // coverage: {
-    //   reporter: ['text', 'json', 'html', 'json-summary'],
-    // },
+    // @ts-ignore
+    coverage: {
+      reporter: ['text', 'json', 'html', 'json-summary'],
+    },
   },
 })
