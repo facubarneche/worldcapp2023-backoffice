@@ -28,16 +28,14 @@ class NationalTeamService {
     }
   }
 
-  // create = async (market) => {
-  //   try {
-  //     const MarketJSON = Market.toJson(market)
-  //     const response = await axios.post(`${REST_SERVER_URL}/punto-de-venta/nuevo`, MarketJSON)
-  //     console.log('Market created successfully', response.data)
-
-  //   } catch (err) {
-  //     HandleError(err) 
-  //   }
-  // }
+  create = async (market) => {
+    try {
+      const TeamJSON = Team.toJson(market)
+      await axios.post(`${REST_SERVER_URL}/selecciones/crear`, TeamJSON)
+    } catch (err) {
+      HandleError(err) 
+    }
+  }
 
   // update = async (market) => {
   //   try {
@@ -50,6 +48,8 @@ class NationalTeamService {
   //     HandleError(err) 
   //   }
   // }
+
+  getConfederaciones = async () => (await axios.get(`${REST_SERVER_URL}/confederaciones`)).data
 }
 
 export const nationalTeamService = new NationalTeamService()

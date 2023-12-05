@@ -2,6 +2,9 @@ import { Box, Modal, TextField } from '@mui/material'
 // import { Team } from 'src/domain/models/TeamModel/Team.model'
 import './TeamsModal.css'
 import { FormActions } from 'src/components/FormActions/FormActions'
+import { useOnInit } from 'src/hooks/useOnInit'
+import { nationalTeamService } from 'src/domain/services/NationalTeamService/NationalTeamService'
+import { useState } from 'react'
 
 //TODO: mover y reutilizar
 // const InputType = {
@@ -11,6 +14,12 @@ import { FormActions } from 'src/components/FormActions/FormActions'
 
 const TeamsModal = ({ onClose }) => {
   // const [team, setTeam] = useState(new Team())
+  const [confederaciones, setConfederaciones] = useState([])
+
+  useOnInit(async()=>{
+    const data = await nationalTeamService.getConfederaciones()
+    setConfederaciones(data)
+  })
 
   //   const fields = {
   //     nombre: {
@@ -69,9 +78,11 @@ const TeamsModal = ({ onClose }) => {
             select
             SelectProps={{ native: true }}
           >
-            <option>lala</option>
-            <option>lele</option>
-            <option>lolo</option>
+            {
+              confederaciones.map( confederacion =>
+                <option key={confederacion}>{confederacion}</option>
+              )
+            }
           </TextField>
           <TextField required label="Copas del mundo" type="number" />
           <TextField required label="Copas confederacion" type="number" />
