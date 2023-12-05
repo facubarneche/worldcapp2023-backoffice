@@ -14,7 +14,7 @@ export const CardForm = ({ saveFunc }) => {
   const navigate = useNavigate()
   const params = useParams()
 
-  const [card, setCard] = useState(new Card())
+  const [card, setCard] = useState(new Card({}))
 
   useOnInit(async () => {
     try {
@@ -68,13 +68,14 @@ export const CardForm = ({ saveFunc }) => {
       <TextField
         select
         className="field"
+        label="Jugador"
         value={card.nombre}
         onChange={(e) => {
           handleChange(e.target.value, 'nombre')
         }}
         data-testid="figurita-nombre"
       >
-        {players.map((player) => 
+        {players.map((player) => (
           <MenuItem
             className="field__option"
             key={`${player.nombre} ${player.apellido}`}
@@ -82,7 +83,7 @@ export const CardForm = ({ saveFunc }) => {
           >
             {`${player.nombre} ${player.apellido}`}
           </MenuItem>
-        )}
+        ))}
       </TextField>
 
       <FormControlLabel
@@ -94,16 +95,17 @@ export const CardForm = ({ saveFunc }) => {
 
       <TextField
         className="field"
+        label="Nivel de impresion"
         select
         value={card.nivelImpresion}
         onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
         data-testid="figurita-impresion"
       >
-        {printsLevel.map((printLevel) => 
+        {printsLevel.map((printLevel) => (
           <MenuItem className="field__option" key={printLevel} value={printLevel}>
             {printLevel}
           </MenuItem>
-        )}
+        ))}
       </TextField>
 
       <TextField className="field" inputProps={{ type: 'url' }} label="Imagen Jugador" data-testid="figurita-imagen" />

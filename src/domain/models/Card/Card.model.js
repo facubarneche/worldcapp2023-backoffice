@@ -6,7 +6,7 @@ export class Card {
     this.id = data.id ?? -1
     this.numero = data.numero ?? ''
     this.onFire = data.onFire ?? false
-    this.nivelImpresion = data.nivelImpresion ?? PrintType.alta
+    this.nivelImpresion = data.nivelImpresion ?? ''
     this.nombre = data.nombre ?? ''
     this.apellido = data.apellido ?? ''
     this.valoracionJugador = data.valoracion ?? 0
@@ -51,11 +51,11 @@ export class Card {
     return BASE_VALUE * this.onFireMultiplier() * this.evenMultiplier() * this.printMultiplier()
   }
 
-  onFireMultiplier = () => this.onFire ? 1.2 : 1.0
+  onFireMultiplier = () => (this.onFire ? 1.2 : 1.0)
 
-  evenMultiplier = () => this.numero % 2 == 0 ? 1.1 : 1.0
+  evenMultiplier = () => (this.numero % 2 == 0 ? 1.1 : 1.0)
 
-  printMultiplier = () => this.nivelImpresion.toLowerCase() === PrintType.baja ? 1.0 : 0.85
+  printMultiplier = () => (this.nivelImpresion.toLowerCase() === PrintType.baja ? 1.0 : 0.85)
 
   get isNew() {
     return this.id === undefined
