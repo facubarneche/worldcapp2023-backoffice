@@ -85,7 +85,7 @@ export const CardForm = () => {
         }}
         data-testid="figurita-nombre"
       >
-        {players.map((player) => (
+        {players.map((player) => 
           <MenuItem
             className="field__option"
             key={`${player.nombre} ${player.apellido}`}
@@ -93,7 +93,7 @@ export const CardForm = () => {
           >
             {`${player.nombre} ${player.apellido}`}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <FormControlLabel
@@ -111,11 +111,11 @@ export const CardForm = () => {
         onChange={(e) => handleChange(e.target.value, 'nivelImpresion')}
         data-testid="figurita-impresion"
       >
-        {printsLevel.map((printLevel) => (
+        {printsLevel.map((printLevel) => 
           <MenuItem className="field__option" key={printLevel} value={printLevel}>
             {printLevel}
           </MenuItem>
-        ))}
+        )}
       </TextField>
 
       <TextField className="field" inputProps={{ type: 'url' }} label="Imagen Jugador" data-testid="figurita-imagen" />

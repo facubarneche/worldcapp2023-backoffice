@@ -39,11 +39,11 @@ const router = createBrowserRouter(
       />
       <Route
         path="figuritas/nuevo"
-        element={<Layout content={<CardForm saveFunc={cardService.create} />} headerTitle="Nueva figurita" />}
+        element={<Layout content={<CardForm />} headerTitle="Nueva figurita" />}
       />
       <Route
         path="figuritas/:id/editar"
-        element={<Layout content={<CardForm saveFunc={cardService.update} />} headerTitle="Modificar figurita" />}
+        element={<Layout content={<CardForm />} headerTitle="Modificar figurita" />}
       />
       <Route
         path="jugadores"

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { REST_SERVER_URL } from '../../constants'
 import { Card } from 'src/domain/models/Card/Card.model'
+import { HandleError } from 'src/utils/HandleError/HandleError'
 
 class CardService {
   getAll = async (search) => {
@@ -22,7 +23,7 @@ class CardService {
       const response$ = await axios.delete(`${REST_SERVER_URL}/figurita/eliminar/${id}`)
       console.log('Elemento eliminado correctamente', response$.data)
     } catch (err) {
-      console.error('Error al eliminar el elemento')
+      HandleError(err)
     }
   }
 
